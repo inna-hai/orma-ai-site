@@ -27,7 +27,7 @@ export default function CaseStudiesPreview({ caseStudies = [] }) {
               סיפורי הצלחה
             </h2>
             <p className="text-slate-600 text-lg">
-              תוצאות אמיתיות מארגונים שעבדנו איתם
+              תוצאות עסקיות מארגונים שעבדו איתנו
             </p>
           </div>
           <Link to={createPageUrl('CaseStudies')}>
