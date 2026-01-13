@@ -43,9 +43,9 @@ export default function HeroSection() {
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed font-normal">
-            ORMA מלווה הנהלות וצוותים בהטמעת AI בתהליכי ליבה -
+            ORMA מיישמת AI בתוך תהליכים ארגוניים –
             <br className="hidden md:block" />
-            משלב אבחון אסטרטגי, דרך יישום בפועל ועד מדידה עסקית ברורה.
+            <span className="text-slate-700 font-medium">אוטומציה, בוטים והטמעה</span> עם מדידה, ROI ותוצאות בשטח.
           </p>
 
           {/* CTA Buttons */}
