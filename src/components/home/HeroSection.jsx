@@ -32,13 +32,13 @@ export default function HeroSection() {
 
           {/* Main Headline */}
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 leading-[1.15] mb-8 tracking-tight">
-            בינה מלאכותית
+            הטמעת AI ארגונית
             <br />
             <span className="font-semibold bg-gradient-to-l from-violet-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
-              שעובדת בתוך
+              משלב האבחון
             </span>
             <br />
-            העבודה האמיתית שלך
+            ועד תוצאה מדידה
           </h1>
 
           {/* Subtitle */}
