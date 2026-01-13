@@ -44,7 +44,7 @@ export default function Header() {
             <img 
               src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69660fcea808f09306a09774/e2bb8cc85_ChatGPTImageJan13202603_32_04PM.png" 
               alt="ORMA-AI" 
-              className="h-10"
+              className="h-16"
             />
           </Link>
 
