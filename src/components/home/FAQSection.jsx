@@ -40,7 +40,7 @@ export default function FAQSection({ faqs = [] }) {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="single" collapsible defaultValue="item-0" className="space-y-4">
             {publishedFaqs.map((faq, index) => (
               <AccordionItem
                 key={faq.id}
@@ -50,7 +50,7 @@ export default function FAQSection({ faqs = [] }) {
                 <AccordionTrigger className="text-right text-lg font-semibold text-slate-900 hover:text-violet-600 py-5 hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-slate-600 leading-relaxed pb-5">
+                <AccordionContent className="text-slate-600 leading-relaxed pb-5 whitespace-pre-line">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
