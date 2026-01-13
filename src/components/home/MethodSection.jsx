@@ -7,21 +7,21 @@ const steps = [
     number: '01',
     title: 'Alignment',
     subtitle: 'אבחון ודיוק',
-    description: 'מיפוי תהליכים, זיהוי צווארי בקבוק והזדמנויות ל-AI עם ROI ברור.',
+    description: 'מיפוי תהליכים, זיהוי צווארי בקבוק והגדרת נקודות יישום ל-AI עם ROI ברור ומדיד.',
     icon: Target
   },
   {
     number: '02',
     title: 'Build',
     subtitle: 'יישום',
-    description: 'בניית בוטים, אוטומציות ומערכות עבודה חכמות המחוברות לכלים קיימים.',
+    description: 'בניית בוטים, אוטומציות ומערכות עבודה חכמות המחוברות לכלים הקיימים בארגון.',
     icon: Wrench
   },
   {
     number: '03',
     title: 'Embed',
     subtitle: 'הטמעה',
-    description: 'הכשרת הנהלה וצוותים, שינוי הרגלי עבודה וליווי עד שזה עובד באמת.',
+    description: 'הכשרת הנהלה וצוותים, שינוי הרגלי עבודה וליווי צמוד עד שזה עובד באמת.',
     icon: Users
   }
 ];
@@ -47,7 +47,7 @@ export default function MethodSection() {
             איך זה עובד
           </h2>
           <p className="text-slate-400 text-lg">
-            השיטה של ORMA.AI – פשוטה, מדידה ובונה ערך אמיתי
+            השיטה של ORMA.AI – פשוטה, מדידה ומחוברת לעבודה האמיתית
           </p>
         </motion.div>
 
