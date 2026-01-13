@@ -8,30 +8,21 @@ export default function StatsSection({ settings }) {
       icon: Clock,
       value: settings?.stats_hours_saved || 5000,
       suffix: '+',
-      label: 'שעות עבודה שנחסכו',
-      color: 'violet'
+      label: 'שעות עבודה שנחסכו'
     },
     {
       icon: Workflow,
       value: settings?.stats_processes || 120,
       suffix: '+',
-      label: 'תהליכים שהוטמעו',
-      color: 'blue'
+      label: 'תהליכים שהוטמעו'
     },
     {
       icon: Building2,
       value: settings?.stats_organizations || 30,
       suffix: '+',
-      label: 'ארגונים שעבדנו איתם',
-      color: 'emerald'
+      label: 'ארגונים שעבדנו איתם'
     }
   ];
-
-  const colorClasses = {
-    violet: 'from-violet-500 to-violet-600',
-    blue: 'from-blue-500 to-blue-600',
-    emerald: 'from-emerald-500 to-emerald-600'
-  };
 
   return (
     <section className="py-16 bg-gradient-to-b from-white to-slate-50">
@@ -46,7 +37,7 @@ export default function StatsSection({ settings }) {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="text-center"
             >
-              <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${colorClasses[stat.color]} flex items-center justify-center shadow-lg`}>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center shadow-lg">
                 <stat.icon className="w-8 h-8 text-white" />
               </div>
               <div className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
