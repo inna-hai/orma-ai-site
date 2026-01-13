@@ -31,10 +31,10 @@ export default function HeroSection() {
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-6">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 leading-[1.15] mb-8 tracking-tight">
             בינה מלאכותית
             <br />
-            <span className="bg-gradient-to-l from-violet-600 to-blue-600 bg-clip-text text-transparent">
+            <span className="font-semibold bg-gradient-to-l from-violet-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
               שעובדת בתוך
             </span>
             <br />
@@ -42,10 +42,10 @@ export default function HeroSection() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed font-normal">
             ORMA מיישמת AI בתוך תהליכים ארגוניים –
             <br className="hidden md:block" />
-            אוטומציה, בוטים והטמעה עם מדידה, ROI ותוצאות בשטח.
+            <span className="text-slate-700 font-medium">אוטומציה, בוטים והטמעה</span> עם מדידה, ROI ותוצאות בשטח.
           </p>
 
           {/* CTA Buttons */}
