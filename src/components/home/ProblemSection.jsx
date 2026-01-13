@@ -56,10 +56,10 @@ export default function ProblemSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-            הבעיות שאנחנו פותרות
+            האתגרים שאנחנו פותרות
           </h2>
           <p className="text-slate-600 text-lg">
-            שלושת האתגרים הנפוצים ביותר שאנחנו פוגשים בארגונים
+            שלושת החסמים המרכזיים שמונעים מ-AI לעבוד באמת בארגונים
           </p>
         </motion.div>
 
@@ -80,21 +80,13 @@ export default function ProblemSection() {
                 </div>
 
                 <div className="space-y-4">
-                  <div>
-                    <p className="text-sm text-slate-500 mb-1">הבעיה</p>
-                    <p className="text-lg font-semibold text-slate-800 line-through decoration-slate-400 decoration-2">
-                      {item.problem}
-                    </p>
-                  </div>
-
-                  <ArrowLeft className="w-5 h-5 text-slate-400 rotate-90 mx-auto" />
-
-                  <div>
-                    <p className="text-sm text-slate-500 mb-1">הפתרון</p>
-                    <p className={`text-lg font-semibold ${colors.icon}`}>
-                      {item.solution}
-                    </p>
-                  </div>
+                  <p className="text-xl font-bold text-slate-900 mb-4">
+                    {item.problem}
+                  </p>
+                  
+                  <p className={`text-base ${colors.icon} font-medium`}>
+                    {item.solution}
+                  </p>
                 </div>
               </motion.div>
             );
