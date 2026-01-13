@@ -41,7 +41,7 @@ export default function About() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-100/80 text-violet-700 text-sm font-medium mb-8">
               <Sparkles className="w-4 h-4" />
-              אודות ORMA.AI
+              אודות ORMA
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
@@ -49,7 +49,7 @@ export default function About() {
             </h1>
 
             <p className="text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
-              ORMA.AI היא סוכנות לבינה מלאכותית יישומית.
+              ORMA היא סוכנות לבינה מלאכותית יישומית.
               <br />
               אנחנו מחברות בין טכנולוגיה, תהליכים ואנשים – 
               והופכות AI לכלי עבודה יומיומי שמייצר ערך אמיתי.
@@ -120,7 +120,7 @@ export default function About() {
               עברתי דרך תפקידי ניהול שונים והבנתי דבר אחד – 
               הטכנולוגיה הכי מתקדמת שווה מעט אם היא לא מתחברת לעבודה האמיתית של האנשים בשטח.
               <br /><br />
-              ORMA.AI נולדה מתוך הרצון לגשר על הפער הזה – 
+              ORMA נולדה מתוך הרצון לגשר על הפער הזה – 
               להביא את הכוח של AI לכל ארגון, בצורה פרקטית ומדידה.
             </p>
           </motion.div>

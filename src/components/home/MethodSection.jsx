@@ -47,7 +47,7 @@ export default function MethodSection() {
             איך זה עובד
           </h2>
           <p className="text-slate-400 text-lg">
-            השיטה של ORMA.AI – פשוטה, מדידה ומחוברת לעבודה האמיתית
+            השיטה של ORMA – פשוטה, מדידה ומחוברת לעבודה האמיתית
           </p>
         </motion.div>
 

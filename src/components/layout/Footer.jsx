@@ -15,7 +15,7 @@ export default function Footer({ settings }) {
                 <span className="text-white font-bold text-lg">O</span>
               </div>
               <span className="text-xl font-bold">
-                ORMA<span className="text-violet-400">.AI</span>
+                ORMA
               </span>
             </div>
             <p className="text-slate-400 leading-relaxed max-w-sm">
@@ -103,7 +103,7 @@ export default function Footer({ settings }) {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-slate-800">
           <p className="text-slate-500 text-sm text-center">
-            © {new Date().getFullYear()} ORMA.AI. כל הזכויות שמורות.
+            © {new Date().getFullYear()} ORMA. כל הזכויות שמורות.
           </p>
         </div>
       </div>
