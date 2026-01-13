@@ -41,12 +41,11 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to={createPageUrl('Home')} className="flex items-center">
-            <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-3 py-1.5 shadow-sm border border-slate-100/50 overflow-hidden w-16 h-12 md:w-14 md:h-10 flex items-center justify-center">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-sm border border-slate-100/50">
               <img 
                 src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69660fcea808f09306a09774/e2bb8cc85_ChatGPTImageJan13202603_32_04PM.png" 
                 alt="ORMA" 
-                className="w-full h-full object-cover scale-[2.5] object-left"
-                style={{ objectPosition: '20% center' }}
+                className="h-8 md:h-7 w-auto"
               />
             </div>
           </Link>
