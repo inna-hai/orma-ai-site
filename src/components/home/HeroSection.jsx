@@ -50,15 +50,15 @@ export default function HeroSection() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to={createPageUrl('CaseStudies')}>
+              <Button variant="outline" size="lg" className="border-2 border-slate-200 hover:border-slate-300 px-8 py-6 text-lg rounded-xl transition-all duration-300 hover:bg-slate-50">
+                לסיפורי הצלחה
+              </Button>
+            </Link>
             <Link to={createPageUrl('Contact')}>
               <Button size="lg" className="bg-slate-900 hover:bg-slate-800 text-white px-8 py-6 text-lg rounded-xl shadow-lg shadow-slate-900/20 transition-all duration-300 hover:shadow-xl hover:shadow-slate-900/30 hover:-translate-y-0.5">
                 קביעת שיחת אבחון AI
                 <ArrowLeft className="w-5 h-5 mr-2" />
-              </Button>
-            </Link>
-            <Link to={createPageUrl('CaseStudies')}>
-              <Button variant="outline" size="lg" className="border-2 border-slate-200 hover:border-slate-300 px-8 py-6 text-lg rounded-xl transition-all duration-300 hover:bg-slate-50">
-                לסיפורי הצלחה
               </Button>
             </Link>
           </div>
