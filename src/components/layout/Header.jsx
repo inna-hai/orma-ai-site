@@ -40,13 +40,12 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to={createPageUrl('Home')} className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-blue-600 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">O</span>
-            </div>
-            <span className="text-xl font-bold text-slate-900">
-              ORMA<span className="text-violet-600">.AI</span>
-            </span>
+          <Link to={createPageUrl('Home')} className="flex items-center">
+            <img 
+              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69660fcea808f09306a09774/e2bb8cc85_ChatGPTImageJan13202603_32_04PM.png" 
+              alt="ORMA-AI" 
+              className="h-10"
+            />
           </Link>
 
           {/* Desktop Navigation */}
