@@ -27,7 +27,7 @@ export default function CaseStudiesPreview({ caseStudies = [] }) {
               סיפורי הצלחה
             </h2>
             <p className="text-slate-600 text-lg">
-              תוצאות אמיתיות מארגונים שעבדנו איתם
+              תוצאות עסקיות מארגונים שעבדו איתנו
             </p>
           </div>
           <Link to={createPageUrl('CaseStudies')}>
@@ -67,8 +67,8 @@ export default function CaseStudiesPreview({ caseStudies = [] }) {
                   {/* Metrics */}
                   {study.metrics && study.metrics.length > 0 && (
                     <div className="flex items-center gap-2 pt-4 border-t border-slate-200">
-                      <TrendingUp className="w-4 h-4 text-emerald-500" />
-                      <span className="text-emerald-600 font-semibold">
+                      <TrendingUp className="w-4 h-4 text-violet-500" />
+                      <span className="text-violet-600 font-semibold">
                         {study.metrics[0].value}
                       </span>
                       <span className="text-slate-500 text-sm">
