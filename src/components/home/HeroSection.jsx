@@ -45,7 +45,7 @@ export default function HeroSection() {
           <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
             ORMA.AI מיישמת AI בתוך תהליכים ארגוניים –
             <br className="hidden md:block" />
-            אוטומציה, בוטים והטמעה עם מדידה ותוצאות.
+            אוטומציה, בוטים והטמעה עם מדידה, ROI ותוצאות בשטח.
           </p>
 
           {/* CTA Buttons */}
