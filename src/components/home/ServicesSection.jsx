@@ -87,12 +87,8 @@ export default function ServicesSection() {
               )}
 
               <div className="flex items-start gap-4 mb-6">
-                <div className={`w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                  service.highlight 
-                    ? 'bg-gradient-to-br from-violet-500 to-blue-500' 
-                    : 'bg-slate-100'
-                }`}>
-                  <service.icon className={`w-7 h-7 ${service.highlight ? 'text-white' : 'text-slate-600'}`} />
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 bg-violet-50">
+                  <service.icon className="w-7 h-7 text-violet-600" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-slate-900">
@@ -107,9 +103,7 @@ export default function ServicesSection() {
               <ul className="space-y-3">
                 {service.features.map((feature, idx) => (
                   <li key={idx} className="flex items-center gap-3">
-                    <CheckCircle2 className={`w-5 h-5 flex-shrink-0 ${
-                      service.highlight ? 'text-violet-500' : 'text-slate-400'
-                    }`} />
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-violet-500" />
                     <span className="text-slate-600">{feature}</span>
                   </li>
                 ))}
