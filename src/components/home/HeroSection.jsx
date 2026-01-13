@@ -35,10 +35,10 @@ export default function HeroSection() {
             בינה מלאכותית
             <br />
             <span className="bg-gradient-to-l from-violet-600 to-blue-600 bg-clip-text text-transparent">
-              שמתחברת לעבודה
+              שעובדת בתוך
             </span>
             <br />
-            האמיתית שלך
+            העבודה האמיתית שלך
           </h1>
 
           {/* Subtitle */}
