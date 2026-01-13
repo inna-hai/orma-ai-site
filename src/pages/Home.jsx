@@ -39,7 +39,6 @@ export default function Home() {
       <MethodSection />
       <ServicesSection />
       <CaseStudiesPreview caseStudies={caseStudies} />
-      <StatsSection settings={settings} />
       <CTASection />
       <FAQSection faqs={faqs} />
     </div>
