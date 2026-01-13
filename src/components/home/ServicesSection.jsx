@@ -7,10 +7,13 @@ const services = [
     icon: Zap,
     title: 'ספרינט אבחון AI',
     badge: 'מוצר כניסה',
-    description: 'תהליך ממוקד לזיהוי הזדמנויות AI בארגון',
+    subtitle: 'נקודת פתיחה ממוקדת לארגונים',
+    description: 'תהליך ממוקד לזיהוי הזדמנויות AI עם השפעה עסקית מיידית. מיועד לארגונים שרוצים להבין איפה נכון להשקיע – לפני שמתחילים לפתח.',
+    forWhom: 'לארגונים שרוצים החלטה חכמה לפני יישום',
     features: [
       'מיפוי תהליכים ארגוניים',
       'זיהוי נקודות חיסכון בזמן וכסף',
+      'הגדרת Use Cases עם ROI ברור',
       'תוכנית יישום אופרטיבית'
     ],
     highlight: true
@@ -18,31 +21,40 @@ const services = [
   {
     icon: Bot,
     title: 'יישום AI ואוטומציה',
-    description: 'בנייה והטמעה של פתרונות AI מותאמים',
+    subtitle: 'הפיכת תובנות לפתרונות עובדים',
+    description: 'בניית פתרונות AI שמתחברים לעבודה היומיומית ולמערכות הקיימות בארגון – בלי להמציא הכול מחדש.',
+    forWhom: 'לארגונים שכבר יודעים מה הם רוצים ליישם',
     features: [
       'בוטים לשירות, מכירות ותפעול',
-      'אוטומציות בין מערכות',
-      'חיבור GPT לתהליכים קיימים'
+      'אוטומציות בין מערכות קיימות',
+      'חיבור GPT לתהליכים ארגוניים',
+      'פתרונות מותאמים לצרכים אמיתיים'
     ]
   },
   {
     icon: GraduationCap,
     title: 'הטמעה והכשרת צוותים',
-    description: 'העברת ידע והכשרה מעשית לצוותים',
+    subtitle: 'כדי ש-AI באמת יעבוד – לא רק יפותח',
+    description: 'הטמעה עמוקה של פתרונות AI דרך שינוי הרגלי עבודה, הכשרת הנהלה וצוותים וליווי תהליכי שינוי.',
+    forWhom: 'לארגונים שרוצים אימוץ אמיתי, לא רק טכנולוגיה',
     features: [
-      'הכשרת הנהלה',
+      'הכשרת הנהלה וצוותים',
       'סוכני AI אישיים לפי תפקיד',
-      'ליווי שינוי תהליכי עבודה'
+      'ליווי שינוי תהליכי עבודה',
+      'התאמה לתרבות הארגונית'
     ]
   },
   {
     icon: RefreshCw,
     title: 'ליווי שוטף (Retainer)',
-    description: 'תמיכה מתמשכת ושדרוגים',
+    subtitle: 'שמירה על ערך לאורך זמן',
+    description: 'ליווי מתמשך לשיפור, התאמה וסקייל של פתרונות AI בהתאם לצמיחה ולצרכים משתנים.',
+    forWhom: 'לארגונים שעובדים עם AI כחלק מהשגרה',
     features: [
       'תחזוקה ושדרוגים',
-      'מדידה ושיפור מתמיד',
-      'התאמות לצמיחה'
+      'מדידה ושיפור מתמשך',
+      'התאמות לצמיחה ארגונית',
+      'שותפות ארוכת טווח'
     ]
   }
 ];
@@ -94,11 +106,19 @@ export default function ServicesSection() {
                   <h3 className="text-xl font-bold text-slate-900">
                     {service.title}
                   </h3>
-                  <p className="text-slate-500 mt-1">
-                    {service.description}
+                  <p className="text-sm text-violet-600 mt-1 font-medium">
+                    {service.subtitle}
                   </p>
                 </div>
               </div>
+
+              <p className="text-slate-600 mb-4 leading-relaxed">
+                {service.description}
+              </p>
+
+              <p className="text-sm text-slate-500 italic mb-4">
+                {service.forWhom}
+              </p>
 
               <ul className="space-y-3">
                 {service.features.map((feature, idx) => (
