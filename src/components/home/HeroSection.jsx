@@ -27,7 +27,7 @@ export default function HeroSection() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-100/80 text-violet-700 text-sm font-medium mb-8 backdrop-blur-sm border border-violet-200/50">
             <Sparkles className="w-4 h-4" />
-            <span>סוכנות AI יישומית</span>
+            <span>AI יישומי לארגונים</span>
           </div>
 
           {/* Main Headline */}
