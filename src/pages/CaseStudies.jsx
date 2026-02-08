@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
+import { caseStudies } from '@/data/staticData';
 import { motion } from 'framer-motion';
 import { ArrowLeft, TrendingUp, Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,19 +10,11 @@ import { Badge } from '@/components/ui/badge';
 export default function CaseStudies() {
   const [selectedIndustry, setSelectedIndustry] = useState('all');
 
-  const { data: caseStudies = [], isLoading } = useQuery({
-    queryKey: ['case-studies'],
-    queryFn: () => base44.entities.CaseStudy.list(),
-    initialData: []
-  });
-
-  const publishedStudies = caseStudies.filter(cs => cs.is_published);
-  
-  const industries = [...new Set(publishedStudies.map(cs => cs.industry).filter(Boolean))];
+  const industries = [...new Set(caseStudies.map(cs => cs.industry).filter(Boolean))];
   
   const filteredStudies = selectedIndustry === 'all' 
-    ? publishedStudies 
-    : publishedStudies.filter(cs => cs.industry === selectedIndustry);
+    ? caseStudies 
+    : caseStudies.filter(cs => cs.industry === selectedIndustry);
 
   return (
     <div className="pt-20 min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -81,18 +72,7 @@ export default function CaseStudies() {
       {/* Case Studies Grid */}
       <section className="pb-24">
         <div className="max-w-6xl mx-auto px-6">
-          {isLoading ? (
-            <div className="grid md:grid-cols-2 gap-6">
-              {[1, 2, 3, 4].map(i => (
-                <div key={i} className="bg-white rounded-2xl p-6 border border-slate-100 animate-pulse">
-                  <div className="h-6 w-24 bg-slate-200 rounded-full mb-4" />
-                  <div className="h-8 w-3/4 bg-slate-200 rounded mb-3" />
-                  <div className="h-4 w-full bg-slate-200 rounded mb-2" />
-                  <div className="h-4 w-2/3 bg-slate-200 rounded" />
-                </div>
-              ))}
-            </div>
-          ) : filteredStudies.length === 0 ? (
+          {filteredStudies.length === 0 ? (
             <div className="text-center py-16">
               <p className="text-slate-500 text-lg">אין סיפורי הצלחה להצגה כרגע.</p>
             </div>
@@ -105,7 +85,7 @@ export default function CaseStudies() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Link to={`${createPageUrl('CaseStudyDetail')}?slug=${study.slug}`}>
+                  <Link to={`${createPageUrl('CaseStudyDetail')}?id=${study.id}`}>
                     <div className="group h-full bg-white rounded-2xl p-8 border border-slate-100 hover:border-violet-200 hover:shadow-xl transition-all duration-300">
                       {/* Industry Badge */}
                       <Badge className="bg-violet-100 text-violet-700 hover:bg-violet-100 mb-4">
@@ -122,14 +102,13 @@ export default function CaseStudies() {
                         {study.challenge}
                       </p>
 
-                      {/* Metrics */}
-                      {study.metrics && study.metrics.length > 0 && (
+                      {/* Results Preview */}
+                      {study.results && study.results.length > 0 && (
                         <div className="flex flex-wrap gap-4 pt-6 border-t border-slate-100">
-                          {study.metrics.slice(0, 2).map((metric, idx) => (
+                          {study.results.slice(0, 2).map((result, idx) => (
                             <div key={idx} className="flex items-center gap-2">
                               <TrendingUp className="w-4 h-4 text-emerald-500" />
-                              <span className="text-emerald-600 font-bold">{metric.value}</span>
-                              <span className="text-slate-500 text-sm">{metric.label}</span>
+                              <span className="text-emerald-600 font-medium text-sm">{result}</span>
                             </div>
                           ))}
                         </div>

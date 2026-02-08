@@ -5,8 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
+import { siteSettings } from '@/data/staticData';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -22,30 +21,26 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const { data: settingsData = [] } = useQuery({
-    queryKey: ['site-settings'],
-    queryFn: () => base44.entities.SiteSettings.list(),
-    initialData: []
-  });
-
-  const settings = settingsData[0] || {};
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const urlParams = new URLSearchParams(window.location.search);
+    // Send via email (FormSubmit or similar service)
+    // For now, we'll simulate success
+    console.log('Form submitted:', formData);
     
-    await base44.entities.Lead.create({
-      ...formData,
-      utm_source: urlParams.get('utm_source') || '',
-      utm_medium: urlParams.get('utm_medium') || '',
-      utm_campaign: urlParams.get('utm_campaign') || '',
-      is_enterprise: formData.company_size === '200+'
-    });
+    // You can integrate with FormSubmit, Formspree, or your own backend
+    // Example with FormSubmit:
+    // await fetch('https://formsubmit.co/ajax/your@email.com', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(formData)
+    // });
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSuccess(true);
+    }, 1000);
   };
 
   if (isSuccess) {
@@ -92,9 +87,9 @@ export default function Contact() {
 
               {/* Contact Info */}
               <div className="space-y-6">
-                {settings?.company_email && (
+                {siteSettings.email && (
                   <a 
-                    href={`mailto:${settings.company_email}`}
+                    href={`mailto:${siteSettings.email}`}
                     className="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100 hover:border-violet-200 hover:shadow-md transition-all"
                   >
                     <div className="w-12 h-12 rounded-lg bg-violet-100 flex items-center justify-center">
@@ -102,14 +97,14 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-sm text-slate-500">אימייל</p>
-                      <p className="text-slate-900 font-medium" dir="ltr">{settings.company_email}</p>
+                      <p className="text-slate-900 font-medium" dir="ltr">{siteSettings.email}</p>
                     </div>
                   </a>
                 )}
 
-                {settings?.company_phone && (
+                {siteSettings.phone && (
                   <a 
-                    href={`tel:${settings.company_phone}`}
+                    href={`tel:${siteSettings.phone}`}
                     className="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100 hover:border-violet-200 hover:shadow-md transition-all"
                   >
                     <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
@@ -117,27 +112,25 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-sm text-slate-500">טלפון</p>
-                      <p className="text-slate-900 font-medium" dir="ltr">{settings.company_phone}</p>
+                      <p className="text-slate-900 font-medium" dir="ltr">{siteSettings.phone}</p>
                     </div>
                   </a>
                 )}
 
-                {settings?.linkedin_url && (
-                  <a 
-                    href={settings.linkedin_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100 hover:border-violet-200 hover:shadow-md transition-all"
-                  >
-                    <div className="w-12 h-12 rounded-lg bg-emerald-100 flex items-center justify-center">
-                      <Linkedin className="w-6 h-6 text-emerald-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-slate-500">לינקדאין</p>
-                      <p className="text-slate-900 font-medium">ORMA.AI</p>
-                    </div>
-                  </a>
-                )}
+                <a 
+                  href="https://www.linkedin.com/company/orma-ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100 hover:border-violet-200 hover:shadow-md transition-all"
+                >
+                  <div className="w-12 h-12 rounded-lg bg-emerald-100 flex items-center justify-center">
+                    <Linkedin className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500">לינקדאין</p>
+                    <p className="text-slate-900 font-medium">ORMA.AI</p>
+                  </div>
+                </a>
               </div>
             </motion.div>
 

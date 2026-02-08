@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
+import React from 'react';
+import { siteSettings } from '@/data/staticData';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
 export default function Layout({ children }) {
-  const { data: settingsData } = useQuery({
-    queryKey: ['site-settings'],
-    queryFn: () => base44.entities.SiteSettings.list(),
-    initialData: []
-  });
-
-  const settings = settingsData?.[0] || {};
-
   return (
     <div dir="rtl" className="min-h-screen flex flex-col font-sans antialiased">
       <style>{`
@@ -31,7 +22,7 @@ export default function Layout({ children }) {
         {children}
       </main>
       
-      <Footer settings={settings} />
+      <Footer settings={siteSettings} />
     </div>
   );
 }

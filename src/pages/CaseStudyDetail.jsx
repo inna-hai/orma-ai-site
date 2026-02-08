@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
+import { caseStudies } from '@/data/staticData';
 import { motion } from 'framer-motion';
 import { ArrowRight, TrendingUp, Wrench, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,30 +9,9 @@ import { Badge } from '@/components/ui/badge';
 
 export default function CaseStudyDetail() {
   const urlParams = new URLSearchParams(window.location.search);
-  const slug = urlParams.get('slug');
+  const id = urlParams.get('id');
 
-  const { data: caseStudies = [], isLoading } = useQuery({
-    queryKey: ['case-studies'],
-    queryFn: () => base44.entities.CaseStudy.list(),
-    initialData: []
-  });
-
-  const study = caseStudies.find(cs => cs.slug === slug);
-
-  if (isLoading) {
-    return (
-      <div className="pt-20 min-h-screen bg-gradient-to-b from-slate-50 to-white">
-        <div className="max-w-4xl mx-auto px-6 py-16">
-          <div className="animate-pulse space-y-6">
-            <div className="h-8 w-32 bg-slate-200 rounded-full" />
-            <div className="h-12 w-3/4 bg-slate-200 rounded" />
-            <div className="h-4 w-full bg-slate-200 rounded" />
-            <div className="h-4 w-2/3 bg-slate-200 rounded" />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const study = caseStudies.find(cs => cs.id === id);
 
   if (!study) {
     return (
@@ -77,16 +55,13 @@ export default function CaseStudyDetail() {
               {study.title}
             </h1>
 
-            {/* Metrics Highlight */}
-            {study.metrics && study.metrics.length > 0 && (
+            {/* Results Highlight */}
+            {study.results && study.results.length > 0 && (
               <div className="flex flex-wrap gap-6 p-6 bg-emerald-50 rounded-2xl border border-emerald-100">
-                {study.metrics.map((metric, idx) => (
+                {study.results.map((result, idx) => (
                   <div key={idx} className="flex items-center gap-3">
                     <TrendingUp className="w-5 h-5 text-emerald-600" />
-                    <div>
-                      <span className="text-2xl font-bold text-emerald-700">{metric.value}</span>
-                      <span className="text-emerald-600 mr-2">{metric.label}</span>
-                    </div>
+                    <span className="text-lg font-medium text-emerald-700">{result}</span>
                   </div>
                 ))}
               </div>
@@ -129,50 +104,6 @@ export default function CaseStudyDetail() {
                 {study.solution}
               </p>
             </div>
-
-            {/* Process */}
-            {study.process && (
-              <div className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
-                    <Wrench className="w-5 h-5 text-blue-600" />
-                  </div>
-                  התהליך
-                </h2>
-                <p className="text-slate-600 leading-relaxed text-lg whitespace-pre-line">
-                  {study.process}
-                </p>
-              </div>
-            )}
-
-            {/* Results */}
-            {study.results && (
-              <div className="bg-gradient-to-br from-emerald-50 to-emerald-100/50 rounded-2xl p-8 border border-emerald-200">
-                <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-200 flex items-center justify-center">
-                    <TrendingUp className="w-5 h-5 text-emerald-700" />
-                  </div>
-                  התוצאות
-                </h2>
-                <p className="text-slate-700 leading-relaxed text-lg whitespace-pre-line">
-                  {study.results}
-                </p>
-              </div>
-            )}
-
-            {/* Tools */}
-            {study.tools && study.tools.length > 0 && (
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-4">כלים שנעשה בהם שימוש</h3>
-                <div className="flex flex-wrap gap-2">
-                  {study.tools.map((tool, idx) => (
-                    <Badge key={idx} variant="outline" className="px-4 py-2 text-sm">
-                      {tool}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            )}
 
             {/* CTA */}
             <div className="bg-slate-900 rounded-2xl p-8 text-center">
