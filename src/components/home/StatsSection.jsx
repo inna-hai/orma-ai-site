@@ -1,49 +1,27 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Clock, Workflow, Building2 } from 'lucide-react';
+import { stats } from '@/data/staticData';
 
-export default function StatsSection({ settings }) {
-  const stats = [
-    {
-      icon: Clock,
-      value: settings?.stats_hours_saved || 5000,
-      suffix: '+',
-      label: 'שעות עבודה שנחסכו'
-    },
-    {
-      icon: Workflow,
-      value: settings?.stats_processes || 120,
-      suffix: '+',
-      label: 'תהליכים שהוטמעו'
-    },
-    {
-      icon: Building2,
-      value: settings?.stats_organizations || 30,
-      suffix: '+',
-      label: 'ארגונים שעבדנו איתם'
-    }
-  ];
-
+export default function StatsSection() {
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-slate-50">
+    <section className="py-20 bg-slate-900">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="text-center"
             >
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center shadow-lg">
-                <stat.icon className="w-8 h-8 text-white" />
+              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent mb-2">
+                {stat.value}
               </div>
-              <div className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
-                {stat.value.toLocaleString()}{stat.suffix}
+              <div className="text-slate-400 text-sm md:text-base">
+                {stat.label}
               </div>
-              <p className="text-slate-600">{stat.label}</p>
             </motion.div>
           ))}
         </div>

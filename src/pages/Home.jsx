@@ -1,25 +1,26 @@
 import React from 'react';
-import { caseStudies, faqs, siteSettings } from '@/data/staticData';
+import { caseStudies, faqs } from '@/data/staticData';
 
 import HeroSection from '@/components/home/HeroSection';
-import ProblemSection from '@/components/home/ProblemSection';
-import MethodSection from '@/components/home/MethodSection';
 import ServicesSection from '@/components/home/ServicesSection';
+import ProcessSection from '@/components/home/ProcessSection';
 import CaseStudiesPreview from '@/components/home/CaseStudiesPreview';
+import TrainingsSection from '@/components/home/TrainingsSection';
 import StatsSection from '@/components/home/StatsSection';
-import CTASection from '@/components/home/CTASection';
 import FAQSection from '@/components/home/FAQSection';
+import CTASection from '@/components/home/CTASection';
 
 export default function Home() {
   return (
-    <div className="pt-20">
+    <div>
       <HeroSection />
-      <ProblemSection />
-      <MethodSection />
       <ServicesSection />
+      <ProcessSection />
       <CaseStudiesPreview caseStudies={caseStudies} />
-      <CTASection />
+      <TrainingsSection />
+      <StatsSection />
       <FAQSection faqs={faqs} />
+      <CTASection />
     </div>
   );
 }
