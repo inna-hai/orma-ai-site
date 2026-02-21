@@ -34,21 +34,23 @@ export default function Header() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100'
-          : 'bg-transparent'
+          : 'bg-slate-950/80 backdrop-blur-md'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to={createPageUrl('Home')} className="flex items-center">
-            <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-3 shadow-sm border border-slate-100/50 overflow-hidden">
-              <img 
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69660fcea808f09306a09774/e2bb8cc85_ChatGPTImageJan13202603_32_04PM.png" 
-                alt="ORMA" 
-                className="h-16 md:h-14 w-auto object-cover object-left scale-[3]"
-                style={{ objectPosition: '25% center' }}
-              />
-            </div>
+          <Link to={createPageUrl('Home')} className="flex items-center gap-3">
+            <img 
+              src="/logo-180.png" 
+              alt="ORMA AI" 
+              className="h-10 w-10 object-contain"
+            />
+            <span className={`text-xl font-bold transition-colors ${
+              isScrolled ? 'text-slate-900' : 'text-white'
+            }`}>
+              ORMA AI
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -59,8 +61,10 @@ export default function Header() {
                 <Link
                   key={item.page}
                   to={createPageUrl(item.page)}
-                  className={`text-sm font-medium transition-colors hover:text-violet-600 ${
-                    isActive ? 'text-violet-600' : 'text-slate-600'
+                  className={`text-sm font-medium transition-colors ${
+                    isScrolled 
+                      ? (isActive ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600')
+                      : (isActive ? 'text-white' : 'text-slate-300 hover:text-white')
                   }`}
                 >
                   {item.label}
@@ -72,8 +76,12 @@ export default function Header() {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Link to={createPageUrl('Contact')}>
-              <Button className="bg-slate-900 hover:bg-slate-800 text-white rounded-lg">
-                שיחת אבחון AI
+              <Button className={`rounded-lg transition-all ${
+                isScrolled 
+                  ? 'bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white'
+                  : 'bg-white text-slate-900 hover:bg-slate-100'
+              }`}>
+                שיחת אסטרטגיה
               </Button>
             </Link>
           </div>
@@ -81,7 +89,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-slate-600 hover:text-slate-900"
+            className={`md:hidden p-2 ${isScrolled ? 'text-slate-600' : 'text-white'}`}
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -105,7 +113,7 @@ export default function Header() {
                     key={item.page}
                     to={createPageUrl(item.page)}
                     className={`block py-3 text-lg font-medium transition-colors ${
-                      isActive ? 'text-violet-600' : 'text-slate-600'
+                      isActive ? 'text-blue-600' : 'text-slate-600'
                     }`}
                   >
                     {item.label}
@@ -113,8 +121,8 @@ export default function Header() {
                 );
               })}
               <Link to={createPageUrl('Contact')} className="block pt-4">
-                <Button className="w-full bg-slate-900 hover:bg-slate-800 text-white rounded-lg h-12">
-                  שיחת אבחון AI
+                <Button className="w-full bg-gradient-to-r from-blue-600 to-violet-600 text-white rounded-lg h-12">
+                  שיחת אסטרטגיה
                 </Button>
               </Link>
             </div>

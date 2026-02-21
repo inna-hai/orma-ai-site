@@ -1,0 +1,6 @@
+# ORMA AI - robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://orma-ai.pages.dev/sitemap.xml

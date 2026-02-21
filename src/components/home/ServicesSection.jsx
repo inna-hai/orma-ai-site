@@ -1,22 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Bot, Zap, Sparkles, GraduationCap, Search, ArrowLeft } from 'lucide-react';
+import { Bot, Zap, Brain, Eye, MessageSquare, Users, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { services } from '@/data/staticData';
 
-const iconMap = {
-  Bot: Bot,
-  Zap: Zap,
-  Sparkles: Sparkles,
-  GraduationCap: GraduationCap,
-  Search: Search,
-};
+const services = [
+  {
+    icon: Brain,
+    title: "פיתוח Generative AI",
+    description: "אנחנו מעצבים אפליקציות AI גנרטיבי שהולכות מעבר לניסויים. פתרונות שפותחים רמות חדשות של יצירתיות, מאטמטים תהליכים קריטיים, ומתרגמים רעיונות לתוצאות מדידות.",
+  },
+  {
+    icon: Users,
+    title: "פיתוח Agentic AI",
+    description: "אנחנו מפתחים עוזרי AI אוטונומיים שפועלים כשותפים דיגיטליים אמינים. הם לוקחים על עצמם עבודה חוזרת ושגרתית, ממזערים טעויות אנוש ומשחררים את הצוותים שלכם למשימות בעלות ערך גבוה יותר.",
+  },
+  {
+    icon: MessageSquare,
+    title: "AI שיחתי",
+    description: "אנחנו מעצבים מערכות AI שיחתיות שעושות יותר מסתם להגיב — הן מייצרות מעורבות. בנויות להבין הקשר, כוונה ורגש, ויוצרות חוויות לקוח טבעיות ורלוונטיות.",
+  },
+  {
+    icon: Eye,
+    title: "פתרונות Computer Vision",
+    description: "אנחנו מיישמים Computer Vision לאתגרים התפעוליים המורכבים ביותר, והופכים תמונות ווידאו לתובנות ניתנות לפעולה. מבדיקות אוטומטיות ועד הערכות — משפרים דיוק תוך חיסכון בזמן ועלויות.",
+  },
+  {
+    icon: Zap,
+    title: "פתרונות Machine Learning",
+    description: "אנחנו עוצבים, מאמנים ומשפרים מודלים של Machine Learning שפותרים אתגרים עסקיים מורכבים. ממנועי המלצות ועד זיהוי הונאות — פתרונות ML מותאמים לנתונים ולמטרות שלכם.",
+  },
+  {
+    icon: Bot,
+    title: "אוטומציה חכמה",
+    description: "זיהוי משימות חוזרות והפיכתן לאוטומטיות עם AI מובנה. חיסכון של שעות עבודה בכל שבוע, הפחתת טעויות ושיפור עקביות התהליכים.",
+  }
+];
 
 export default function ServicesSection() {
   return (
     <section className="py-24 bg-white" id="services">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,69 +48,37 @@ export default function ServicesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-violet-600 font-semibold text-sm tracking-wide uppercase mb-3 block">
-            השירותים שלנו
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-            פתרונות AI מקצה לקצה
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-6">
+            פתרונות AI מקצה לקצה, בנויים להשפעה
           </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            מאבחון ראשוני ועד הטמעה מלאה - מלווים אתכם בכל שלב
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            אנחנו עוזרים לחברות לעצב ולהרחיב פתרונות AI שמביאים השפעה מדידה. מהכנת דאטה ועד פריסת מערכות מוכנות לפרודקשן, אנחנו מתמקדים בהאצת תוצאות, הגנה על התפעול, ומניעת ROI.
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
-            const Icon = iconMap[service.icon] || Sparkles;
+            const Icon = service.icon;
             return (
               <motion.div
-                key={service.id}
+                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`group relative p-8 rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
-                  service.highlighted 
-                    ? 'bg-gradient-to-br from-violet-600 to-purple-700 text-white shadow-xl shadow-violet-500/25'
-                    : 'bg-slate-50 hover:bg-white hover:shadow-xl border border-slate-100'
-                }`}
+                className="group p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:border-slate-200 transition-all duration-300"
               >
-                {service.highlighted && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-yellow-400 text-yellow-900 text-xs font-bold rounded-full">
-                    פופולרי
-                  </div>
-                )}
-                
-                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${
-                  service.highlighted 
-                    ? 'bg-white/20' 
-                    : 'bg-violet-100 text-violet-600'
-                }`}>
-                  <Icon className={`w-7 h-7 ${service.highlighted ? 'text-white' : ''}`} />
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/10 to-violet-500/10 border border-blue-500/20 flex items-center justify-center mb-6 group-hover:from-blue-500/20 group-hover:to-violet-500/20 transition-all duration-300">
+                  <Icon className="w-7 h-7 text-blue-600" />
                 </div>
                 
-                <h3 className={`text-xl font-bold mb-3 ${
-                  service.highlighted ? 'text-white' : 'text-slate-900'
-                }`}>
+                <h3 className="text-xl font-bold text-slate-900 mb-4">
                   {service.title}
                 </h3>
                 
-                <p className={`mb-6 leading-relaxed ${
-                  service.highlighted ? 'text-white/80' : 'text-slate-600'
-                }`}>
+                <p className="text-slate-600 leading-relaxed">
                   {service.description}
                 </p>
-
-                <ul className="space-y-2">
-                  {service.features.map((feature, i) => (
-                    <li key={i} className={`flex items-start gap-2 text-sm ${
-                      service.highlighted ? 'text-white/90' : 'text-slate-700'
-                    }`}>
-                      <span className={`mt-1 ${service.highlighted ? 'text-yellow-300' : 'text-violet-500'}`}>•</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
               </motion.div>
             );
           })}
@@ -100,9 +92,9 @@ export default function ServicesSection() {
           className="text-center mt-12"
         >
           <Link to={createPageUrl('Contact')}>
-            <button className="inline-flex items-center gap-2 text-violet-600 font-semibold hover:text-violet-700 transition-colors">
-              לא בטוחים מה מתאים לכם? דברו איתנו
-              <ArrowLeft className="w-4 h-4" />
+            <button className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors text-lg">
+              לא בטוחים מה מתאים? בואו נדבר
+              <ArrowLeft className="w-5 h-5" />
             </button>
           </Link>
         </motion.div>

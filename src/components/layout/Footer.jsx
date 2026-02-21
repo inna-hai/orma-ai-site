@@ -5,33 +5,35 @@ import { Linkedin, Mail, Phone } from 'lucide-react';
 
 export default function Footer({ settings }) {
   return (
-    <footer className="bg-slate-900 text-white">
-      <div className="max-w-6xl mx-auto px-6 py-16">
+    <footer className="bg-slate-950 text-white">
+      <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">O</span>
-              </div>
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src="/logo-180.png" 
+                alt="ORMA AI" 
+                className="h-10 w-10 object-contain"
+              />
               <span className="text-xl font-bold">
-                ORMA
+                ORMA AI
               </span>
             </div>
-            <p className="text-slate-400 leading-relaxed max-w-sm">
-              סוכנות לבינה מלאכותית יישומית.
+            <p className="text-slate-400 leading-relaxed max-w-sm mb-6">
+              AI שמביא תוצאות — מהיר, מאובטח, ומוכן לארגון שלך.
               <br />
               בינה שמתחברת לעשייה.
             </p>
             
             {/* Social Links */}
-            <div className="flex gap-4 mt-6">
+            <div className="flex gap-3">
               {settings?.linkedin_url && (
                 <a
                   href={settings.linkedin_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-slate-800 hover:bg-violet-600 flex items-center justify-center transition-colors"
+                  className="w-10 h-10 rounded-lg bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition-colors"
                 >
                   <Linkedin className="w-5 h-5" />
                 </a>
@@ -39,7 +41,7 @@ export default function Footer({ settings }) {
               {settings?.company_email && (
                 <a
                   href={`mailto:${settings.company_email}`}
-                  className="w-10 h-10 rounded-lg bg-slate-800 hover:bg-violet-600 flex items-center justify-center transition-colors"
+                  className="w-10 h-10 rounded-lg bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition-colors"
                 >
                   <Mail className="w-5 h-5" />
                 </a>
@@ -47,7 +49,7 @@ export default function Footer({ settings }) {
               {settings?.company_phone && (
                 <a
                   href={`tel:${settings.company_phone}`}
-                  className="w-10 h-10 rounded-lg bg-slate-800 hover:bg-violet-600 flex items-center justify-center transition-colors"
+                  className="w-10 h-10 rounded-lg bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition-colors"
                 >
                   <Phone className="w-5 h-5" />
                 </a>
@@ -57,25 +59,25 @@ export default function Footer({ settings }) {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold mb-4 text-white">ניווט מהיר</h4>
+            <h4 className="font-semibold mb-4 text-white">ניווט</h4>
             <ul className="space-y-3">
               <li>
-                <Link to={createPageUrl('Home')} className="text-slate-400 hover:text-violet-400 transition-colors">
+                <Link to={createPageUrl('Home')} className="text-slate-400 hover:text-blue-400 transition-colors">
                   ראשי
                 </Link>
               </li>
               <li>
-                <Link to={createPageUrl('CaseStudies')} className="text-slate-400 hover:text-violet-400 transition-colors">
+                <Link to={createPageUrl('CaseStudies')} className="text-slate-400 hover:text-blue-400 transition-colors">
                   סיפורי הצלחה
                 </Link>
               </li>
               <li>
-                <Link to={createPageUrl('About')} className="text-slate-400 hover:text-violet-400 transition-colors">
+                <Link to={createPageUrl('About')} className="text-slate-400 hover:text-blue-400 transition-colors">
                   אודות
                 </Link>
               </li>
               <li>
-                <Link to={createPageUrl('Contact')} className="text-slate-400 hover:text-violet-400 transition-colors">
+                <Link to={createPageUrl('Contact')} className="text-slate-400 hover:text-blue-400 transition-colors">
                   צור קשר
                 </Link>
               </li>
@@ -87,12 +89,12 @@ export default function Footer({ settings }) {
             <h4 className="font-semibold mb-4 text-white">מידע נוסף</h4>
             <ul className="space-y-3">
               <li>
-                <Link to={createPageUrl('Privacy')} className="text-slate-400 hover:text-violet-400 transition-colors">
+                <Link to={createPageUrl('Privacy')} className="text-slate-400 hover:text-blue-400 transition-colors">
                   מדיניות פרטיות
                 </Link>
               </li>
               <li>
-                <Link to={createPageUrl('Terms')} className="text-slate-400 hover:text-violet-400 transition-colors">
+                <Link to={createPageUrl('Terms')} className="text-slate-400 hover:text-blue-400 transition-colors">
                   תנאי שימוש
                 </Link>
               </li>
@@ -103,7 +105,7 @@ export default function Footer({ settings }) {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-slate-800">
           <p className="text-slate-500 text-sm text-center">
-            © {new Date().getFullYear()} ORMA. כל הזכויות שמורות.
+            © {new Date().getFullYear()} ORMA AI. כל הזכויות שמורות.
           </p>
         </div>
       </div>
