@@ -1,23 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Repeat, Link2, Lightbulb, ArrowLeft } from 'lucide-react';
+import { X, Check } from 'lucide-react';
 
-const problems = [
-  {
-    icon: Repeat,
-    problem: 'עומס עבודה ידני ומיותר',
-    solution: 'תהליכים אוטומטיים וזרימה חכמה'
-  },
-  {
-    icon: Link2,
-    problem: 'מערכות שלא מתקשרות אחת עם השנייה',
-    solution: 'חיבור חכם בין הכלים הקיימים'
-  },
-  {
-    icon: Lightbulb,
-    problem: 'AI שנשאר בהרצאות ובמצגות',
-    solution: 'הטמעה אמיתית בעבודה היומיומית'
-  }
+const oldItems = [
+  'המערכת קיימת; AI "מוצמד" אליה',
+  'עדיין צריך להזין נתונים ידנית',
+  'AI מציע — אדם מבצע',
+  'כל מחלקה = מערכת נפרדת',
+  'AI לא "רואה" את התמונה המלאה',
+];
+
+const newItems = [
+  'אין מערכת "מתחת" — הסוכן הוא הכל',
+  'נתונים נאספים מהשיחה הטבעית',
+  'הסוכן מחליט ומבצע באוטונומיה',
+  'CRM + HR + Finance = סוכן אחד',
+  'ראייה הוליסטית מלאה של העסק',
 ];
 
 export default function ProblemSection() {
@@ -29,42 +27,70 @@ export default function ProblemSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-6"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-            האתגרים שאנחנו פותרות
+          <span className="text-indigo-600 text-sm font-bold tracking-widest uppercase">מה באמת שונה כאן</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">
+            הפער בין "AI בתוך מערכת" לבין "AI שהוא המערכת"
           </h2>
-          <p className="text-slate-600 text-lg">
-            שלושת החסמים המרכזיים שמונעים מ-AI לעבוד באמת בארגונים
+          <p className="text-slate-600 text-lg max-w-3xl mx-auto">
+            כמעט כל חברת תוכנה הוסיפה "AI" למוצר שלה — Salesforce, HubSpot, Monday. אבל כולן חולקות מגבלה מבנית: ה-AI הוא שכבה על גבי המערכת, לא המערכת עצמה.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {problems.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative rounded-2xl p-8 bg-white border border-slate-100 group hover:shadow-lg transition-all duration-300"
-            >
-              <div className="w-14 h-14 rounded-xl bg-violet-50 flex items-center justify-center mb-6">
-                <item.icon className="w-7 h-7 text-violet-600" />
-              </div>
+        <div className="grid md:grid-cols-2 gap-6 mt-12">
+          {/* Old CRM Column */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="rounded-2xl p-8 bg-red-50 border border-red-200"
+          >
+            <h3 className="text-lg font-bold text-red-800 mb-6">AI כשכבה (השוק)</h3>
+            <ul className="space-y-4">
+              {oldItems.map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-slate-700">
+                  <X className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
 
-              <div className="space-y-4">
-                <p className="text-xl font-bold text-slate-900 mb-4">
-                  {item.problem}
-                </p>
-                
-                <p className="text-base text-violet-600 font-medium">
-                  {item.solution}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+          {/* Forward Column */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="rounded-2xl p-8 bg-green-50 border border-green-200"
+          >
+            <h3 className="text-lg font-bold text-green-800 mb-6">AI כמערכת (Forward)</h3>
+            <ul className="space-y-4">
+              {newItems.map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-slate-700">
+                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
         </div>
+
+        {/* Intro paragraph */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-12 max-w-3xl mx-auto text-center"
+        >
+          <p className="text-lg text-slate-600 leading-relaxed">
+            Forward בנתה משהו שונה מהותית. לא עוד שכבת AI על גבי תוכנה קיימת. לא עוד "Copilot" שמחכה להוראות. אלא{' '}
+            <strong className="text-slate-900">סוכן שהוא המערכת עצמה</strong> — שיודע לנהל תהליכים עסקיים מקצה לקצה, מרגע שליד נכנס ועד שהחשבונית יוצאת.
+          </p>
+        </motion.div>
       </div>
     </section>
   );
