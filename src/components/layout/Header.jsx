@@ -7,6 +7,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
   { label: 'ראשי', page: 'Home' },
+  { label: 'הפלטפורמה', page: 'Platform' },
+  { label: 'תחומים', page: 'Industries' },
+  { label: 'מחירים', page: 'Pricing' },
   { label: 'סיפורי הצלחה', page: 'CaseStudies' },
   { label: 'אודות', page: 'About' },
   { label: 'צור קשר', page: 'Contact' }
