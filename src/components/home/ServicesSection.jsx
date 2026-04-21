@@ -1,48 +1,45 @@
 import React from 'react';
-import { Users, UserCog, Wallet, Brain, Rocket } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
+import { Bot, Zap, Brain, Eye, MessageSquare, Users, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const services = [
   {
-    icon: Users,
-    title: "שליטה מלאה במחזור חיי הלקוח",
-    subtitle: "מליד לעסקה לשימור",
-    description: "הסוכן מזהה ליד חדש ברגע שהוא נכנס, מסווג לפי דחיפות ופוטנציאל, מקצה לאיש הצוות הנכון, ומתחיל מעקב אוטומטי. כל אירוע מתועד, כל מסר מותאם לשלב ולהקשר.",
-    color: "from-red-500 to-rose-600",
-  },
-  {
-    icon: UserCog,
-    title: "ניהול צוות שטח ומשאבי אנוש",
-    subtitle: "בלי מערכת HR נפרדת",
-    description: "דיווח שעות, בקשות חופשה, אישורי מנהל, קליטת עובדים — הכל דרך הודעה. הסוכן מנהל Onboarding מלא, מפיץ לוחות משימות, ומאזן עומסים בין אזורים.",
-    color: "from-blue-500 to-indigo-600",
-  },
-  {
-    icon: Wallet,
-    title: "חשבונאות ותזרים",
-    subtitle: "סגירת המעגל הפיננסי",
-    description: "עסקה נסגרת → הצעת מחיר → חשבונית → מעקב תשלום → תזכורת → דוח תזרים. אין יותר ׳חורים׳ בין מחלקות. מכירות, תפעול וכספים מנוהלים באותו מוח.",
-    color: "from-amber-500 to-orange-600",
-  },
-  {
     icon: Brain,
-    title: "אינטליגנציה מצטברת",
-    subtitle: "הסוכן נהיה חכם יותר עם כל יום",
-    description: "מזהה דפוסים, לומד איזה לקוחות סוגרים מהר, מתי הצוות הכי מגיב, אילו מוצרים מבוקשים ביחד, ואילו לקוחות בסיכון נטישה — ומתריע לפני שמאוחר.",
-    color: "from-violet-500 to-purple-600",
+    title: "פיתוח Generative AI",
+    description: "אנחנו מעצבים אפליקציות AI גנרטיבי שהולכות מעבר לניסויים. פתרונות שפותחים רמות חדשות של יצירתיות, מאטמטים תהליכים קריטיים, ומתרגמים רעיונות לתוצאות מדידות.",
   },
   {
-    icon: Rocket,
-    title: "הטמעה ללא שיבוש",
-    subtitle: "תהליך מובנה שמכבד את המורכבות",
-    description: "אפיון מעמיק, מיגרציה מלאה עם audit trail, הרשאות מדורגות, ושלב Soft Launch. הצוות עובר בצורה טבעית — כי הערוץ כבר מוכר. אין מערכת חדשה ללמוד.",
-    color: "from-emerald-500 to-green-600",
+    icon: Users,
+    title: "פיתוח Agentic AI",
+    description: "אנחנו מפתחים עוזרי AI אוטונומיים שפועלים כשותפים דיגיטליים אמינים. הם לוקחים על עצמם עבודה חוזרת ושגרתית, ממזערים טעויות אנוש ומשחררים את הצוותים שלכם למשימות בעלות ערך גבוה יותר.",
   },
+  {
+    icon: MessageSquare,
+    title: "AI שיחתי",
+    description: "אנחנו מעצבים מערכות AI שיחתיות שעושות יותר מסתם להגיב — הן מייצרות מעורבות. בנויות להבין הקשר, כוונה ורגש, ויוצרות חוויות לקוח טבעיות ורלוונטיות.",
+  },
+  {
+    icon: Eye,
+    title: "פתרונות Computer Vision",
+    description: "אנחנו מיישמים Computer Vision לאתגרים התפעוליים המורכבים ביותר, והופכים תמונות ווידאו לתובנות ניתנות לפעולה. מבדיקות אוטומטיות ועד הערכות — משפרים דיוק תוך חיסכון בזמן ועלויות.",
+  },
+  {
+    icon: Zap,
+    title: "פתרונות Machine Learning",
+    description: "אנחנו עוצבים, מאמנים ומשפרים מודלים של Machine Learning שפותרים אתגרים עסקיים מורכבים. ממנועי המלצות ועד זיהוי הונאות — פתרונות ML מותאמים לנתונים ולמטרות שלכם.",
+  },
+  {
+    icon: Bot,
+    title: "אוטומציה חכמה",
+    description: "זיהוי משימות חוזרות והפיכתן לאוטומטיות עם AI מובנה. חיסכון של שעות עבודה בכל שבוע, הפחתת טעויות ושיפור עקביות התהליכים.",
+  }
 ];
 
 export default function ServicesSection() {
   return (
-    <section className="py-24 bg-slate-50" id="services">
+    <section className="py-24 bg-white" id="services">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -51,12 +48,11 @@ export default function ServicesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-indigo-600 text-sm font-bold tracking-widest uppercase">חמש נקודות חוזק</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-6 mt-2">
-            מערכת אחת. סוכן אחד. כל התפעול.
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-6">
+            פתרונות AI מקצה לקצה, בנויים להשפעה
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Forward מאחדת CRM, משאבי אנוש וכספים תחת סוכן AI אוטונומי אחד — שלומד, מחליט ופועל.
+            אנחנו עוזרים לחברות לעצב ולהרחיב פתרונות AI שמביאים השפעה מדידה. מהכנת דאטה ועד פריסת מערכות מוכנות לפרודקשן, אנחנו מתמקדים בהאצת תוצאות, הגנה על התפעול, ומניעת ROI.
           </p>
         </motion.div>
 
@@ -70,16 +66,15 @@ export default function ServicesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`group p-8 rounded-2xl bg-white border border-slate-100 hover:shadow-xl hover:shadow-slate-200/50 hover:border-slate-200 transition-all duration-300 ${index >= 3 ? 'lg:col-span-1' : ''}`}
+                className="group p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:border-slate-200 transition-all duration-300"
               >
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6`}>
-                  <Icon className="w-7 h-7 text-white" />
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/10 to-violet-500/10 border border-blue-500/20 flex items-center justify-center mb-6 group-hover:from-blue-500/20 group-hover:to-violet-500/20 transition-all duration-300">
+                  <Icon className="w-7 h-7 text-blue-600" />
                 </div>
                 
-                <h3 className="text-xl font-bold text-slate-900 mb-1">
+                <h3 className="text-xl font-bold text-slate-900 mb-4">
                   {service.title}
                 </h3>
-                <p className="text-indigo-600 font-medium text-sm mb-4">{service.subtitle}</p>
                 
                 <p className="text-slate-600 leading-relaxed">
                   {service.description}
@@ -88,6 +83,21 @@ export default function ServicesSection() {
             );
           })}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center mt-12"
+        >
+          <Link to={createPageUrl('Contact')}>
+            <button className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors text-lg">
+              לא בטוחים מה מתאים? בואו נדבר
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

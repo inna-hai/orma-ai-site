@@ -1,33 +1,30 @@
 import React from 'react';
-import { Bot, Zap, MessageSquare, BarChart3 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
+import { ArrowLeft, Shield, CheckCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-
-const badges = [
-  { icon: Bot, label: 'סוכני AI אוטונומיים' },
-  { icon: Zap, label: 'CRM + HR + Finance' },
-  { icon: MessageSquare, label: 'WhatsApp-native' },
-  { icon: BarChart3, label: 'תובנות פרואקטיביות' },
-];
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden" style={{ background: 'linear-gradient(160deg, #020617 0%, #0f172a 35%, #1e1b4b 70%, #312e81 100%)' }}>
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
       {/* Subtle gradient orbs */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-1/4 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[150px]" />
-        <div className="absolute bottom-20 right-1/4 w-[500px] h-[500px] bg-red-500/5 rounded-full blur-[120px]" />
+        <div className="absolute top-20 left-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px]" />
+        <div className="absolute bottom-20 right-1/4 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[120px]" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 py-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Category */}
+          {/* Trust Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-indigo-400 text-sm font-bold tracking-widest uppercase mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-8 border border-emerald-500/20"
           >
-            ניתוח · טכנולוגיה עסקית · 2026
+            <Shield className="w-4 h-4" />
+            <span>אבטחה ואיכות מוכחת: ISO 9001 & ISO 27001</span>
           </motion.div>
 
           {/* Main Headline */}
@@ -35,11 +32,13 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-100 leading-[1.25] mb-8"
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.15] mb-6"
           >
-            מעבר לאוטומציה: כשסוכן AI הופך{' '}
-            <span className="text-indigo-400">למנהל התפעול</span>{' '}
-            של החברה — וכל שרשרת הערך משתנה
+            AI שמביא תוצאות —
+            <br />
+            <span className="bg-gradient-to-l from-blue-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
+              מהיר, מאובטח, ומוכן לארגון שלך
+            </span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -49,41 +48,56 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-slate-400 mb-10 leading-relaxed max-w-3xl mx-auto"
           >
-            איך ארכיטקטורה של סוכנים אוטונומיים מאחדת CRM, משאבי אנוש וכספים למערכת אחת חושבת — ולמה רוב הפתרונות בשוק, מ-Salesforce ועד Leena AI,{' '}
-            <strong className="text-slate-300">עדיין תקועים בשכבת העוזרים</strong>.
+            אורמא מטמיעה AI היכן שזה משנה באמת בתהליכי העבודה שלכם — 
+            <span className="text-white"> מצמצמת עיכובים, מונעת טעויות, ומשפרת יעילות</span> כדי שתוכלו לנצח גם במהירות וגם בעלויות — בלי לשבש את הדרך שהצוותים שלכם כבר עובדים.
           </motion.p>
 
-          {/* Badges */}
+          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-wrap justify-center gap-3 mb-16"
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
           >
-            {badges.map((badge, i) => (
-              <div
-                key={i}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.08] border border-white/[0.12] text-slate-400 text-sm font-medium"
-              >
-                <badge.icon className="w-4 h-4" />
-                <span>{badge.label}</span>
-              </div>
-            ))}
+            <Link to={createPageUrl('Contact')}>
+              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white px-8 py-6 text-lg rounded-xl shadow-2xl shadow-blue-600/25 transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto">
+                לשיחת אסטרטגיה חינם
+                <ArrowLeft className="w-5 h-5 mr-2" />
+              </Button>
+            </Link>
+            <Link to={createPageUrl('CaseStudies')}>
+              <Button size="lg" variant="outline" className="border-2 border-slate-600 text-white hover:bg-slate-800 px-8 py-6 text-lg rounded-xl transition-all duration-300 w-full sm:w-auto">
+                סיפורי הצלחה
+              </Button>
+            </Link>
+          </motion.div>
+
+          {/* Trust Points */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-slate-400"
+          >
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-emerald-400" />
+              <span>נסמכים על ידי ארגונים מובילים</span>
+            </div>
           </motion.div>
         </div>
 
-        {/* Stats */}
+        {/* Stats Section */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
+          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
         >
           {[
-            { value: "100%", label: "העברת נתונים עם בדיקת תקינות" },
-            { value: "0", label: "שיבוש לפעילות השוטפת" },
-            { value: "24/7", label: "ניטור וליווי צמוד" },
-            { value: "∞", label: "סוכנים ללא הגבלה" }
+            { value: "30+", label: "פרויקטי AI שהושלמו" },
+            { value: "90%", label: "זמן מהיר יותר לתוצאות" },
+            { value: "8+", label: "שנות ניסיון ב-AI" },
+            { value: "24/7", label: "תמיכה וליווי" }
           ].map((stat, index) => (
             <div key={index} className="text-center">
               <div className="text-3xl md:text-4xl font-black text-white mb-2">{stat.value}</div>
