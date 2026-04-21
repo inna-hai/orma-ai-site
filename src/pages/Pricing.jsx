@@ -2,21 +2,22 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
-import { Check, X, Sparkles, ArrowLeft, TrendingDown, Users, Zap, Crown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ArrowLeft, Check, X, Minus } from 'lucide-react';
+
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-80px' },
+  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+};
 
 const plans = [
   {
     name: 'Starter',
     subtitle: 'לעסק מתחיל',
-    price: '0',
-    priceNote: 'חינם לתמיד',
-    setup: '0',
-    setupNote: 'ללא הקמה',
+    price: '0', priceNote: 'חינם לתמיד',
+    setup: '0', setupNote: 'ללא הקמה',
     cta: 'התחלה חינמית',
-    highlighted: false,
-    icon: Users,
-    color: 'from-slate-400 to-slate-600',
     features: [
       { text: 'עד 1 משתמש', included: true },
       { text: '100 אנשי קשר', included: true },
@@ -32,14 +33,9 @@ const plans = [
   {
     name: 'Growth',
     subtitle: 'לעסק קטן-בינוני',
-    price: '299',
-    priceNote: '₪ / חודש',
-    setup: '4,500',
-    setupNote: 'הקמה חד-פעמית',
+    price: '299', priceNote: '₪ / חודש',
+    setup: '4,500', setupNote: 'הקמה חד-פעמית',
     cta: 'בחר Growth',
-    highlighted: false,
-    icon: TrendingDown,
-    color: 'from-blue-500 to-cyan-600',
     features: [
       { text: 'עד 5 משתמשים', included: true },
       { text: '2,000 אנשי קשר', included: true },
@@ -48,22 +44,17 @@ const plans = [
       { text: 'טפסי Web + Landing Page', included: true },
       { text: 'דשבורד מתקדם', included: true },
       { text: 'חשבוניות ישראליות (Morning/iCount)', included: true },
-      { text: 'תמיכה בצ\'אט וואטסאפ', included: true },
+      { text: "תמיכה בצ'אט וואטסאפ", included: true },
       { text: 'AI features', included: false },
     ],
   },
   {
     name: 'Professional',
     subtitle: 'הכי פופולרי',
-    price: '799',
-    priceNote: '₪ / חודש',
-    setup: '9,000',
-    setupNote: 'הקמה חד-פעמית',
+    price: '799', priceNote: '₪ / חודש',
+    setup: '9,000', setupNote: 'הקמה חד-פעמית',
     cta: 'בחר Professional',
-    highlighted: true,
-    badge: 'הכי משתלם',
-    icon: Zap,
-    color: 'from-indigo-500 to-violet-600',
+    featured: true,
     features: [
       { text: 'עד 15 משתמשים', included: true },
       { text: 'אנשי קשר ללא הגבלה', included: true },
@@ -79,14 +70,9 @@ const plans = [
   {
     name: 'Business',
     subtitle: 'לעסקים מתקדמים',
-    price: '1,499',
-    priceNote: '₪ / חודש',
-    setup: '15,000',
-    setupNote: 'הקמה חד-פעמית',
+    price: '1,499', priceNote: '₪ / חודש',
+    setup: '15,000', setupNote: 'הקמה חד-פעמית',
     cta: 'בחר Business',
-    highlighted: false,
-    icon: Crown,
-    color: 'from-amber-500 to-orange-600',
     features: [
       { text: 'עד 30 משתמשים', included: true },
       { text: 'הכל ללא הגבלה', included: true },
@@ -106,522 +92,306 @@ const comparisonRows = [
   { feature: 'תמחור ל-25 משתמשים', orma: '₪1,499 flat', fireberry: '~₪7,500', monday: '~₪2,800', hubspot: '~₪9,200' },
   { feature: 'חשבוניות מס ישראליות', orma: true, fireberry: 'חלקי', monday: false, hubspot: false },
   { feature: 'עברית RTL מלאה', orma: true, fireberry: true, monday: 'חלקי', hubspot: 'חלקי' },
-  { feature: 'WhatsApp Business native', orma: true, fireberry: 'תוסף בתשלום', monday: 'תוסף בתשלום', hubspot: 'תוסף יקר' },
+  { feature: 'WhatsApp Business native', orma: true, fireberry: 'תוסף', monday: 'תוסף', hubspot: 'תוסף יקר' },
   { feature: 'AI מובנה (Claude)', orma: true, fireberry: 'חלקי', monday: 'בסיסי', hubspot: 'יקר (+$)' },
   { feature: 'בנדלים ורטיקליים', orma: '8 תחומים', fireberry: 'גנרי', monday: 'תבניות', hubspot: 'גנרי' },
-  { feature: 'Workflow Automation', orma: true, fireberry: true, monday: true, hubspot: 'מוגבל ב-Starter' },
-  { feature: 'Custom development', orma: true, fireberry: 'דורש הטמעה חיצונית', monday: 'מוגבל', hubspot: 'מוגבל' },
-  { feature: 'תמיכה בעברית', orma: '24/7 ישירה', fireberry: 'בשעות עבודה', monday: 'אנגלית', hubspot: 'אנגלית' },
+  { feature: 'Workflow Automation', orma: true, fireberry: true, monday: true, hubspot: 'מוגבל' },
+  { feature: 'Custom development', orma: true, fireberry: 'חיצוני', monday: 'מוגבל', hubspot: 'מוגבל' },
+  { feature: 'תמיכה בעברית', orma: '24/7', fireberry: 'שעות עבודה', monday: 'אנגלית', hubspot: 'אנגלית' },
 ];
 
 const faqs = [
-  {
-    q: 'למה ה-flat rate חשוב כל כך?',
-    a: 'בכל CRM אחר (HubSpot, Fireberry, Salesforce) אתם משלמים פר משתמש — ככל שהצוות גדל, המחיר זוחל ויכול להגיע ל-₪8,000-10,000 לחודש לעסק של 20 עובדים. אצלנו המחיר קבוע: Professional ב-₪799 זה אותו דבר בין אם יש 5 משתמשים או 15. זה חוסך לעסקים צומחים עשרות אלפי שקלים בשנה.',
-  },
-  {
-    q: 'מה כולל Setup Fee?',
-    a: 'התקנה ראשונית, הגדרת הצוות, קונפיגורציית pipeline, ייבוא מידע ממערכת ישנה (אם יש), שתי הדרכות לצוות, והתאמה של המודולים הרלוונטיים. מחיר Setup נע בין ₪4,000 ל-₪15,000 לפי מסלול.',
-  },
-  {
-    q: 'האם ניתן לשדרג/להוריד מסלול?',
-    a: 'כן, בכל עת. שדרוג — מיידי. הורדה — בסוף תקופת החיוב הנוכחית. אם הוספתם מודולים בעצם ההתקשרות, הם נשארים גם במסלול נמוך יותר.',
-  },
-  {
-    q: 'מה ההבדל בין Growth ל-Professional?',
-    a: 'Growth מתאים לעסק שעושה CRM בסיסי + תקשורת (WhatsApp, Email, טפסי Web). Professional מוסיף את ה-AI (סיכומי שיחות, טיוטות מייל), automation מלא, חוזים עם חתימה דיגיטלית, ואחד מה-Vertical Bundles (נדל&quot;ן/ביטוח/רפואה וכו\').',
-  },
-  {
-    q: 'יש התחייבות?',
-    a: 'התחייבות מינימלית של 6 חודשים (כי יש השקעה ב-Setup ובהדרכה). אחרי זה — חודש בחודש. אין ביטול לפני 6 חודשים אלא אם אנחנו לא עומדים ב-SLA.',
-  },
-  {
-    q: 'מה קורה עם הדאטה שלי אם אעזוב?',
-    a: 'הדאטה שלכם — שלכם. בכל עת אתם יכולים לייצא את כל המידע כ-CSV/Excel/JSON. אם אתם עוזבים, יש לכם 30 יום להוריד הכל, ואז המידע נמחק מהשרתים שלנו.',
-  },
-  {
-    q: 'האם יש אפשרות חינמית באמת?',
-    a: 'כן — מסלול Starter חינמי לתמיד. משתמש אחד, 100 אנשי קשר, הבסיס. מספיק לעצמאים בתחילת דרכם. כשהעסק גדל — עוברים ל-Growth.',
-  },
-  {
-    q: 'איך ההטמעה עובדת?',
-    a: '1) שיחת אפיון (30-60 דקות). 2) אנחנו מקימים את המערכת ומגדירים אותה (3-7 ימי עבודה). 3) ייבוא נתונים מהמערכת הישנה. 4) הדרכת צוות. 5) Go-live עם ליווי צמוד שבועיים. סה&quot;כ 2-3 שבועות עד לייצור מלא.',
-  },
+  { q: 'למה ה-flat rate חשוב כל כך?', a: 'בכל CRM אחר (HubSpot, Fireberry, Salesforce) אתם משלמים פר משתמש — ככל שהצוות גדל, המחיר זוחל ויכול להגיע ל-₪8,000-10,000 לחודש לעסק של 20 עובדים. אצלנו המחיר קבוע: Professional ב-₪799 זה אותו דבר בין אם יש 5 משתמשים או 15.' },
+  { q: 'מה כולל Setup Fee?', a: 'התקנה ראשונית, הגדרת הצוות, קונפיגורציית pipeline, ייבוא מידע ממערכת ישנה, שתי הדרכות לצוות, והתאמה של המודולים הרלוונטיים. מחיר Setup נע בין ₪4,500 ל-₪15,000 לפי מסלול.' },
+  { q: 'האם ניתן לשדרג/להוריד מסלול?', a: 'כן, בכל עת. שדרוג — מיידי. הורדה — בסוף תקופת החיוב הנוכחית. אם הוספתם מודולים בעצם ההתקשרות, הם נשארים גם במסלול נמוך יותר.' },
+  { q: 'מה ההבדל בין Growth ל-Professional?', a: 'Growth מתאים לעסק שעושה CRM בסיסי + תקשורת. Professional מוסיף את ה-AI, automation מלא, חוזים עם חתימה דיגיטלית, ואחד מה-Vertical Bundles.' },
+  { q: 'יש התחייבות?', a: 'התחייבות מינימלית של 6 חודשים. אחרי זה — חודש בחודש. אין ביטול לפני 6 חודשים אלא אם אנחנו לא עומדים ב-SLA.' },
+  { q: 'מה קורה עם הדאטה שלי אם אעזוב?', a: 'הדאטה שלכם — שלכם. בכל עת אתם יכולים לייצא את כל המידע כ-CSV/Excel/JSON. אם אתם עוזבים, יש לכם 30 יום להוריד הכל, ואז המידע נמחק מהשרתים שלנו.' },
+  { q: 'איך ההטמעה עובדת?', a: '1) שיחת אפיון (30-60 דקות). 2) אנחנו מקימים את המערכת (3-7 ימי עבודה). 3) ייבוא נתונים. 4) הדרכת צוות. 5) Go-live עם ליווי צמוד שבועיים. סה"כ 2-3 שבועות עד לייצור מלא.' },
 ];
 
 export default function Pricing() {
   const [yearly, setYearly] = useState(false);
-  const yearlyDiscount = 0.8; // 20% off
-
-  const getPrice = (price) => {
-    if (price === '0') return '0';
-    const num = parseInt(price.replace(',', ''));
-    if (yearly) {
-      return Math.round(num * yearlyDiscount).toLocaleString('he-IL');
-    }
-    return num.toLocaleString('he-IL');
+  const priceOf = (p) => {
+    if (p === '0') return '0';
+    const n = parseInt(p.replace(',', ''));
+    return (yearly ? Math.round(n * 0.8) : n).toLocaleString('he-IL');
   };
 
   return (
-    <div className="pt-20 min-h-screen bg-white">
+    <div>
       {/* Hero */}
-      <section className="relative py-20 overflow-hidden" style={{ background: 'linear-gradient(160deg, #020617 0%, #0f172a 35%, #1e1b4b 70%, #312e81 100%)' }}>
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-1/3 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[150px]" />
-        </div>
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-indigo-400 text-sm font-bold tracking-widest uppercase mb-6"
-          >
-            תמחור שקוף
+      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(139,109,226,0.18) 0%, transparent 60%)' }} />
+        <div className="relative container-editorial">
+          <motion.div {...fadeUp} className="max-w-4xl">
+            <div className="meta-label mb-6">Pricing</div>
+            <h1 className="heading-display mb-8">
+              עד <span className="text-lavender-300">פי 5 זול</span> יותר<br />
+              ממה שאתם משלמים היום.
+            </h1>
+            <p className="text-white/60 text-lg md:text-xl leading-[1.75] max-w-2xl">
+              תמחור <span className="text-white">flat</span>, לא per-user.
+              לא משנה אם 5 או 25 משתמשים — אותו מחיר. חוסך לעסק צומח עשרות אלפי שקלים בשנה.
+            </p>
           </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-100 leading-[1.2] mb-6"
-          >
-            עד <span className="text-indigo-400">פי 5 זול</span> יותר<br />
-            ממה שאתם משלמים היום
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-xl text-slate-400 mb-10 leading-relaxed max-w-3xl mx-auto"
-          >
-            תמחור <strong className="text-white">flat</strong>, לא per-user. לא משנה אם 5 או 25 משתמשים —
-            אותו מחיר. חוסך לעסק צומח עשרות אלפי שקלים בשנה.
-          </motion.p>
 
           {/* Billing toggle */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="inline-flex items-center gap-3 bg-white/10 rounded-full p-1.5 border border-white/10"
-          >
+          <motion.div {...fadeUp} className="mt-10 inline-flex items-center gap-2 p-1.5 rounded-full border border-white/[0.1] bg-white/[0.03]">
             <button
               onClick={() => setYearly(false)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition ${!yearly ? 'bg-white text-slate-900' : 'text-slate-300'}`}
+              className={`px-5 py-2 rounded-full text-[13px] font-medium transition ${!yearly ? 'bg-white text-[#0a0515]' : 'text-white/70 hover:text-white'}`}
             >
               חודשי
             </button>
             <button
               onClick={() => setYearly(true)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition flex items-center gap-2 ${yearly ? 'bg-white text-slate-900' : 'text-slate-300'}`}
+              className={`px-5 py-2 rounded-full text-[13px] font-medium transition flex items-center gap-2 ${yearly ? 'bg-white text-[#0a0515]' : 'text-white/70 hover:text-white'}`}
             >
               שנתי
-              <span className="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">חיסכון 20%</span>
+              <span className="bg-lavender-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">−20%</span>
             </button>
           </motion.div>
         </div>
       </section>
 
-      {/* Pricing Cards */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {plans.map((plan, idx) => {
-              const PlanIcon = plan.icon;
-              return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className={`relative rounded-2xl p-8 flex flex-col ${
-                    plan.highlighted
-                      ? 'bg-gradient-to-br from-indigo-600 to-violet-700 text-white shadow-2xl scale-105 border-2 border-indigo-400'
-                      : 'bg-white border border-slate-200'
-                  }`}
-                >
-                  {plan.badge && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-orange-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
-                      {plan.badge}
-                    </div>
-                  )}
-
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${plan.color} flex items-center justify-center mb-5`}>
-                    <PlanIcon className="w-6 h-6 text-white" />
+      {/* Pricing cards */}
+      <section className="py-20 md:py-24 border-t border-white/[0.06]">
+        <div className="container-wide">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {plans.map((plan) => (
+              <motion.div
+                key={plan.name}
+                {...fadeUp}
+                className={`relative rounded-2xl border p-8 flex flex-col ${
+                  plan.featured
+                    ? 'border-lavender-400/40 bg-lavender-500/[0.06]'
+                    : 'border-white/[0.08] bg-white/[0.02]'
+                }`}
+              >
+                {plan.featured && (
+                  <div className="absolute -top-3 right-8 text-[10px] font-bold tracking-widest uppercase text-[#0a0515] bg-lavender-400 px-3 py-1 rounded-full">
+                    המומלץ
                   </div>
+                )}
 
-                  <h3 className={`text-2xl font-black mb-1 ${plan.highlighted ? 'text-white' : 'text-slate-900'}`}>
-                    {plan.name}
-                  </h3>
-                  <p className={`text-sm mb-6 ${plan.highlighted ? 'text-indigo-200' : 'text-slate-500'}`}>
-                    {plan.subtitle}
-                  </p>
+                <div className="meta-label mb-2">{plan.name}</div>
+                <div className="text-white/55 text-[13px] mb-6">{plan.subtitle}</div>
 
-                  <div className="mb-6">
-                    <div className="flex items-baseline gap-1">
-                      <span className={`text-4xl font-black ${plan.highlighted ? 'text-white' : 'text-slate-900'}`}>
-                        {plan.price === '0' ? '₪0' : `₪${getPrice(plan.price)}`}
-                      </span>
-                    </div>
-                    <div className={`text-sm mt-1 ${plan.highlighted ? 'text-indigo-200' : 'text-slate-500'}`}>
-                      {plan.price === '0' ? plan.priceNote : (yearly ? '₪/חודש (חיוב שנתי)' : plan.priceNote)}
-                    </div>
+                <div className="flex items-baseline gap-2 mb-1">
+                  <span className="text-5xl font-black text-white tracking-tight">
+                    {plan.price === '0' ? '₪0' : `₪${priceOf(plan.price)}`}
+                  </span>
+                </div>
+                <div className="text-[13px] text-white/50 mb-6">
+                  {plan.price === '0' ? plan.priceNote : (yearly ? '₪/חודש · חיוב שנתי' : plan.priceNote)}
+                </div>
 
-                    {/* Setup fee — prominent */}
-                    <div className={`mt-4 pt-4 border-t ${plan.highlighted ? 'border-white/20' : 'border-slate-200'}`}>
-                      <div className={`text-xs font-bold tracking-wider uppercase mb-1 ${plan.highlighted ? 'text-indigo-200' : 'text-slate-400'}`}>
-                        + דמי הקמה
-                      </div>
-                      <div className={`flex items-baseline gap-2`}>
-                        <span className={`text-2xl font-black ${plan.highlighted ? 'text-amber-300' : 'text-amber-600'}`}>
-                          {plan.setup === '0' ? 'חינם' : `₪${plan.setup}`}
-                        </span>
-                        <span className={`text-xs ${plan.highlighted ? 'text-indigo-200' : 'text-slate-500'}`}>
-                          {plan.setup === '0' ? '' : 'חד-פעמי'}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <Link to={createPageUrl('Contact')} className="mb-8">
-                    <Button
-                      className={`w-full rounded-xl font-semibold ${
-                        plan.highlighted
-                          ? 'bg-white text-indigo-700 hover:bg-indigo-50'
-                          : 'bg-slate-900 text-white hover:bg-slate-800'
-                      }`}
-                    >
-                      {plan.cta}
-                    </Button>
-                  </Link>
-
-                  <ul className="space-y-3 flex-1">
-                    {plan.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-start gap-3 text-sm">
-                        {feature.included ? (
-                          <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${plan.highlighted ? 'text-emerald-300' : 'text-emerald-500'}`} />
-                        ) : (
-                          <X className={`w-4 h-4 mt-0.5 flex-shrink-0 ${plan.highlighted ? 'text-white/30' : 'text-slate-300'}`} />
-                        )}
-                        <span className={
-                          feature.included
-                            ? (plan.highlighted ? 'text-white' : 'text-slate-700')
-                            : (plan.highlighted ? 'text-white/40 line-through' : 'text-slate-400 line-through')
-                        }>
-                          {feature.text}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Enterprise */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-8 bg-gradient-to-r from-slate-900 to-indigo-900 rounded-2xl p-8 md:p-10 text-white flex flex-col md:flex-row md:items-center gap-8"
-          >
-            <div className="flex-1">
-              <div className="inline-flex items-center gap-2 bg-white/10 text-indigo-300 text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4">
-                <Sparkles className="w-3 h-3" />
-                ENTERPRISE
-              </div>
-              <h3 className="text-2xl md:text-3xl font-black mb-3">לארגונים עם דרישות מיוחדות</h3>
-              <p className="text-slate-300 leading-relaxed">
-                30+ משתמשים · תשתית ייעודית · SLA מוגדר חוזית · פיתוחים מותאמים ללא הגבלה · אינטגרציות מורכבות ל-ERP · מנהל פרויקט ייעודי
-              </p>
-            </div>
-            <div>
-              <Link to={createPageUrl('Contact')}>
-                <Button size="lg" className="bg-white text-slate-900 hover:bg-slate-100 px-8 py-6 text-lg rounded-xl">
-                  לתיאום שיחה
-                  <ArrowLeft className="w-5 h-5 mr-2" />
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* Setup fee explanation — prominent */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mt-16 bg-white rounded-3xl border-2 border-amber-200 p-10 shadow-xl"
-          >
-            <div className="flex items-start gap-6 flex-wrap md:flex-nowrap">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center flex-shrink-0">
-                <Sparkles className="w-8 h-8 text-white" />
-              </div>
-              <div className="flex-1">
-                <div className="text-xs font-bold tracking-widest uppercase text-amber-600 mb-2">חשוב לדעת</div>
-                <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-4">
-                  דמי ההקמה — חד-פעמי, בבניית הליבה שלכם
-                </h3>
-                <p className="text-slate-700 leading-relaxed mb-6">
-                  בניגוד ל-Fireberry או Monday שבהם אתם מקבלים מערכת גנרית &quot;כמו שהיא&quot;,
-                  אצלנו <strong>כל לקוח מקבל מערכת מותאמת אישית</strong>. דמי ההקמה מכסים את העבודה של
-                  התאמת הליבה לעסק שלכם, ומשתלמים כבר בחודש השני.
-                </p>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <div className="text-sm font-bold text-slate-900 mb-3">מה כלול בהקמה?</div>
-                    <ul className="space-y-2 text-sm text-slate-700">
-                      <li className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                        <span>אפיון עסקי (שיחת 60 דקות)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                        <span>הקמת המערכת והגדרת המודולים</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                        <span>התאמת Pipeline ושלבים לתהליך שלכם</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                        <span>ייבוא נתונים ממערכת קודמת (CSV/API)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                        <span>חיבור לאינטגרציות (WhatsApp, חשבוניות וכו׳)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                        <span>2 מפגשי הדרכה לצוות</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                        <span>שבועיים ליווי צמוד אחרי ה-Go-Live</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-slate-900 mb-3">עלות הקמה לפי מסלול</div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center bg-slate-50 rounded-lg px-4 py-3">
-                        <span className="font-medium text-slate-700">Starter</span>
-                        <span className="font-bold text-emerald-600">חינם</span>
-                      </div>
-                      <div className="flex justify-between items-center bg-slate-50 rounded-lg px-4 py-3">
-                        <span className="font-medium text-slate-700">Growth</span>
-                        <span className="font-bold text-amber-600">₪4,500</span>
-                      </div>
-                      <div className="flex justify-between items-center bg-indigo-50 rounded-lg px-4 py-3 border-2 border-indigo-200">
-                        <span className="font-bold text-indigo-900">Professional</span>
-                        <span className="font-bold text-indigo-700">₪9,000</span>
-                      </div>
-                      <div className="flex justify-between items-center bg-slate-50 rounded-lg px-4 py-3">
-                        <span className="font-medium text-slate-700">Business</span>
-                        <span className="font-bold text-amber-600">₪15,000</span>
-                      </div>
-                      <div className="flex justify-between items-center bg-slate-50 rounded-lg px-4 py-3">
-                        <span className="font-medium text-slate-700">Enterprise</span>
-                        <span className="font-bold text-slate-600">בהתאמה</span>
-                      </div>
-                    </div>
-                    <p className="text-xs text-slate-500 mt-3">
-                      תשלום: 50% בחתימת ההסכם, 50% ב-Go-Live
-                    </p>
+                <div className="pt-4 mb-6 border-t border-white/[0.08]">
+                  <div className="meta-label text-[10px] mb-1.5 text-white/40">+ דמי הקמה</div>
+                  <div className="flex items-baseline gap-2">
+                    <span className={`text-2xl font-black ${plan.setup === '0' ? 'text-lavender-300' : 'text-lavender-300'}`}>
+                      {plan.setup === '0' ? 'חינם' : `₪${plan.setup}`}
+                    </span>
+                    {plan.setup !== '0' && <span className="text-[11px] text-white/40">חד-פעמי</span>}
                   </div>
                 </div>
+
+                <Link to={createPageUrl('Contact')} className={`mb-8 py-3 text-center rounded-full text-[14px] font-medium transition ${
+                  plan.featured ? 'bg-lavender-400 hover:bg-lavender-300 text-[#0a0515]' : 'bg-white/10 hover:bg-white/20 text-white'
+                }`}>
+                  {plan.cta}
+                </Link>
+
+                <ul className="space-y-2.5 flex-1">
+                  {plan.features.map((f, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-[13px]">
+                      {f.included ? (
+                        <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-lavender-300" strokeWidth={2.5} />
+                      ) : (
+                        <X className="w-4 h-4 mt-0.5 flex-shrink-0 text-white/20" strokeWidth={2} />
+                      )}
+                      <span className={f.included ? 'text-white/80' : 'text-white/30 line-through'}>{f.text}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Enterprise callout */}
+          <motion.div {...fadeUp} className="mt-8 rounded-2xl border border-white/[0.08] bg-gradient-to-br from-lavender-900/30 to-transparent p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6">
+            <div className="flex-1">
+              <div className="meta-label mb-3">Enterprise</div>
+              <h3 className="text-2xl md:text-3xl font-black text-white mb-2">לארגונים עם דרישות מיוחדות</h3>
+              <p className="text-white/60 text-[15px] leading-relaxed max-w-2xl">
+                30+ משתמשים · תשתית ייעודית · SLA חוזי · פיתוחים מותאמים ללא הגבלה · אינטגרציות ERP · מנהל פרויקט ייעודי
+              </p>
+            </div>
+            <Link to={createPageUrl('Contact')} className="btn-pill-primary flex-shrink-0">
+              <ArrowLeft className="w-4 h-4 ml-2" />
+              תיאום שיחה
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Setup explanation */}
+      <section className="py-24 md:py-32">
+        <div className="container-editorial">
+          <motion.div {...fadeUp} className="grid md:grid-cols-12 gap-10 md:gap-16">
+            <div className="md:col-span-4">
+              <div className="meta-label mb-4">דמי ההקמה</div>
+              <h2 className="heading-section">חד-פעמי, בבניית הליבה שלכם.</h2>
+            </div>
+            <div className="md:col-span-8">
+              <p className="text-white/65 text-lg leading-[1.85] max-w-2xl mb-10">
+                בניגוד ל-Fireberry או Monday שבהם אתם מקבלים מערכת גנרית &quot;כמו שהיא&quot;,
+                אצלנו <span className="text-white">כל לקוח מקבל מערכת מותאמת אישית</span>.
+                דמי ההקמה מכסים את העבודה של התאמת הליבה לעסק שלכם, ומשתלמים כבר בחודש השני.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-x-10 gap-y-3 border-t border-white/[0.08] pt-8">
+                {[
+                  'אפיון עסקי (שיחת 60 דקות)',
+                  'הקמת המערכת והגדרת המודולים',
+                  'התאמת Pipeline ושלבים',
+                  'ייבוא נתונים ממערכת קודמת',
+                  'חיבור אינטגרציות',
+                  '2 מפגשי הדרכה לצוות',
+                  'שבועיים ליווי אחרי Go-Live',
+                  'תשלום: 50% בחתימה, 50% ב-Go-Live',
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-2.5 py-2 text-[14px] text-white/75">
+                    <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-lavender-400" strokeWidth={2.5} />
+                    {item}
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Competitor Comparison */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <span className="text-indigo-600 text-sm font-bold tracking-widest uppercase">השוואה</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-6 mt-2">
-              ORMA AI vs. השוק
-            </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+      {/* Comparison table */}
+      <section className="py-24 md:py-32 bg-gradient-to-b from-night-900/40 to-transparent">
+        <div className="container-wide">
+          <motion.div {...fadeUp} className="mb-14">
+            <div className="meta-label mb-4">השוואה</div>
+            <h2 className="heading-section max-w-3xl">Forward vs. השוק.</h2>
+            <p className="text-white/60 text-lg leading-[1.85] max-w-2xl mt-6">
               תמחור אמיתי מול המתחרים הגדולים. לא הנחות טריקיות, לא &quot;starts from&quot;.
             </p>
           </motion.div>
 
-          <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
-            <table className="w-full min-w-[700px]">
+          <motion.div {...fadeUp} className="overflow-x-auto rounded-2xl border border-white/[0.08]">
+            <table className="w-full min-w-[720px] text-[14px]">
               <thead>
-                <tr className="bg-gradient-to-r from-slate-900 to-indigo-900 text-white">
-                  <th className="p-4 text-right font-bold">פיצ&apos;ר</th>
-                  <th className="p-4 text-center font-bold bg-indigo-600">
-                    <div className="flex flex-col items-center">
-                      <span>ORMA AI</span>
-                      <span className="text-xs text-indigo-200 font-normal">אנחנו</span>
-                    </div>
+                <tr className="border-b border-white/[0.08]">
+                  <th className="p-5 text-right font-medium text-white/60 text-[13px] tracking-wide">פיצ&apos;ר</th>
+                  <th className="p-5 text-center bg-lavender-500/[0.08]">
+                    <div className="meta-label text-lavender-300">Forward</div>
                   </th>
-                  <th className="p-4 text-center font-bold">Fireberry</th>
-                  <th className="p-4 text-center font-bold">Monday CRM</th>
-                  <th className="p-4 text-center font-bold">HubSpot</th>
+                  <th className="p-5 text-center text-white/50 text-[13px]">Fireberry</th>
+                  <th className="p-5 text-center text-white/50 text-[13px]">Monday CRM</th>
+                  <th className="p-5 text-center text-white/50 text-[13px]">HubSpot</th>
                 </tr>
               </thead>
               <tbody>
                 {comparisonRows.map((row, i) => (
-                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
-                    <td className="p-4 font-medium text-slate-900">{row.feature}</td>
-                    <td className="p-4 text-center bg-indigo-50 font-bold text-indigo-900">
+                  <tr key={i} className="border-b border-white/[0.04] last:border-0">
+                    <td className="p-5 text-white/85">{row.feature}</td>
+                    <td className="p-5 text-center bg-lavender-500/[0.04] font-semibold text-white">
                       {typeof row.orma === 'boolean' ? (
-                        row.orma ? <Check className="w-5 h-5 text-emerald-600 mx-auto" /> : <X className="w-5 h-5 text-red-500 mx-auto" />
+                        row.orma ? <Check className="w-5 h-5 text-lavender-300 mx-auto" /> : <X className="w-5 h-5 text-white/30 mx-auto" />
                       ) : row.orma}
                     </td>
-                    <td className="p-4 text-center text-slate-700">
-                      {typeof row.fireberry === 'boolean' ? (
-                        row.fireberry ? <Check className="w-5 h-5 text-slate-500 mx-auto" /> : <X className="w-5 h-5 text-red-400 mx-auto" />
-                      ) : <span className="text-sm">{row.fireberry}</span>}
-                    </td>
-                    <td className="p-4 text-center text-slate-700">
-                      {typeof row.monday === 'boolean' ? (
-                        row.monday ? <Check className="w-5 h-5 text-slate-500 mx-auto" /> : <X className="w-5 h-5 text-red-400 mx-auto" />
-                      ) : <span className="text-sm">{row.monday}</span>}
-                    </td>
-                    <td className="p-4 text-center text-slate-700">
-                      {typeof row.hubspot === 'boolean' ? (
-                        row.hubspot ? <Check className="w-5 h-5 text-slate-500 mx-auto" /> : <X className="w-5 h-5 text-red-400 mx-auto" />
-                      ) : <span className="text-sm">{row.hubspot}</span>}
-                    </td>
+                    {[row.fireberry, row.monday, row.hubspot].map((v, j) => (
+                      <td key={j} className="p-5 text-center text-white/50">
+                        {typeof v === 'boolean' ? (
+                          v ? <Check className="w-5 h-5 text-white/35 mx-auto" /> : <X className="w-5 h-5 text-white/20 mx-auto" />
+                        ) : <span className="text-[13px]">{v}</span>}
+                      </td>
+                    ))}
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
+          </motion.div>
 
-          <p className="text-center text-sm text-slate-500 mt-6">
-            * מחירי מתחרים מבוססים על אתרי התמחור הרשמיים (Fireberry, Monday, HubSpot) נכון לאפריל 2026, המרה לשקל לפי שער יציג.
+          <p className="text-center text-[12px] text-white/35 mt-6">
+            * מחירי מתחרים מבוססים על אתרי התמחור הרשמיים נכון לאפריל 2026.
           </p>
         </div>
       </section>
 
-      {/* ROI Calculator hint */}
-      <section className="py-24 bg-gradient-to-br from-indigo-50 via-white to-violet-50">
-        <div className="max-w-5xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-white rounded-3xl p-10 md:p-14 shadow-xl border border-indigo-100"
-          >
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">
-                כמה תחסכו בשנה?
-              </h2>
-              <p className="text-lg text-slate-600">דוגמה אמיתית: עסק עם 15 משתמשים — שנה ראשונה כולל הקמה</p>
-            </div>
+      {/* ROI */}
+      <section className="py-24 md:py-32">
+        <div className="container-editorial">
+          <motion.div {...fadeUp} className="mb-14 text-center max-w-2xl mx-auto">
+            <div className="meta-label mb-4">חיסכון</div>
+            <h2 className="heading-section mb-6">כמה תחסכו בשנה?</h2>
+            <p className="text-white/60 text-lg">דוגמה אמיתית: עסק עם 15 משתמשים — שנה ראשונה כולל הקמה.</p>
+          </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-6 mb-10">
-              <div className="bg-red-50 rounded-2xl p-6 text-center border border-red-100">
-                <div className="text-xs font-bold tracking-widest uppercase text-red-600 mb-2">HubSpot Pro</div>
-                <div className="text-3xl font-black text-red-900 mb-1">₪81,600</div>
-                <div className="text-xs text-red-700 space-y-0.5">
-                  <div>₪5,550 × 12 חודשים</div>
-                  <div className="opacity-80">+ ₪15,000 הטמעה</div>
-                </div>
+          <motion.div {...fadeUp} className="grid md:grid-cols-3 gap-5">
+            {[
+              { tag: 'HubSpot Pro', total: '₪81,600', breakdown: '₪5,550 × 12 + ₪15,000 הטמעה', bad: true },
+              { tag: 'Fireberry Growth', total: '₪64,000', breakdown: '₪4,500 × 12 + ₪10,000 הטמעה', bad: true },
+              { tag: 'Forward Professional', total: '₪18,588', breakdown: '₪799 × 12 + ₪9,000 הקמה', good: true },
+            ].map((c, i) => (
+              <div key={i} className={`rounded-2xl p-8 text-center ${
+                c.good ? 'border-2 border-lavender-400/50 bg-lavender-500/[0.08]' : 'border border-white/[0.08] bg-white/[0.02]'
+              }`}>
+                <div className={`meta-label mb-3 ${c.good ? 'text-lavender-300' : 'text-white/45'}`}>{c.tag}</div>
+                <div className={`text-4xl font-black tracking-tight mb-2 ${c.good ? 'text-white' : 'text-white/70'}`}>{c.total}</div>
+                <div className="text-[12px] text-white/45">{c.breakdown}</div>
               </div>
-              <div className="bg-amber-50 rounded-2xl p-6 text-center border border-amber-100">
-                <div className="text-xs font-bold tracking-widest uppercase text-amber-600 mb-2">Fireberry Growth</div>
-                <div className="text-3xl font-black text-amber-900 mb-1">₪64,000</div>
-                <div className="text-xs text-amber-700 space-y-0.5">
-                  <div>₪4,500 × 12 חודשים</div>
-                  <div className="opacity-80">+ ₪10,000 הטמעה</div>
-                </div>
-              </div>
-              <div className="bg-emerald-50 rounded-2xl p-6 text-center border-2 border-emerald-300 shadow-lg relative">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                  ORMA AI
-                </div>
-                <div className="text-xs font-bold tracking-widest uppercase text-emerald-600 mb-2 mt-2">Professional</div>
-                <div className="text-3xl font-black text-emerald-900 mb-1">₪18,588</div>
-                <div className="text-xs text-emerald-700 space-y-0.5">
-                  <div>₪799 × 12 חודשים</div>
-                  <div className="opacity-80">+ ₪9,000 הקמה</div>
-                </div>
-              </div>
-            </div>
+            ))}
+          </motion.div>
 
-            <div className="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl p-6 text-center text-white">
-              <div className="text-sm font-medium mb-1 opacity-90">חיסכון שנה ראשונה מול HubSpot (כולל הקמה)</div>
-              <div className="text-5xl font-black mb-2">₪63,012</div>
-              <div className="text-emerald-100">בשנים הבאות — חיסכון של ₪57,012 בשנה</div>
-            </div>
+          <motion.div {...fadeUp} className="mt-8 rounded-2xl p-8 text-center bg-gradient-to-r from-lavender-600/20 to-lavender-400/10 border border-lavender-400/30">
+            <div className="text-[13px] text-lavender-200 mb-2">חיסכון שנה ראשונה מול HubSpot</div>
+            <div className="text-5xl md:text-6xl font-black text-white tracking-tight mb-2">₪63,012</div>
+            <div className="text-[14px] text-white/60">בשנים הבאות — חיסכון של ₪57,012 בשנה</div>
           </motion.div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-24 bg-white">
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <span className="text-indigo-600 text-sm font-bold tracking-widest uppercase">FAQ</span>
-            <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4 mt-2">
-              שאלות נפוצות
-            </h2>
+      <section className="py-24 md:py-32 bg-gradient-to-b from-night-900/40 to-transparent">
+        <div className="container-editorial">
+          <motion.div {...fadeUp} className="mb-14">
+            <div className="meta-label mb-4">שאלות נפוצות</div>
+            <h2 className="heading-section max-w-3xl">הפרטים הקטנים.</h2>
           </motion.div>
 
-          <div className="space-y-4">
+          <motion.div {...fadeUp} className="space-y-1">
             {faqs.map((faq, i) => (
-              <motion.details
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden hover:border-indigo-200 transition"
-              >
-                <summary className="flex items-center justify-between cursor-pointer list-none p-6 font-bold text-slate-900 hover:bg-slate-100 transition">
+              <details key={i} className="group border-b border-white/[0.08]">
+                <summary className="cursor-pointer list-none flex items-center justify-between py-6 text-white font-medium text-[17px]">
                   <span>{faq.q}</span>
-                  <span className="text-2xl text-indigo-600 group-open:rotate-45 transition-transform">+</span>
+                  <span className="text-lavender-400 text-2xl font-light group-open:rotate-45 transition-transform">+</span>
                 </summary>
-                <div className="px-6 pb-6 text-slate-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: faq.a }} />
-              </motion.details>
+                <div className="pb-6 text-white/60 leading-[1.85] text-[15px] max-w-3xl">{faq.a}</div>
+              </details>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-6">
-              לא בטוחים איזה מסלול מתאים?
-            </h2>
-            <p className="text-xl text-slate-300 mb-10">
+      <section className="relative py-28 md:py-36 overflow-hidden border-t border-white/[0.06]">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 60% at 50% 50%, rgba(139,109,226,0.2) 0%, transparent 70%)' }} />
+        <div className="relative container-editorial text-center">
+          <motion.div {...fadeUp}>
+            <h2 className="heading-section max-w-3xl mx-auto mb-8">לא בטוחים איזה מסלול מתאים?</h2>
+            <p className="text-white/60 text-lg max-w-2xl mx-auto mb-10">
               שיחת 30 דקות ונבחן יחד — לפי מספר משתמשים, תחום עסקי, וצרכים ייחודיים.
             </p>
-            <Link to={createPageUrl('Contact')}>
-              <Button size="lg" className="bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white px-10 py-7 text-lg rounded-xl">
-                תיאום שיחת אבחון
-                <ArrowLeft className="w-5 h-5 mr-2" />
-              </Button>
+            <Link to={createPageUrl('Contact')} className="btn-pill-primary">
+              <ArrowLeft className="w-4 h-4 ml-2" />
+              תיאום שיחת אבחון
             </Link>
           </motion.div>
         </div>

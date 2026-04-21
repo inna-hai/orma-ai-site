@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle2, Loader2, Mail, Phone, Linkedin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Send, CheckCircle2, Loader2, Mail, Phone, Linkedin, ArrowLeft } from 'lucide-react';
 import { siteSettings } from '@/data/staticData';
+
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-80px' },
+  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+};
+
+const fieldCls = "w-full h-12 px-4 rounded-lg bg-white/[0.04] border border-white/[0.1] text-white placeholder:text-white/30 focus:outline-none focus:border-lavender-400/60 focus:bg-white/[0.06] transition-colors text-[15px]";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    full_name: '',
-    email: '',
-    phone: '',
-    company: '',
-    role: '',
-    company_size: '',
-    challenge_area: '',
-    message: ''
+    full_name: '', email: '', phone: '', company: '', role: '', company_size: '', challenge_area: '', message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -24,273 +22,151 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Send via email (FormSubmit or similar service)
-    // For now, we'll simulate success
     console.log('Form submitted:', formData);
-    
-    // You can integrate with FormSubmit, Formspree, or your own backend
-    // Example with FormSubmit:
-    // await fetch('https://formsubmit.co/ajax/your@email.com', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData)
-    // });
-
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);
-    }, 1000);
+    }, 900);
   };
 
   if (isSuccess) {
     return (
-      <div className="pt-20 min-h-screen bg-gradient-to-b from-slate-50 to-white flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center px-6 py-16"
-        >
-          <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-emerald-100 flex items-center justify-center">
-            <CheckCircle2 className="w-12 h-12 text-emerald-600" />
+      <div className="pt-32 min-h-screen flex items-center justify-center">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center px-6 py-16 max-w-xl">
+          <div className="w-16 h-16 mx-auto mb-8 rounded-full border-2 border-lavender-400/40 flex items-center justify-center">
+            <CheckCircle2 className="w-8 h-8 text-lavender-300" />
           </div>
-          <h1 className="text-3xl font-bold text-slate-900 mb-4">
-            תודה על הפנייה!
-          </h1>
-          <p className="text-xl text-slate-600 max-w-md mx-auto">
-            קיבלנו את הפרטים ונחזור אליך תוך 24 שעות עם הצעד הבא.
-          </p>
+          <div className="meta-label mb-4">נקלט בהצלחה</div>
+          <h1 className="heading-section mb-6">תודה על הפנייה.</h1>
+          <p className="text-white/60 text-lg">נחזור אליכם תוך 24 שעות עם הצעד הבא.</p>
         </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="pt-20 min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Left Side - Info */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-                בואו נדבר
-              </h1>
-              <p className="text-xl text-slate-600 mb-10 leading-relaxed">
-                רוצים לדעת איך AI יכול לחסוך לכם זמן וכסף?
-                <br />
-                השאירו פרטים ונחזור אליכם עם תובנות ראשוניות.
-              </p>
+    <div>
+      {/* Hero */}
+      <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(139,109,226,0.18) 0%, transparent 60%)' }} />
+        <div className="relative container-editorial">
+          <motion.div {...fadeUp} className="max-w-3xl">
+            <div className="meta-label mb-6">Contact</div>
+            <h1 className="heading-display mb-6">בואו <span className="text-lavender-300">נדבר.</span></h1>
+            <p className="text-white/60 text-lg md:text-xl leading-[1.75] max-w-xl">
+              שיחת 30 דקות בלי מצגות. נבחן את האתגרים שלכם ונראה אם יש התאמה בינינו.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-              {/* Contact Info */}
-              <div className="space-y-6">
-                {siteSettings.email && (
-                  <a 
-                    href={`mailto:${siteSettings.email}`}
-                    className="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100 hover:border-violet-200 hover:shadow-md transition-all"
-                  >
-                    <div className="w-12 h-12 rounded-lg bg-violet-100 flex items-center justify-center">
-                      <Mail className="w-6 h-6 text-violet-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-slate-500">אימייל</p>
-                      <p className="text-slate-900 font-medium" dir="ltr">{siteSettings.email}</p>
-                    </div>
-                  </a>
-                )}
-
-                {siteSettings.phone && (
-                  <a 
-                    href={`tel:${siteSettings.phone}`}
-                    className="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100 hover:border-violet-200 hover:shadow-md transition-all"
-                  >
-                    <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
-                      <Phone className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-slate-500">טלפון</p>
-                      <p className="text-slate-900 font-medium" dir="ltr">{siteSettings.phone}</p>
-                    </div>
-                  </a>
-                )}
-
-                <a 
-                  href="https://www.linkedin.com/company/orma-ai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100 hover:border-violet-200 hover:shadow-md transition-all"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-emerald-100 flex items-center justify-center">
-                    <Linkedin className="w-6 h-6 text-emerald-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-slate-500">לינקדאין</p>
-                    <p className="text-slate-900 font-medium">ORMA.AI</p>
-                  </div>
-                </a>
+      {/* Form + Contact Info */}
+      <section className="py-16 md:py-24 border-t border-white/[0.06]">
+        <div className="container-editorial grid lg:grid-cols-12 gap-12 md:gap-16">
+          {/* Info side */}
+          <motion.aside {...fadeUp} className="lg:col-span-4 space-y-8">
+            <div>
+              <div className="meta-label mb-4">דרכי יצירת קשר</div>
+              <div className="divider-thin mb-6" />
+            </div>
+            <a href={`mailto:${siteSettings.email}`} className="block group">
+              <div className="meta-label mb-2 text-white/50">אימייל</div>
+              <div className="flex items-center gap-3 text-white group-hover:text-lavender-300 transition-colors text-[17px]" dir="ltr">
+                <Mail className="w-4 h-4" />
+                {siteSettings.email}
               </div>
-            </motion.div>
+            </a>
+            <a href={`tel:${siteSettings.phone}`} className="block group">
+              <div className="meta-label mb-2 text-white/50">טלפון</div>
+              <div className="flex items-center gap-3 text-white group-hover:text-lavender-300 transition-colors text-[17px]" dir="ltr">
+                <Phone className="w-4 h-4" />
+                {siteSettings.phone}
+              </div>
+            </a>
+            <a href="https://www.linkedin.com/company/orma-ai" target="_blank" rel="noopener noreferrer" className="block group">
+              <div className="meta-label mb-2 text-white/50">לינקדאין</div>
+              <div className="flex items-center gap-3 text-white group-hover:text-lavender-300 transition-colors text-[17px]">
+                <Linkedin className="w-4 h-4" />
+                Forward / ORMA.AI
+              </div>
+            </a>
+          </motion.aside>
 
-            {/* Right Side - Form */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <form 
-                onSubmit={handleSubmit}
-                className="bg-white rounded-2xl p-8 shadow-xl border border-slate-100"
-              >
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">
-                  השאירו פרטים
-                </h2>
+          {/* Form side */}
+          <motion.form
+            {...fadeUp}
+            onSubmit={handleSubmit}
+            className="lg:col-span-8 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8 md:p-10"
+          >
+            <div className="meta-label mb-6">טופס פנייה</div>
 
-                <div className="grid gap-5">
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        שם מלא *
-                      </label>
-                      <Input
-                        required
-                        value={formData.full_name}
-                        onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                        className="h-12"
-                        placeholder="השם שלך"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        אימייל *
-                      </label>
-                      <Input
-                        required
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="h-12"
-                        placeholder="email@company.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        טלפון
-                      </label>
-                      <Input
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="h-12"
-                        placeholder="050-0000000"
-                        dir="ltr"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        חברה
-                      </label>
-                      <Input
-                        value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="h-12"
-                        placeholder="שם החברה"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        תפקיד
-                      </label>
-                      <Input
-                        value={formData.role}
-                        onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                        className="h-12"
-                        placeholder="התפקיד שלך"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        גודל חברה
-                      </label>
-                      <Select
-                        value={formData.company_size}
-                        onValueChange={(value) => setFormData({ ...formData, company_size: value })}
-                      >
-                        <SelectTrigger className="h-12">
-                          <SelectValue placeholder="בחר גודל" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="1-10">1-10 עובדים</SelectItem>
-                          <SelectItem value="11-50">11-50 עובדים</SelectItem>
-                          <SelectItem value="51-200">51-200 עובדים</SelectItem>
-                          <SelectItem value="200+">200+ עובדים</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      תחום האתגר
-                    </label>
-                    <Select
-                      value={formData.challenge_area}
-                      onValueChange={(value) => setFormData({ ...formData, challenge_area: value })}
-                    >
-                      <SelectTrigger className="h-12">
-                        <SelectValue placeholder="בחר תחום" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="אוטומציה">אוטומציה</SelectItem>
-                        <SelectItem value="בוטים ושירות">בוטים ושירות</SelectItem>
-                        <SelectItem value="הטמעת AI">הטמעת AI</SelectItem>
-                        <SelectItem value="חיבור מערכות">חיבור מערכות</SelectItem>
-                        <SelectItem value="הכשרות">הכשרות</SelectItem>
-                        <SelectItem value="אחר">אחר</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      ספר/י לנו קצת על האתגר
-                    </label>
-                    <Textarea
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="מה האתגר המרכזי שאת/ה רוצה לפתור?"
-                      className="min-h-[120px] resize-none"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full h-14 bg-slate-900 hover:bg-slate-800 text-white text-lg rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                        שולח...
-                      </>
-                    ) : (
-                      <>
-                        שליחה
-                        <Send className="w-5 h-5 mr-2" />
-                      </>
-                    )}
-                  </Button>
+            <div className="grid gap-5">
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-[13px] text-white/70 mb-2">שם מלא *</label>
+                  <input required value={formData.full_name} onChange={(e) => setFormData({ ...formData, full_name: e.target.value })} className={fieldCls} placeholder="השם שלך" />
                 </div>
-              </form>
-            </motion.div>
-          </div>
+                <div>
+                  <label className="block text-[13px] text-white/70 mb-2">אימייל *</label>
+                  <input required type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className={fieldCls} placeholder="email@company.com" dir="ltr" />
+                </div>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-[13px] text-white/70 mb-2">טלפון</label>
+                  <input value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className={fieldCls} placeholder="050-0000000" dir="ltr" />
+                </div>
+                <div>
+                  <label className="block text-[13px] text-white/70 mb-2">חברה</label>
+                  <input value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} className={fieldCls} placeholder="שם החברה" />
+                </div>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-[13px] text-white/70 mb-2">תפקיד</label>
+                  <input value={formData.role} onChange={(e) => setFormData({ ...formData, role: e.target.value })} className={fieldCls} placeholder="התפקיד שלך" />
+                </div>
+                <div>
+                  <label className="block text-[13px] text-white/70 mb-2">גודל חברה</label>
+                  <select value={formData.company_size} onChange={(e) => setFormData({ ...formData, company_size: e.target.value })} className={fieldCls}>
+                    <option value="" className="bg-night-900">בחר גודל</option>
+                    <option value="1-10" className="bg-night-900">1-10 עובדים</option>
+                    <option value="11-50" className="bg-night-900">11-50 עובדים</option>
+                    <option value="51-200" className="bg-night-900">51-200 עובדים</option>
+                    <option value="200+" className="bg-night-900">200+ עובדים</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[13px] text-white/70 mb-2">תחום האתגר</label>
+                <select value={formData.challenge_area} onChange={(e) => setFormData({ ...formData, challenge_area: e.target.value })} className={fieldCls}>
+                  <option value="" className="bg-night-900">בחר תחום</option>
+                  <option value="CRM" className="bg-night-900">CRM ומכירות</option>
+                  <option value="אוטומציה" className="bg-night-900">אוטומציה של תהליכים</option>
+                  <option value="בוטים" className="bg-night-900">בוטים ושירות</option>
+                  <option value="הטמעת AI" className="bg-night-900">הטמעת AI</option>
+                  <option value="חיבור" className="bg-night-900">חיבור מערכות</option>
+                  <option value="אחר" className="bg-night-900">אחר</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[13px] text-white/70 mb-2">ספר/י לנו קצת על האתגר</label>
+                <textarea value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className={`${fieldCls} h-auto py-3 min-h-[120px] resize-none`} placeholder="מה האתגר המרכזי שאת/ה רוצה לפתור?" />
+              </div>
+
+              <button type="submit" disabled={isSubmitting} className="mt-4 btn-pill-primary w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed">
+                {isSubmitting ? (
+                  <><Loader2 className="w-4 h-4 ml-2 animate-spin" /> שולח...</>
+                ) : (
+                  <><ArrowLeft className="w-4 h-4 ml-2" /> שליחת פנייה</>
+                )}
+              </button>
+            </div>
+          </motion.form>
         </div>
       </section>
     </div>
