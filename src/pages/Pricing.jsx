@@ -11,6 +11,8 @@ const plans = [
     subtitle: 'לעסק מתחיל',
     price: '0',
     priceNote: 'חינם לתמיד',
+    setup: '0',
+    setupNote: 'ללא הקמה',
     cta: 'התחלה חינמית',
     highlighted: false,
     icon: Users,
@@ -32,6 +34,8 @@ const plans = [
     subtitle: 'לעסק קטן-בינוני',
     price: '299',
     priceNote: '₪ / חודש',
+    setup: '4,500',
+    setupNote: 'הקמה חד-פעמית',
     cta: 'בחר Growth',
     highlighted: false,
     icon: TrendingDown,
@@ -53,6 +57,8 @@ const plans = [
     subtitle: 'הכי פופולרי',
     price: '799',
     priceNote: '₪ / חודש',
+    setup: '9,000',
+    setupNote: 'הקמה חד-פעמית',
     cta: 'בחר Professional',
     highlighted: true,
     badge: 'הכי משתלם',
@@ -75,6 +81,8 @@ const plans = [
     subtitle: 'לעסקים מתקדמים',
     price: '1,499',
     priceNote: '₪ / חודש',
+    setup: '15,000',
+    setupNote: 'הקמה חד-פעמית',
     cta: 'בחר Business',
     highlighted: false,
     icon: Crown,
@@ -258,6 +266,21 @@ export default function Pricing() {
                     <div className={`text-sm mt-1 ${plan.highlighted ? 'text-indigo-200' : 'text-slate-500'}`}>
                       {plan.price === '0' ? plan.priceNote : (yearly ? '₪/חודש (חיוב שנתי)' : plan.priceNote)}
                     </div>
+
+                    {/* Setup fee — prominent */}
+                    <div className={`mt-4 pt-4 border-t ${plan.highlighted ? 'border-white/20' : 'border-slate-200'}`}>
+                      <div className={`text-xs font-bold tracking-wider uppercase mb-1 ${plan.highlighted ? 'text-indigo-200' : 'text-slate-400'}`}>
+                        + דמי הקמה
+                      </div>
+                      <div className={`flex items-baseline gap-2`}>
+                        <span className={`text-2xl font-black ${plan.highlighted ? 'text-amber-300' : 'text-amber-600'}`}>
+                          {plan.setup === '0' ? 'חינם' : `₪${plan.setup}`}
+                        </span>
+                        <span className={`text-xs ${plan.highlighted ? 'text-indigo-200' : 'text-slate-500'}`}>
+                          {plan.setup === '0' ? '' : 'חד-פעמי'}
+                        </span>
+                      </div>
+                    </div>
                   </div>
 
                   <Link to={createPageUrl('Contact')} className="mb-8">
@@ -323,18 +346,94 @@ export default function Pricing() {
             </div>
           </motion.div>
 
-          {/* Setup fees note */}
+          {/* Setup fee explanation — prominent */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-12 bg-indigo-50 border border-indigo-100 rounded-2xl p-6 max-w-3xl mx-auto text-center"
+            transition={{ duration: 0.6 }}
+            className="mt-16 bg-white rounded-3xl border-2 border-amber-200 p-10 shadow-xl"
           >
-            <div className="text-sm font-bold text-indigo-900 mb-2">עלות Setup חד-פעמית</div>
-            <p className="text-slate-700 text-sm leading-relaxed">
-              Starter: ללא עלות · Growth: ₪4,500 · Professional: ₪9,000 · Business: ₪15,000 · Enterprise: בהתאמה.<br />
-              כולל הטמעה מלאה, ייבוא מידע, הדרכות, ושבועיים ליווי צמוד.
-            </p>
+            <div className="flex items-start gap-6 flex-wrap md:flex-nowrap">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center flex-shrink-0">
+                <Sparkles className="w-8 h-8 text-white" />
+              </div>
+              <div className="flex-1">
+                <div className="text-xs font-bold tracking-widest uppercase text-amber-600 mb-2">חשוב לדעת</div>
+                <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-4">
+                  דמי ההקמה — חד-פעמי, בבניית הליבה שלכם
+                </h3>
+                <p className="text-slate-700 leading-relaxed mb-6">
+                  בניגוד ל-Fireberry או Monday שבהם אתם מקבלים מערכת גנרית &quot;כמו שהיא&quot;,
+                  אצלנו <strong>כל לקוח מקבל מערכת מותאמת אישית</strong>. דמי ההקמה מכסים את העבודה של
+                  התאמת הליבה לעסק שלכם, ומשתלמים כבר בחודש השני.
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <div className="text-sm font-bold text-slate-900 mb-3">מה כלול בהקמה?</div>
+                    <ul className="space-y-2 text-sm text-slate-700">
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <span>אפיון עסקי (שיחת 60 דקות)</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <span>הקמת המערכת והגדרת המודולים</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <span>התאמת Pipeline ושלבים לתהליך שלכם</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <span>ייבוא נתונים ממערכת קודמת (CSV/API)</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <span>חיבור לאינטגרציות (WhatsApp, חשבוניות וכו׳)</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <span>2 מפגשי הדרכה לצוות</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <span>שבועיים ליווי צמוד אחרי ה-Go-Live</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-slate-900 mb-3">עלות הקמה לפי מסלול</div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center bg-slate-50 rounded-lg px-4 py-3">
+                        <span className="font-medium text-slate-700">Starter</span>
+                        <span className="font-bold text-emerald-600">חינם</span>
+                      </div>
+                      <div className="flex justify-between items-center bg-slate-50 rounded-lg px-4 py-3">
+                        <span className="font-medium text-slate-700">Growth</span>
+                        <span className="font-bold text-amber-600">₪4,500</span>
+                      </div>
+                      <div className="flex justify-between items-center bg-indigo-50 rounded-lg px-4 py-3 border-2 border-indigo-200">
+                        <span className="font-bold text-indigo-900">Professional</span>
+                        <span className="font-bold text-indigo-700">₪9,000</span>
+                      </div>
+                      <div className="flex justify-between items-center bg-slate-50 rounded-lg px-4 py-3">
+                        <span className="font-medium text-slate-700">Business</span>
+                        <span className="font-bold text-amber-600">₪15,000</span>
+                      </div>
+                      <div className="flex justify-between items-center bg-slate-50 rounded-lg px-4 py-3">
+                        <span className="font-medium text-slate-700">Enterprise</span>
+                        <span className="font-bold text-slate-600">בהתאמה</span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-500 mt-3">
+                      תשלום: 50% בחתימת ההסכם, 50% ב-Go-Live
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -424,34 +523,43 @@ export default function Pricing() {
               <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">
                 כמה תחסכו בשנה?
               </h2>
-              <p className="text-lg text-slate-600">דוגמה אמיתית: עסק עם 15 משתמשים</p>
+              <p className="text-lg text-slate-600">דוגמה אמיתית: עסק עם 15 משתמשים — שנה ראשונה כולל הקמה</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 mb-10">
               <div className="bg-red-50 rounded-2xl p-6 text-center border border-red-100">
                 <div className="text-xs font-bold tracking-widest uppercase text-red-600 mb-2">HubSpot Pro</div>
-                <div className="text-3xl font-black text-red-900 mb-1">₪66,600</div>
-                <div className="text-sm text-red-700">₪5,550 × 12 חודשים</div>
+                <div className="text-3xl font-black text-red-900 mb-1">₪81,600</div>
+                <div className="text-xs text-red-700 space-y-0.5">
+                  <div>₪5,550 × 12 חודשים</div>
+                  <div className="opacity-80">+ ₪15,000 הטמעה</div>
+                </div>
               </div>
               <div className="bg-amber-50 rounded-2xl p-6 text-center border border-amber-100">
                 <div className="text-xs font-bold tracking-widest uppercase text-amber-600 mb-2">Fireberry Growth</div>
-                <div className="text-3xl font-black text-amber-900 mb-1">₪54,000</div>
-                <div className="text-sm text-amber-700">₪4,500 × 12 חודשים</div>
+                <div className="text-3xl font-black text-amber-900 mb-1">₪64,000</div>
+                <div className="text-xs text-amber-700 space-y-0.5">
+                  <div>₪4,500 × 12 חודשים</div>
+                  <div className="opacity-80">+ ₪10,000 הטמעה</div>
+                </div>
               </div>
               <div className="bg-emerald-50 rounded-2xl p-6 text-center border-2 border-emerald-300 shadow-lg relative">
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">
                   ORMA AI
                 </div>
                 <div className="text-xs font-bold tracking-widest uppercase text-emerald-600 mb-2 mt-2">Professional</div>
-                <div className="text-3xl font-black text-emerald-900 mb-1">₪9,588</div>
-                <div className="text-sm text-emerald-700">₪799 × 12 חודשים</div>
+                <div className="text-3xl font-black text-emerald-900 mb-1">₪18,588</div>
+                <div className="text-xs text-emerald-700 space-y-0.5">
+                  <div>₪799 × 12 חודשים</div>
+                  <div className="opacity-80">+ ₪9,000 הקמה</div>
+                </div>
               </div>
             </div>
 
             <div className="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl p-6 text-center text-white">
-              <div className="text-sm font-medium mb-1 opacity-90">חיסכון שנתי מול HubSpot</div>
-              <div className="text-5xl font-black mb-2">₪57,012</div>
-              <div className="text-emerald-100">בערך פי 7 זול יותר</div>
+              <div className="text-sm font-medium mb-1 opacity-90">חיסכון שנה ראשונה מול HubSpot (כולל הקמה)</div>
+              <div className="text-5xl font-black mb-2">₪63,012</div>
+              <div className="text-emerald-100">בשנים הבאות — חיסכון של ₪57,012 בשנה</div>
             </div>
           </motion.div>
         </div>
