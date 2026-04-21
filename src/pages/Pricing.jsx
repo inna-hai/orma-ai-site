@@ -219,8 +219,23 @@ export default function Pricing() {
             ))}
           </div>
 
+          {/* A la carte callout */}
+          <motion.div {...fadeUp} className="mt-8 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 md:p-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <div className="meta-label mb-2 text-white/50">רוצים קונפיגורציה מותאמת?</div>
+              <p className="text-white/75 text-[14px] leading-relaxed max-w-3xl">
+                המסלולים למעלה כוללים חבילות מוכנות של מודולים. לקונפיגורציה פרטנית של מודולים ספציפיים —
+                <Link to={createPageUrl('Platform')} className="text-lavender-300 hover:text-lavender-200 font-semibold mx-1">קטלוג A la Carte</Link>
+                עם תמחור פרטני לכל מודול.
+              </p>
+            </div>
+            <Link to={createPageUrl('Platform')} className="btn-pill-ghost flex-shrink-0 whitespace-nowrap">
+              לקטלוג המלא
+            </Link>
+          </motion.div>
+
           {/* Enterprise callout */}
-          <motion.div {...fadeUp} className="mt-8 rounded-2xl border border-white/[0.08] bg-gradient-to-br from-lavender-900/30 to-transparent p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6">
+          <motion.div {...fadeUp} className="mt-4 rounded-2xl border border-white/[0.08] bg-gradient-to-br from-lavender-900/30 to-transparent p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6">
             <div className="flex-1">
               <div className="meta-label mb-3">Enterprise</div>
               <h3 className="text-2xl md:text-3xl font-black text-white mb-2">לארגונים עם דרישות מיוחדות</h3>

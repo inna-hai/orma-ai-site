@@ -181,13 +181,16 @@ export default function Platform() {
               <div className="meta-label mb-4">הבסיס</div>
               <div className="divider-thin mb-6" />
               <div className="flex items-baseline gap-3 mb-2">
-                <div className="text-4xl font-black text-white tracking-tight">₪15,000</div>
+                <div className="text-4xl font-black text-white tracking-tight">₪4,500</div>
                 <div className="text-[13px] text-white/50">הקמה</div>
               </div>
               <div className="flex items-baseline gap-3">
-                <div className="text-4xl font-black text-white tracking-tight">₪500</div>
-                <div className="text-[13px] text-white/50">/חודש מינימום</div>
+                <div className="text-4xl font-black text-white tracking-tight">₪299</div>
+                <div className="text-[13px] text-white/50">/חודש</div>
               </div>
+              <p className="mt-4 text-[12px] text-white/45 leading-relaxed">
+                זהה למסלול <Link to={createPageUrl('Pricing')} className="text-lavender-300 hover:text-lavender-200">Growth</Link>. בלי מודולים נוספים — רק הבסיס.
+              </p>
             </div>
             <div className="md:col-span-8">
               <h2 className="heading-section mb-6">Base CRM — מה שכל לקוח מקבל</h2>
@@ -211,7 +214,7 @@ export default function Platform() {
       {/* Modules */}
       <section className="py-24 md:py-32 bg-gradient-to-b from-night-900/40 to-transparent">
         <div className="container-editorial">
-          <motion.div {...fadeUp} className="mb-20">
+          <motion.div {...fadeUp} className="mb-12">
             <div className="meta-label mb-4">הקטלוג</div>
             <h2 className="heading-section max-w-3xl">10 קטגוריות. 50+ מודולים.</h2>
             <p className="text-white/60 text-lg leading-[1.85] max-w-2xl mt-6">
@@ -227,6 +230,24 @@ export default function Platform() {
                 <span className="w-2 h-2 rounded-full bg-white/40"></span>
                 חודשי = תחזוקה, עדכונים ותמיכה
               </div>
+            </div>
+          </motion.div>
+
+          {/* Pricing notice — distinguishes a la carte from plans */}
+          <motion.div {...fadeUp} className="mb-20 rounded-2xl border border-lavender-400/30 bg-lavender-500/[0.06] p-6 md:p-7">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <div className="meta-label mb-2 text-lavender-300">שימו לב · תמחור A la Carte</div>
+                <p className="text-white/80 text-[15px] leading-[1.75] max-w-3xl">
+                  המחירים כאן הם לרכישה <span className="text-white font-semibold">פרטנית של מודולים</span>. לרוב העסקים,
+                  ה<Link to={createPageUrl('Pricing')} className="text-lavender-300 hover:text-lavender-200 font-semibold underline decoration-lavender-400/40 underline-offset-4">מסלולים החודשיים</Link>{' '}
+                  חוסכים <span className="text-white font-semibold">30-60%</span> — כי הם חבילות מוכנות עם מודולים נפוצים.
+                </p>
+              </div>
+              <Link to={createPageUrl('Pricing')} className="btn-pill-primary flex-shrink-0 whitespace-nowrap">
+                <ArrowLeft className="w-4 h-4 ml-2" />
+                השוואה למסלולים
+              </Link>
             </div>
           </motion.div>
 
@@ -287,28 +308,52 @@ export default function Platform() {
               <div className="meta-label mb-3">A la Carte</div>
               <h3 className="text-2xl font-black text-white mb-4">מודולים לפי בחירה</h3>
               <p className="text-white/60 text-[15px] leading-[1.8] mb-6">
-                בחרו רק את המודולים שרלוונטיים לעסק. משלמים עבור כל אחד בנפרד לפי התמחור למעלה.
-                טוב למי שיודע בדיוק מה צריך או רוצה גמישות מלאה.
+                גמישות מלאה. בוחרים בדיוק את המודולים שצריכים ומשלמים על כל אחד בנפרד.
+                טוב למי שיודע בדיוק מה נדרש או שרוצה קונפיגורציה לא-סטנדרטית.
               </p>
-              <div className="space-y-2 text-[14px] text-white/80">
-                <div>+ Base CRM: ₪15,000 setup / ₪500 לחודש</div>
-                <div>+ מודולים לבחירה (ראו מעלה)</div>
+              <div className="space-y-2 text-[14px] text-white/80 border-t border-white/[0.08] pt-5">
+                <div className="flex justify-between">
+                  <span>Base CRM</span>
+                  <span className="text-lavender-300 font-semibold">₪4,500 + ₪299/חודש</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>+ כל מודול</span>
+                  <span className="text-white/70">₪2,000-8,000 + ₪100-400/חודש</span>
+                </div>
+              </div>
+              <div className="mt-5 text-[12px] text-white/40">
+                דוגמה: Base + WhatsApp + חשבוניות + Calendar<br />
+                = ₪18,000 setup + ₪849/חודש
               </div>
             </div>
 
             <div className="rounded-2xl border-2 border-lavender-400/40 bg-lavender-500/[0.06] p-8 md:p-10 relative">
               <div className="absolute -top-3 right-8 text-[10px] font-bold tracking-widest uppercase text-[#0a0515] bg-lavender-400 px-3 py-1 rounded-full">
-                מומלץ לרובם
+                מומלץ לרובם · חסכוני פי 2
               </div>
-              <div className="meta-label mb-3 text-lavender-300">Plans</div>
+              <div className="meta-label mb-3 text-lavender-300">Plans (חבילות)</div>
               <h3 className="text-2xl font-black text-white mb-4">מסלול flat חודשי</h3>
               <p className="text-white/70 text-[15px] leading-[1.8] mb-6">
-                4 מסלולים שכבר כוללים את כל הבסיס + חבילת מודולים לפי סוג העסק.
-                מחיר חודשי קבוע, לא per-user. פשוט וצפוי — וחוסך עד פי 5 מול המתחרים.
+                חבילות מוכנות שכבר כוללות את הבסיס + מודולים פופולריים. מחיר חודשי קבוע
+                (לא per-user), והעלות נמוכה משמעותית מ-A la Carte כי זו חבילה סטנדרטית בסקייל.
               </p>
-              <Link to={createPageUrl('Pricing')} className="inline-flex items-center text-white hover:text-lavender-200 transition-colors font-medium border-b border-white/30 hover:border-lavender-200 pb-1 text-[14px]">
+              <div className="space-y-2 text-[14px] text-white/90 border-t border-lavender-400/20 pt-5">
+                <div className="flex justify-between">
+                  <span>Growth (Base + 3 מודולים)</span>
+                  <span className="text-lavender-300 font-semibold">₪4,500 + ₪299/חודש</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Professional (Base + 8 מודולים)</span>
+                  <span className="text-lavender-300 font-semibold">₪9,000 + ₪799/חודש</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Business (כל המודולים)</span>
+                  <span className="text-lavender-300 font-semibold">₪15,000 + ₪1,499/חודש</span>
+                </div>
+              </div>
+              <Link to={createPageUrl('Pricing')} className="inline-flex items-center mt-6 text-white hover:text-lavender-200 transition-colors font-medium border-b border-white/30 hover:border-lavender-200 pb-1 text-[14px]">
                 <ArrowLeft className="w-4 h-4 ml-2" />
-                ראו את המסלולים
+                לפירוט המסלולים המלא
               </Link>
             </div>
           </motion.div>
