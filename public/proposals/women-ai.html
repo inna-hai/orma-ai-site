@@ -7,34 +7,34 @@
 <title>הצעה — מתחילים מהגרעין | Forward</title>
 <style>
   :root {
-    --bg: #0a0515;
-    --bg-2: #0f0820;
-    --bg-card: rgba(255,255,255,0.03);
-    --border: rgba(255,255,255,0.08);
-    --border-2: rgba(255,255,255,0.12);
-    --text: #f0e9ff;
-    --text-2: rgba(240, 233, 255, 0.7);
-    --text-3: rgba(240, 233, 255, 0.45);
-    --lavender-200: #ddd0ff;
-    --lavender-300: #c4b0fa;
-    --lavender-400: #a68af0;
-    --lavender-500: #8b6de2;
-    --lavender-600: #7554cc;
+    --bg: #fff8f4;
+    --bg-2: #fff1ec;
+    --bg-card: rgba(255,255,255,0.85);
+    --border: rgba(242, 41, 91, 0.12);
+    --border-2: rgba(242, 41, 91, 0.18);
+    --text: #2a1636;
+    --text-2: rgba(42, 22, 54, 0.78);
+    --text-3: rgba(42, 22, 54, 0.52);
+    --lavender-200: #ffd9e6;
+    --lavender-300: #ffb7cf;
+    --lavender-400: #f472b6;
+    --lavender-500: #f2295b;
+    --lavender-600: #d63384;
     --pain-red: #e85a7a;
-    --success: #6ee7b7;
-    --gold: #f5c97a;
+    --success: #f7b0c8;
+    --gold: #f7b267;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
     font-family: "Heebo", "Segoe UI", "Arial Hebrew", Arial, sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--text);
-    background: var(--bg);
+    background: linear-gradient(180deg, #fff8f4 0%, #fff1ec 100%);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
   }
-  ::selection { background: rgba(139, 109, 226, 0.5); color: #fff; }
+  ::selection { background: rgba(139, 109, 226, 0.5); color: #2a1636; }
 
   .container { max-width: 920px; margin: 0 auto; padding: 0 60px; }
   .narrow { max-width: 720px; margin: 0 auto; padding: 0 60px; }
@@ -49,9 +49,9 @@
     position: relative;
     overflow: hidden;
     background:
-      radial-gradient(ellipse 70% 50% at 30% 20%, rgba(139,109,226,0.25) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 60% at 70% 80%, rgba(75,40,140,0.3) 0%, transparent 60%),
-      linear-gradient(180deg, #0f0820 0%, #1a0f35 60%, #0a0515 100%);
+      radial-gradient(ellipse 70% 50% at 30% 20%, rgba(242,41,91,0.14) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 70% 80%, rgba(244,114,182,0.16) 0%, transparent 60%),
+      linear-gradient(180deg, #fff6f3 0%, #ffe9f1 55%, #fff8f4 100%);
   }
   .cover::before {
     content: "";
@@ -80,9 +80,9 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 900;
-    color: #fff;
+    color: #2a1636;
     letter-spacing: -0.02em;
   }
   .logo-square {
@@ -93,13 +93,13 @@
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    color: #fff;
+    color: #2a1636;
   }
   .logo-mark .dot { color: var(--lavender-400); }
   .doc-meta {
     text-align: left;
     font-size: 12px;
-    color: var(--text-3);
+    color: rgba(59, 34, 74, 0.66);
     letter-spacing: 0.15em;
     text-transform: uppercase;
   }
@@ -114,7 +114,7 @@
     margin-bottom: 30px;
   }
   .cover h1 {
-    font-size: clamp(48px, 7vw, 88px);
+    font-size: clamp(54px, 7.4vw, 98px);
     font-weight: 900;
     line-height: 1.05;
     letter-spacing: -0.025em;
@@ -127,9 +127,9 @@
     color: transparent;
   }
   .cover-subtitle {
-    font-size: 22px;
-    color: var(--text-2);
-    font-weight: 300;
+    font-size: 24px;
+    color: #412657;
+    font-weight: 400;
     max-width: 720px;
     line-height: 1.6;
   }
@@ -143,33 +143,33 @@
     padding-top: 30px;
   }
   .meta-block .label {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--lavender-400);
     letter-spacing: 0.25em;
     text-transform: uppercase;
     margin-bottom: 8px;
   }
-  .meta-block .value { font-size: 16px; color: var(--text); font-weight: 500; }
-  .meta-block .sub { font-size: 13px; color: var(--text-3); margin-top: 4px; }
+  .meta-block .value { font-size: 16px; color: #2a1636; font-weight: 600; }
+  .meta-block .sub { font-size: 15px; color: rgba(59, 34, 74, 0.66); margin-top: 4px; }
 
   /* Sections */
   section { padding: 100px 0; position: relative; }
   section.tinted { background: linear-gradient(180deg, transparent, rgba(15, 8, 32, 0.6), transparent); }
   .section-eyebrow {
     color: var(--lavender-400);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     margin-bottom: 16px;
   }
   h2 {
-    font-size: clamp(32px, 4vw, 52px);
+    font-size: clamp(36px, 4.8vw, 60px);
     font-weight: 900;
     line-height: 1.1;
     letter-spacing: -0.02em;
     margin-bottom: 30px;
-    color: #fff;
+    color: #2a1636;
   }
   h2 .accent {
     background: linear-gradient(135deg, var(--lavender-300), var(--lavender-500));
@@ -177,17 +177,17 @@
     background-clip: text;
     color: transparent;
   }
-  h3 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 12px; }
-  p { font-size: 16px; line-height: 1.85; color: var(--text-2); margin-bottom: 16px; }
-  p strong { color: #fff; font-weight: 600; }
-  .lead { font-size: 18px; color: var(--text-2); }
+  h3 { font-size: 24px; font-weight: 700; color: #2a1636; margin-bottom: 12px; }
+  p { font-size: 18px; line-height: 1.95; color: #3b224a; margin-bottom: 18px; }
+  p strong { color: #2a1636; font-weight: 600; }
+  .lead { font-size: 20px; color: #3b224a; }
 
   /* The core diagram — central piece */
   .core-diagram {
     margin: 50px 0;
     padding: 60px 40px;
-    background: linear-gradient(135deg, rgba(139,109,226,0.12), rgba(75,40,140,0.06));
-    border: 1px solid rgba(139,109,226,0.25);
+    background: linear-gradient(135deg, rgba(242,41,91,0.08), rgba(244,114,182,0.06));
+    border: 1px solid rgba(242,41,91,0.18);
     border-radius: 24px;
     text-align: center;
     position: relative;
@@ -208,32 +208,32 @@
     justify-content: center;
     width: 220px; height: 220px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--lavender-500), var(--lavender-700));
-    color: #fff;
+    background: linear-gradient(135deg, #f2295b, #f472b6);
+    color: #2a1636;
     box-shadow: 0 30px 60px rgba(139,109,226,0.4);
     margin-bottom: 30px;
   }
   .core-circle small {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     opacity: 0.8;
     margin-bottom: 8px;
   }
-  .core-circle .core-title { font-size: 22px; font-weight: 900; line-height: 1.2; }
-  .core-circle .core-sub { font-size: 13px; opacity: 0.85; margin-top: 4px; }
+  .core-circle .core-title { font-size: 24px; font-weight: 900; line-height: 1.2; }
+  .core-circle .core-sub { font-size: 14px; opacity: 0.95; margin-top: 6px; }
   .core-orbit {
     display: flex; justify-content: center; flex-wrap: wrap; gap: 8px;
     max-width: 700px; margin: 0 auto; position: relative;
   }
   .core-orbit .orbit-item {
     padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-2);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(242, 41, 91, 0.16);
     border-radius: 100px;
-    font-size: 13px;
-    color: var(--text-2);
+    font-size: 15px;
+    color: #412657;
     transition: all 0.2s;
   }
   .core-orbit .orbit-item.future {
@@ -241,7 +241,7 @@
     border-style: dashed;
   }
   .core-orbit-label {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--lavender-400);
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -285,15 +285,15 @@
   }
   .quote p {
     font-size: 19px;
-    color: #fff;
+    color: #2a1636;
     font-style: italic;
     line-height: 1.7;
     margin: 0;
   }
   .quote .source {
     margin-top: 12px;
-    font-size: 13px;
-    color: var(--text-3);
+    font-size: 15px;
+    color: rgba(59, 34, 74, 0.66);
     font-style: normal;
   }
 
@@ -312,17 +312,17 @@
     border-radius: 16px;
   }
   .stat .value {
-    font-size: 36px; font-weight: 900; color: #fff; letter-spacing: -0.03em;
+    font-size: 36px; font-weight: 900; color: #2a1636; letter-spacing: -0.03em;
   }
   .stat .value.accent {
     background: linear-gradient(135deg, var(--lavender-300), var(--lavender-500));
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  .stat .label { font-size: 12px; color: var(--text-3); margin-top: 6px; line-height: 1.5; }
+  .stat .label { font-size: 12px; color: rgba(59, 34, 74, 0.66); margin-top: 6px; line-height: 1.5; }
 
   /* Pricing card */
   .price-card {
-    background: linear-gradient(135deg, rgba(139,109,226,0.12), rgba(75,40,140,0.06));
+    background: linear-gradient(135deg, rgba(242,41,91,0.08), rgba(244,114,182,0.06));
     border: 2px solid rgba(196, 176, 250, 0.4);
     border-radius: 24px;
     padding: 50px;
@@ -349,7 +349,7 @@
     margin-bottom: 30px;
   }
   .price-block .label {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--lavender-400);
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -359,13 +359,13 @@
   .price-block .num {
     font-size: 56px;
     font-weight: 900;
-    color: #fff;
+    color: #2a1636;
     line-height: 1;
     letter-spacing: -0.04em;
   }
   .price-block .sub {
-    font-size: 13px;
-    color: var(--text-3);
+    font-size: 15px;
+    color: rgba(59, 34, 74, 0.66);
     margin-top: 8px;
   }
   .price-includes {
@@ -373,7 +373,7 @@
     padding-top: 24px;
   }
   .price-includes-label {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--lavender-400);
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -385,7 +385,7 @@
     padding-right: 24px;
     position: relative;
     margin-bottom: 8px;
-    color: var(--text-2);
+    color: #412657;
     font-size: 14px;
     break-inside: avoid;
   }
@@ -393,7 +393,7 @@
     content: "✓";
     position: absolute;
     right: 0; top: 0;
-    color: var(--success);
+    color: #d63384;
     font-weight: 900;
   }
 
@@ -419,7 +419,7 @@
     box-shadow: 0 0 0 2px var(--lavender-400);
   }
   .timeline-step .week {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--lavender-400);
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -456,26 +456,26 @@
     color: var(--lavender-400);
     letter-spacing: 0.15em;
   }
-  .ladder-content h5 { font-size: 16px; color: #fff; margin-bottom: 4px; font-weight: 700; }
-  .ladder-content p { font-size: 13px; color: var(--text-3); margin: 0; line-height: 1.6; }
+  .ladder-content h5 { font-size: 16px; color: #2a1636; margin-bottom: 4px; font-weight: 700; }
+  .ladder-content p { font-size: 15px; color: rgba(59, 34, 74, 0.66); margin: 0; line-height: 1.6; }
   .ladder-savings {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     margin-top: 12px;
     padding: 6px 14px;
-    background: rgba(110, 231, 183, 0.1);
-    border: 1px solid rgba(110, 231, 183, 0.25);
+    background: rgba(247, 176, 200, 0.1);
+    border: 1px solid rgba(247, 176, 200, 0.25);
     border-radius: 100px;
-    color: var(--success);
+    color: #d63384;
     font-size: 12.5px;
     font-weight: 500;
     line-height: 1.5;
   }
-  .ladder-savings strong { color: var(--success); font-weight: 700; }
+  .ladder-savings strong { color: #d63384; font-weight: 700; }
   .ladder-price {
     text-align: left;
-    font-size: 13px;
+    font-size: 15px;
     color: var(--lavender-300);
     font-weight: 600;
     white-space: nowrap;
@@ -496,12 +496,12 @@
     gap: 16px;
     margin-top: 40px;
   }
-  .cta-block .name { font-size: 18px; font-weight: 600; color: #fff; }
-  .cta-block .role { font-size: 13px; color: var(--text-3); }
+  .cta-block .name { font-size: 18px; font-weight: 600; color: #2a1636; }
+  .cta-block .role { font-size: 15px; color: rgba(59, 34, 74, 0.66); }
   .cta-block .contact {
     margin-top: 16px;
     font-size: 14px;
-    color: var(--text-2);
+    color: #412657;
     line-height: 2;
   }
   .cta-block .contact a { color: var(--lavender-300); text-decoration: none; }
@@ -510,7 +510,7 @@
     border-top: 1px solid var(--border);
     padding: 30px 60px;
     text-align: center;
-    color: var(--text-3);
+    color: rgba(59, 34, 74, 0.66);
     font-size: 12px;
   }
 
@@ -543,7 +543,7 @@
     .cover-eyebrow { font-size: 10px; letter-spacing: 0.2em; margin-bottom: 18px; }
     .cover-bottom { padding-top: 20px; gap: 16px; }
     .meta-block .value { font-size: 15px; }
-    .doc-meta { font-size: 11px; }
+    .doc-meta { font-size: 12px; }
     .logo-mark { font-size: 18px; }
     .logo-square { width: 30px; height: 30px; font-size: 14px; }
 
@@ -559,7 +559,7 @@
     .core-circle { width: 160px; height: 160px; margin-bottom: 22px; }
     .core-circle small { font-size: 10px; letter-spacing: 0.2em; margin-bottom: 6px; }
     .core-circle .core-title { font-size: 17px; }
-    .core-circle .core-sub { font-size: 11px; margin-top: 6px; }
+    .core-circle .core-sub { font-size: 12px; margin-top: 6px; }
     .core-orbit { gap: 6px; }
     .core-orbit .orbit-item { font-size: 12px; padding: 6px 12px; }
     .core-orbit-label { font-size: 10px; letter-spacing: 0.2em; }
@@ -585,22 +585,22 @@
 
     /* Ladder */
     .ladder-row { padding: 18px 18px; grid-template-columns: 1fr; gap: 6px; }
-    .ladder-step { font-size: 13px; opacity: 0.65; font-weight: 700; }
+    .ladder-step { font-size: 15px; opacity: 0.65; font-weight: 700; }
     .ladder-content h5 { font-size: 16px; }
-    .ladder-content p { font-size: 13px; }
+    .ladder-content p { font-size: 15px; }
     .ladder-savings { font-size: 12px; padding: 6px 12px; line-height: 1.6; gap: 4px; }
 
     /* CTA */
     .cta-section { padding: 60px 20px; }
     .cta-section h2 { font-size: 30px; }
     .cta-block .name { font-size: 16px; }
-    .cta-block .contact { font-size: 13px; }
+    .cta-block .contact { font-size: 15px; }
 
     /* Stats */
     .stats { gap: 10px; }
     .stat { padding: 18px 8px; }
     .stat .value { font-size: 28px; }
-    .stat .label { font-size: 11px; }
+    .stat .label { font-size: 12px; }
   }
 
   /* === SMALL PHONES === */
@@ -675,7 +675,7 @@
       מייל פרטי שמחביא פרטים. בלי שום חוסר וודאות.
     </p>
     <p>
-      <strong>וזה רק הבסיס.</strong> הגרעין הזה הוא נקודת ההתחלה — מעליו יוצמדו, לפי הסדר
+      <strong>מכאן אפשר להתרחב בהדרגה, לפי סדר העדיפויות שלכן, למודולים נוספים שכבר עלו בשיחה: הסרת חברה עוזבת בצורה מסודרת, וואטסאפ בוט, הצעות מחיר וחוזים, עמודי נחיתה, חיבור לפרסום ממומן, דיוור, ניהול קהילה ותיעוד זומים אוטומטי. כל רכיב כזה יכול להתווסף בזמן הנכון, כשהוא נשען על אותה תשתית ליבה.</strong> הגרעין הזה הוא נקודת ההתחלה — מעליו יוצמדו, לפי הסדר
       שלכן, מודולים שכבר אפיינו ביחד: סוכן הסרת חברה עוזבת בקליק (פותר את הכאב הגדול),
       וואטסאפ בוט, הצעות מחיר וחוזים, עמודי נחיתה, חיבור לפרסום ממומן, דיוור,
       ניהול קהילה ותיעוד זומים אוטומטי. כל אחד מצטרף בזמנו, ועובד מהדאטה של הגרעין.
@@ -767,13 +767,13 @@
 <section class="tinted">
   <div class="container">
     <div class="section-eyebrow">השקעה</div>
-    <h2><span class="accent">תמחור שקוף.</span><br>בלי הפתעות.</h2>
+    <h2><span class="accent">השקעה</span><br></h2>
 
     <div class="price-card">
       <div class="price-grid">
         <div class="price-block">
           <div class="label">דמי הקמה · חד-פעמי</div>
-          <div style="font-size: 28px; font-weight: 700; color: var(--text-3); text-decoration: line-through; line-height: 1; margin-bottom: 6px;">₪9,000</div>
+          <div style="font-size: 28px; font-weight: 700; color: rgba(59, 34, 74, 0.66); text-decoration: line-through; line-height: 1; margin-bottom: 6px;">₪9,000</div>
           <div class="num">₪4,500</div>
           <div style="margin-top: 10px; display: inline-block; padding: 6px 14px; background: rgba(196, 176, 250, 0.15); border: 1px solid rgba(196, 176, 250, 0.35); border-radius: 100px; color: var(--lavender-200); font-size: 12px; font-weight: 600; letter-spacing: 0.05em;">
             ★ מערכת מותאמת אישית לכם
@@ -787,14 +787,13 @@
         </div>
       </div>
 
-      <div style="padding-top: 24px; border-top: 1px solid var(--border-2); font-size: 13px; color: var(--text-3);">
+      <div style="padding-top: 24px; border-top: 1px solid var(--border-2); font-size: 15px; color: rgba(59, 34, 74, 0.66);">
         תנאי תשלום: 50% בחתימה, 50% ב-go-live.
       </div>
     </div>
 
   </div>
 </section>
-
 
 <!-- THE LADDER (future) -->
 <section class="tinted">
@@ -811,8 +810,8 @@
         <div class="ladder-step">+ 1</div>
         <div class="ladder-content">
           <h5>הסרת לקוח/חבר עוזב — בקליק אחד</h5>
-          <p>לחיצה אחת מבטלת חיוב, מסירה הרשאות, מעדכנת את ה-CRM, מנקה רשימות תפוצה, ומבטלת הזמנות עתידיות. סוף לסבב של 30 דקות עבודה ידנית בכל מערכת בנפרד — והסיכון לפספוס שמוביל לחיוב לא רצוי.</p>
-          <div class="ladder-savings">⚡ חוסך <strong>30 דק&apos; בכל עזיבה</strong> + מונע חיובים שגויים שעלולים לעלות אלפי שקלים בתביעות</div>
+          <</p>
+          <div class="ladder-savings"><</strong> + </div>
         </div>
       </div>
       <div class="ladder-row">
@@ -820,7 +819,7 @@
         <div class="ladder-content">
           <h5>הצעות מחיר וחוזים</h5>
           <p>תבניות PDF מעוצבות, חתימה דיגיטלית בתוקף משפטי, מעקב פתיחה ואישור.</p>
-          <div class="ladder-savings">⚡ הצעה תוך <strong>5 דקות</strong> במקום 45 — מאיץ סגירת עסקאות ב-50%+</div>
+          <div class="ladder-savings"><</strong> במקום 45 — מאיץ סגירת עסקאות ב-50%+</div>
         </div>
       </div>
       <div class="ladder-row">
@@ -828,7 +827,7 @@
         <div class="ladder-content">
           <h5>וואטסאפ בוט</h5>
           <p>שליחה וקבלה אוטומטית, Templates מאושרות, מענה 24/7 לשאלות נפוצות, יצירת לידים מהבוט.</p>
-          <div class="ladder-savings">⚡ עונה במקומכם 24/7 — חוסך <strong>~20 שעות עבודה / חודש</strong> (~₪4,000)</div>
+          <div class="ladder-savings"><strong><</div>
         </div>
       </div>
       <div class="ladder-row">
@@ -836,7 +835,7 @@
         <div class="ladder-content">
           <h5>בניית עמודי נחיתה</h5>
           <p>עמודי נחיתה מעוצבים בעברית RTL, טפסים מחוברים אוטומטית ל-CRM, Custom domain.</p>
-          <div class="ladder-savings">⚡ מעלה אחוזי המרה ב-<strong>30-50%</strong> מאותו תקציב פרסום — מחזיר את עצמו תוך חודש</div>
+          <div class="ladder-savings"><strong></strong> מאותו תקציב פרסום — מחזיר את עצמו תוך חודש</div>
         </div>
       </div>
       <div class="ladder-row">
@@ -844,7 +843,7 @@
         <div class="ladder-content">
           <h5>חיבור פרסום ממומן (Google + Meta) + Analytics</h5>
           <p>סנכרון Conversions ל-Google Ads ול-Meta (Facebook/Instagram), מעקב מסע משתמש מלא, ROI אמיתי לכל קמפיין, חיבור GA4.</p>
-          <div class="ladder-savings">⚡ משפר ROI של תקציב פרסום ב-<strong>20-40%</strong> — על ₪10K/חודש זה ₪2-4K חיסכון</div>
+          <div class="ladder-savings"><strong></strong> — על ₪10K/חודש זה ₪2-4K </div>
         </div>
       </div>
       <div class="ladder-row">
@@ -852,7 +851,7 @@
         <div class="ladder-content">
           <h5>דיוור במיילים</h5>
           <p>Email Campaigns עם Drag-and-drop builder, סגמנטציה, A/B testing, דוחות פתיחה וקליק.</p>
-          <div class="ladder-savings">⚡ <strong>מבטל מנוי ל-Mailchimp/ActiveCampaign</strong> (₪400-1,500/חודש) + טוב יותר כי מחובר ל-CRM</div>
+          <div class="ladder-savings"><strong>/ActiveCampaign</strong> (₪400-1,500/חודש) + טוב יותר כי מחובר ל-CRM</div>
         </div>
       </div>
       <div class="ladder-row">
@@ -860,7 +859,7 @@
         <div class="ladder-content">
           <h5>ניהול קהילה</h5>
           <p>חברי מועדון/קהילה, מעקב engagement, פורטל אישי, ניהול מנויים — חיבור לכלים כמו Skool.</p>
-          <div class="ladder-savings">⚡ Self-Service לחברים — חוסך <strong>10+ שעות תמיכה / חודש</strong></div>
+          <div class="ladder-savings"><strong>10+ שעות תמיכה / חודש</strong></div>
         </div>
       </div>
       <div class="ladder-row">
@@ -868,7 +867,7 @@
         <div class="ladder-content">
           <h5>תיעוד וסיכום זומים (AI)</h5>
           <p>תמלול אוטומטי בעברית, סיכום AI של כל שיחה, action items, שליחה אוטומטית למי שהחמיץ.</p>
-          <div class="ladder-savings">⚡ סיכום אוטומטי תוך <strong>5 דקות</strong> במקום שעות — מייצר תוכן לרשתות בלי עבודה</div>
+          <div class="ladder-savings"><</strong> במקום שעות — מייצר תוכן לרשתות בלי עבודה</div>
         </div>
       </div>
       <div class="ladder-row">
@@ -876,7 +875,7 @@
         <div class="ladder-content">
           <h5>חשבוניות ישראליות</h5>
           <p>הוצאת חשבוניות, ביטולים והחזרים — אוטומטית מתוך ה-CRM. חיבור Morning/iCount/Cardcom, סנכרון לרואה חשבון, ותמונה מלאה של היסטוריית התשלומים של כל לקוח.</p>
-          <div class="ladder-savings">⚡ <strong>אוטומציה מלאה של חיוב</strong> + יודעים לכל לקוח בדיוק כמה שילם, מתי, ועל מה — בלי לחפש</div>
+          <div class="ladder-savings"><strong>אוטומציה מלאה של חיוב</strong> + יודעים לכל לקוח בדיוק כמה שילם, מתי, ועל מה — בלי לחפש</div>
         </div>
       </div>
       <div class="ladder-row">
@@ -884,7 +883,7 @@
         <div class="ladder-content">
           <h5>AI Summary &amp; Insights</h5>
           <p>סיכום שיחות והתכתבויות אוטומטי, ניתוח sentiment, חיזוי churn, Next-Best-Action.</p>
-          <div class="ladder-savings">⚡ מזהה לקוחות בסיכון <strong>לפני שהם עוזבים</strong> — שומר עסקאות שהיו הולכות לאיבוד</div>
+          <div class="ladder-savings"><strong>לפני שהם עוזבים</strong> — שומר עסקאות שהיו הולכות לאיבוד</div>
         </div>
       </div>
       <div class="ladder-row">
@@ -896,8 +895,8 @@
       </div>
     </div>
 
-    <p style="text-align: center; font-size: 14px; color: var(--text-3); margin-top: 30px;">
-      הקטלוג המלא ב-<a href="https://forward.hai.tech/Platform" target="_blank" style="color: var(--lavender-300); text-decoration: none;">forward.hai.tech/Platform</a>
+    <p style="text-align: center; font-size: 14px; color: rgba(59, 34, 74, 0.66); margin-top: 30px;">
+      הקטלוג המלא ב-/Platform
     </p>
   </div>
 </section>
@@ -916,20 +915,7 @@
 
 <!-- CTA -->
 <section class="cta-section">
-  <div class="section-eyebrow">הצעד הבא</div>
-  <h2>שיחת <span class="accent">30 דקות</span>.</h2>
-  <p class="lead" style="max-width: 600px; margin: 0 auto;">
-    בלי מצגות, בלי התחייבויות. נצלול לתהליך המכירה הנוכחי שלכם, נראה איפה הלידים נופלים היום,
-    ונחליט יחד אם הגרעין מתאים — או שיש משהו אחר שיעזור יותר.
-  </p>
-
-  <div class="cta-block">
-    <div class="name">אינה גרוייס &amp; עמי מידר</div>
-    <div class="role">Co-Founders · Forward / HAi.TECH</div>
-    <div class="contact">
-      📧 <a href="mailto:inna@hai.tech">inna@hai.tech</a><br>
-      📱 <a href="tel:+972533009742" dir="ltr">+972-53-300-9742</a><br>
-      🌐 <a href="https://forward.hai.tech" target="_blank">forward.hai.tech</a>
+  <div class="section-eyebrow">
     </div>
   </div>
 </section>
