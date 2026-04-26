@@ -903,35 +903,31 @@
     };
   }
 
-  function sendSummary() {
+  async function sendSummary() {
     const payload = buildPayload();
-    const subject = encodeURIComponent(`טופס סוכני AI · ${data.name || ''}`);
-    const lines = [
-      '═══ סיכום ═══',
-      `שם:               ${payload.name}`,
-      `חברה:             ${payload.company}`,
-      `תפקיד:            ${payload.role}`,
-      `שנים ב-CRM:       ${payload.yearsInCRM}`,
-      `כובע:             ${payload.hat}`,
-      '',
-      `תחומי שחיקה:`,
-      ...(payload.timeDrains.length ? payload.timeDrains.map(d => `  • ${d}`) : ['  (לא סומן)']),
-      '',
-      `המשאלה:`,
-      `  ${payload.wish || '(ריק)'}`,
-      '',
-      `מה הכי יציל את היום: ${payload.dayMaker}`,
-      '',
-      `סוכנים שנבחרו:`,
-      ...(payload.agentsSelected.length ? payload.agentsSelected.map(a => `  • ${a}`) : ['  (לא נבחר)']),
-      '',
-      `מודל יישום מועדף: ${payload.implementationPreference}`,
-      '',
-      '═══ JSON ═══',
-      JSON.stringify(payload, null, 2),
-    ];
-    const body = encodeURIComponent(lines.join('\n'));
-    window.location.href = `mailto:inna@hai.tech?subject=${subject}&body=${body}`;
+    const button = event?.currentTarget;
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'שולח...';
+    }
+
+    try {
+      const res = await fetch('/api/discovery-submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error('submit failed');
+      alert('נשלח בהצלחה ל-info@hai.tech');
+    } catch (err) {
+      alert('לא הצלחתי לשלוח אוטומטית. אפשר להשתמש ב-Download JSON ולשלוח ידנית.');
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = 'שלח את הסיכום למייל ←';
+      }
+    }
   }
 
   function downloadJson() {
