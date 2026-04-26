@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0515">
+<title>סוכני AI — איפה הם יעזרו לך? | Forward</title>
+<style>
+  :root {
+    --bg: #0a0515;
+    --bg-2: #0f0820;
+    --bg-card: rgba(255,255,255,0.04);
+    --bg-card-hover: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.08);
+    --border-2: rgba(255,255,255,0.14);
+    --border-active: rgba(196,176,250,0.5);
+    --text: #f0e9ff;
+    --text-2: rgba(240, 233, 255, 0.7);
+    --text-3: rgba(240, 233, 255, 0.45);
+    --lavender-200: #ddd0ff;
+    --lavender-300: #c4b0fa;
+    --lavender-400: #a68af0;
+    --lavender-500: #8b6de2;
+    --lavender-600: #7554cc;
+    --pain: #e85a7a;
+    --success: #6ee7b7;
+    --gold: #f5c97a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Heebo", "Segoe UI", "Arial Hebrew", Arial, sans-serif;
+    font-weight: 300;
+    color: var(--text);
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139,109,226,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 80% 100%, rgba(75,40,140,0.2) 0%, transparent 60%),
+      #0a0515;
+    background-attachment: fixed;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  ::selection { background: rgba(139, 109, 226, 0.5); color: #fff; }
+
+  /* Header */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10, 5, 21, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    max-width: 900px; margin: 0 auto;
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 18px; font-weight: 900; letter-spacing: -0.02em; color: #fff;
+    text-decoration: none;
+  }
+  .logo-square {
+    width: 30px; height: 30px; border-radius: 6px;
+    background: var(--lavender-500); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .logo .dot { color: var(--lavender-400); }
+  .progress-text { font-size: 12px; color: var(--text-3); letter-spacing: 0.1em; }
+  .progress-bar {
+    height: 3px; background: rgba(255,255,255,0.05); position: relative;
+  }
+  .progress-fill {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, var(--lavender-400), var(--lavender-500));
+    transition: width 0.4s ease;
+  }
+
+  main {
+    max-width: 720px; margin: 0 auto;
+    padding: 50px 24px 100px;
+  }
+
+  /* Steps */
+  .step { display: none; animation: fadeIn 0.4s ease; }
+  .step.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .meta-label {
+    color: var(--lavender-400);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 900; line-height: 1.1;
+    letter-spacing: -0.025em; margin-bottom: 20px; color: #fff;
+  }
+  h1 .accent {
+    background: linear-gradient(135deg, var(--lavender-300), var(--lavender-500));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  h2 {
+    font-size: clamp(24px, 3.5vw, 32px);
+    font-weight: 800; line-height: 1.2;
+    margin-bottom: 16px; color: #fff;
+  }
+  .lead { font-size: 17px; color: var(--text-2); line-height: 1.75; margin-bottom: 32px; }
+  p { margin-bottom: 14px; color: var(--text-2); }
+  p strong { color: #fff; }
+
+  /* Form fields */
+  .field { margin-bottom: 22px; }
+  label {
+    display: block; font-size: 14px; font-weight: 500;
+    color: var(--text); margin-bottom: 8px;
+  }
+  label .required { color: var(--pain); margin-right: 2px; }
+  label .hint { font-weight: 400; color: var(--text-3); margin-right: 6px; font-size: 13px; }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: #fff;
+    font-family: inherit;
+    font-size: 15px;
+    transition: all 0.2s;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--border-active);
+    background: var(--bg-card-hover);
+  }
+  textarea { min-height: 100px; resize: vertical; line-height: 1.6; }
+  input::placeholder, textarea::placeholder { color: var(--text-3); }
+
+  /* Choice cards */
+  .choices { display: grid; gap: 10px; }
+  .choices.two { grid-template-columns: 1fr 1fr; }
+  .choice {
+    display: block; cursor: pointer;
+    padding: 18px 20px;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .choice:hover { background: var(--bg-card-hover); border-color: var(--border-2); }
+  .choice input { position: absolute; opacity: 0; pointer-events: none; }
+  .choice input:checked ~ .choice-content {
+    /* No-op, container will style instead */
+  }
+  .choice:has(input:checked) {
+    border-color: var(--lavender-400);
+    background: rgba(139,109,226,0.08);
+  }
+  .choice-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+  .choice-title .check {
+    display: inline-flex;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border-2);
+    border-radius: 5px;
+    align-items: center; justify-content: center;
+    font-size: 11px;
+    transition: all 0.15s;
+  }
+  .choice:has(input:checked) .check {
+    background: var(--lavender-500);
+    border-color: var(--lavender-500);
+    color: #fff;
+  }
+  .choice-desc { font-size: 13.5px; color: var(--text-3); line-height: 1.6; }
+  .choice-pain {
+    display: inline-block; margin-top: 8px;
+    font-size: 11.5px; color: var(--pain); font-weight: 500;
+  }
+
+  /* AI Agents grid */
+  .agents-grid {
+    display: grid; grid-template-columns: 1fr; gap: 10px;
+  }
+  @media (min-width: 600px) {
+    .agents-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .agent {
+    cursor: pointer; position: relative;
+    padding: 18px 20px;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    transition: all 0.2s;
+  }
+  .agent:hover { background: var(--bg-card-hover); border-color: var(--border-2); }
+  .agent input { position: absolute; opacity: 0; pointer-events: none; }
+  .agent:has(input:checked) {
+    border-color: var(--lavender-400);
+    background: rgba(139,109,226,0.1);
+  }
+  .agent-emoji { font-size: 22px; margin-bottom: 8px; display: block; }
+  .agent-title {
+    font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px;
+    display: flex; align-items: start; justify-content: space-between; gap: 8px;
+  }
+  .agent-check {
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+    border: 1.5px solid var(--border-2);
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    transition: all 0.15s;
+  }
+  .agent:has(input:checked) .agent-check {
+    background: var(--lavender-500);
+    border-color: var(--lavender-500);
+    color: #fff;
+  }
+  .agent-desc { font-size: 13px; color: var(--text-3); line-height: 1.55; margin-bottom: 8px; }
+  .agent-tag {
+    display: inline-block;
+    font-size: 11px; padding: 3px 9px;
+    background: rgba(196,176,250,0.1);
+    color: var(--lavender-300);
+    border-radius: 100px;
+    border: 1px solid rgba(196,176,250,0.2);
+  }
+
+  /* Buttons / nav */
+  .step-nav {
+    margin-top: 36px;
+    display: flex; gap: 10px; align-items: center;
+  }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 24px;
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 15px; font-weight: 600;
+    cursor: pointer; border: 0;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--lavender-500); color: #fff;
+    flex: 1;
+  }
+  .btn-primary:hover { background: var(--lavender-400); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-ghost {
+    background: transparent; color: var(--text-2);
+    border: 1.5px solid var(--border-2);
+  }
+  .btn-ghost:hover { color: #fff; border-color: var(--border-active); }
+
+  /* Result page */
+  .result-card {
+    background: linear-gradient(135deg, rgba(139,109,226,0.1), rgba(75,40,140,0.05));
+    border: 1px solid var(--border-active);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 20px;
+  }
+  .result-card h3 {
+    font-size: 14px; color: var(--lavender-400);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 12px; font-weight: 700;
+  }
+  .result-card p { color: var(--text); font-size: 16px; line-height: 1.85; }
+
+  .recommended {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 10px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .recommended-num {
+    flex-shrink: 0;
+    font-size: 32px; font-weight: 900;
+    color: var(--lavender-300);
+    line-height: 1; opacity: 0.7;
+  }
+  .recommended h4 { font-size: 17px; color: #fff; margin-bottom: 6px; }
+  .recommended p { font-size: 14px; color: var(--text-3); line-height: 1.65; margin: 0; }
+
+  .summary-list { margin-top: 12px; }
+  .summary-list li {
+    list-style: none; padding: 6px 0;
+    color: var(--text); font-size: 14.5px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .summary-list li:last-child { border-bottom: 0; }
+  .summary-list li strong { color: var(--lavender-300); }
+
+  /* Welcome step */
+  .welcome-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin: 32px 0;
+  }
+  .welcome-stat {
+    text-align: center;
+    padding: 20px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .welcome-stat .value { font-size: 26px; font-weight: 900; color: #fff; }
+  .welcome-stat .label { font-size: 11px; color: var(--text-3); margin-top: 4px; line-height: 1.4; }
+
+  @media (max-width: 500px) {
+    main { padding: 30px 20px 80px; }
+    .choices.two { grid-template-columns: 1fr; }
+    .step-nav { flex-direction: column-reverse; }
+    .btn { width: 100%; }
+    .recommended { flex-direction: column; gap: 8px; }
+    .welcome-stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="https://forward.hai.tech" class="logo">
+      <span>Forward<span class="dot">.</span></span>
+      <span class="logo-square">←</span>
+    </a>
+    <span class="progress-text" id="stepText">שלב 1 מתוך 7</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 14.28%"></div></div>
+</header>
+
+<main>
+
+  <!-- STEP 1: Welcome -->
+  <div class="step active" data-step="1">
+    <div class="meta-label">סוכני AI · גילוי צרכים</div>
+    <h1>איפה סוכן AI<br><span class="accent">יעזור לך הכי הרבה?</span></h1>
+    <p class="lead">
+      טופס קצר שיעזור לך למפות איפה <strong>סוכני AI</strong> יכולים להיכנס בעבודה היומיומית שלך —
+      בעולם ה-CRM, הייעוץ, הפרויקטים. בסוף תקבל סיכום אישי + 3 המלצות קונקרטיות.
+    </p>
+
+    <div class="welcome-stats">
+      <div class="welcome-stat">
+        <div class="value">5</div>
+        <div class="label">דקות מילוי</div>
+      </div>
+      <div class="welcome-stat">
+        <div class="value">7</div>
+        <div class="label">שלבים קצרים</div>
+      </div>
+      <div class="welcome-stat">
+        <div class="value">0</div>
+        <div class="label">התחייבות</div>
+      </div>
+    </div>
+
+    <p style="font-size: 14px; color: var(--text-3); margin-top: 24px;">
+      💡 הטופס הזה נבנה כדי שגם <em>אם אינך בטוח מה אתה רוצה</em> —
+      התשובות והאפשרויות יעזרו לך לגלות איפה יש פוטנציאל אמיתי.
+    </p>
+
+    <div class="step-nav">
+      <button class="btn btn-primary" onclick="nextStep()">התחלה ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: About you -->
+  <div class="step" data-step="2">
+    <div class="meta-label">2 / 7 · עליך</div>
+    <h2>קצת רקע.</h2>
+    <p class="lead">כדי שנבין במה אנחנו עובדים — בלי להעמיס שאלות.</p>
+
+    <div class="field">
+      <label>שם <span class="required">*</span></label>
+      <input id="name" type="text" placeholder="השם שלך" required>
+    </div>
+
+    <div class="field">
+      <label>חברה / עסק</label>
+      <input id="company" type="text" placeholder="שם החברה או העסק">
+    </div>
+
+    <div class="field">
+      <label>תפקיד / איך תתאר את עיסוקך</label>
+      <input id="role" type="text" placeholder="לדוגמה: Creatio Consultant, יזם CRM, מנהל פרויקטים">
+    </div>
+
+    <div class="field">
+      <label>שנים בעולם ה-CRM</label>
+      <select id="years">
+        <option value="">בחר/י...</option>
+        <option value="<3">פחות מ-3 שנים</option>
+        <option value="3-7">3-7 שנים</option>
+        <option value="7-15">7-15 שנים</option>
+        <option value="15+">מעל 15 שנים</option>
+      </select>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="prevStep()">→ אחורה</button>
+      <button class="btn btn-primary" onclick="nextStep()" id="step2Next">המשך ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Two hats -->
+  <div class="step" data-step="3">
+    <div class="meta-label">3 / 7 · הקונטקסט</div>
+    <h2>איזו "כובע" אתה לובש?</h2>
+    <p class="lead">סוכני AI נבנים שונה אם זה <strong>בשבילך</strong> או <strong>ללקוחות שלך</strong>. בחר/י את מה שמתאר אותך:</p>
+
+    <div class="choices">
+      <label class="choice">
+        <input type="radio" name="hat" value="personal">
+        <div class="choice-title"><span class="check">✓</span>העסק הפרטי שלי</div>
+        <div class="choice-desc">אני מפעיל עסק/ייעוץ עצמאי. אני מחפש סוכנים שיעזרו <strong>לי</strong> בעבודה היומיומית — ללא צוות IT שיטמיע. אם אקבל ערך, אני רוצה שתבנו לי את זה.</div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="hat" value="partnership">
+        <div class="choice-title"><span class="check">✓</span>שותפות עם צוות IT</div>
+        <div class="choice-desc">אני מוביל בארגון/שותפות שיש בו צוות IT שיכול להטמיע. אני מחפש קודם <strong>POC ויעוץ</strong>, ואז אולי הצוות שלנו יבצע את הפיתוח עצמו.</div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="hat" value="both">
+        <div class="choice-title"><span class="check">✓</span>שני הכובעים</div>
+        <div class="choice-desc">יש לי את שני העולמות — עסק פרטי + שותפות עם ארגון גדול יותר. רוצה להבין מה רלוונטי בכל אחד.</div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="hat" value="exploring">
+        <div class="choice-title"><span class="check">✓</span>פשוט סקרן/ית</div>
+        <div class="choice-desc">בעיקר רוצה להבין מה זה סוכני AI ואיפה הם משחקים בעולם ה-CRM. אין לי כובע ברור עדיין.</div>
+      </label>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="prevStep()">→ אחורה</button>
+      <button class="btn btn-primary" onclick="nextStep()" id="step3Next" disabled>המשך ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Time drains -->
+  <div class="step" data-step="4">
+    <div class="meta-label">4 / 7 · איפה מתבזבז זמן</div>
+    <h2>איפה הזמן שלך <span style="color: var(--pain)">"הולך"</span> כל יום?</h2>
+    <p class="lead">סמן/י את כל המשימות שגוזלות לך הכי הרבה זמן (בחירה מרובה):</p>
+
+    <div class="choices">
+      <label class="choice">
+        <input type="checkbox" name="drain" value="leadFollow">
+        <div class="choice-title"><span class="check">✓</span>מעקב אחר לידים שלא ענו</div>
+        <div class="choice-desc">לבדוק "מי לא חזר אליי", להזכיר, לסגור</div>
+      </label>
+      <label class="choice">
+        <input type="checkbox" name="drain" value="proposals">
+        <div class="choice-title"><span class="check">✓</span>כתיבת הצעות מחיר ומפרטים</div>
+        <div class="choice-desc">להתאים תבנית בכל פעם, לעדכן מספרים, לשלוח</div>
+      </label>
+      <label class="choice">
+        <input type="checkbox" name="drain" value="meetings">
+        <div class="choice-title"><span class="check">✓</span>סיכום פגישות וזומים</div>
+        <div class="choice-desc">לזכור מה דיברו, מה הוסכם, מי מבצע מה</div>
+      </label>
+      <label class="choice">
+        <input type="checkbox" name="drain" value="email">
+        <div class="choice-title"><span class="check">✓</span>אימיילים שגרתיים</div>
+        <div class="choice-desc">לענות על שאלות חוזרות, לתאם, לעדכן</div>
+      </label>
+      <label class="choice">
+        <input type="checkbox" name="drain" value="reports">
+        <div class="choice-title"><span class="check">✓</span>דוחות סטטוס לפרויקטים</div>
+        <div class="choice-desc">איפה כל פרויקט עומד, מה היה השבוע, מה עכשיו</div>
+      </label>
+      <label class="choice">
+        <input type="checkbox" name="drain" value="support">
+        <div class="choice-title"><span class="check">✓</span>תמיכה ושאלות אחרי הטמעה</div>
+        <div class="choice-desc">לקוחות שואלים אותך אותן שאלות שוב ושוב</div>
+      </label>
+      <label class="choice">
+        <input type="checkbox" name="drain" value="docs">
+        <div class="choice-title"><span class="check">✓</span>תיעוד ידע פנימי</div>
+        <div class="choice-desc">לכתוב איך עשינו דבר, לחפש פעם הבאה</div>
+      </label>
+      <label class="choice">
+        <input type="checkbox" name="drain" value="scheduling">
+        <div class="choice-title"><span class="check">✓</span>תיאומים יומיים</div>
+        <div class="choice-desc">פגישות, התחלות פרויקט, מעבר בין משימות</div>
+      </label>
+      <label class="choice">
+        <input type="checkbox" name="drain" value="other">
+        <div class="choice-title"><span class="check">✓</span>משהו אחר שגוזל זמן</div>
+        <div class="choice-desc">תוכל/י לפרט בשלב הבא</div>
+      </label>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="prevStep()">→ אחורה</button>
+      <button class="btn btn-primary" onclick="nextStep()">המשך ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 5: Wishlist -->
+  <div class="step" data-step="5">
+    <div class="meta-label">5 / 7 · משאלה</div>
+    <h2>אם היית יכול/ה לשכפל את עצמך<br>— מה היית נותן ל"שכפול" לעשות?</h2>
+    <p class="lead">בלי לחשוב טכנית. רק מה היית רוצה <em>שמישהו</em> יעשה במקומך:</p>
+
+    <div class="field">
+      <label>המשאלה שלך <span class="hint">(שורה או שתיים)</span></label>
+      <textarea id="wish" rows="4" placeholder="לדוגמה: שמישהו יעקוב אחרי כל הצעת מחיר ששלחתי, יזכור מתי לחזור, ויכתוב לי טיוטה ראשונה למייל המעקב..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>מה הכי "יציל" לך את היום?</label>
+      <select id="dayMaker">
+        <option value="">בחר/י...</option>
+        <option value="time">חיסכון של שעות עבודה</option>
+        <option value="quality">פחות טעויות / שכחות</option>
+        <option value="speed">תגובה מהירה יותר ללקוחות</option>
+        <option value="insight">תובנות שלא קיבלתי לבד (חיזוי, התרעה)</option>
+        <option value="growth">סקייל — לטפל ביותר לקוחות באותו זמן</option>
+      </select>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="prevStep()">→ אחורה</button>
+      <button class="btn btn-primary" onclick="nextStep()">המשך ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 6: AI Agent inspiration -->
+  <div class="step" data-step="6">
+    <div class="meta-label">6 / 7 · הספריה</div>
+    <h2>איזה סוכנים <span class="accent">"מדליקים נורה"</span>?</h2>
+    <p class="lead">12 רעיונות קונקרטיים לסוכני AI בעולם ה-CRM/ייעוץ. סמן/י את כל מה שמעניין — אפשר גם הרבה:</p>
+
+    <div class="agents-grid">
+      <label class="agent">
+        <input type="checkbox" name="agent" value="lead-qualifier">
+        <span class="agent-emoji">🎯</span>
+        <div class="agent-title">Lead Qualifier <span class="agent-check">✓</span></div>
+        <div class="agent-desc">לידים נכנסים אוטומטית, נשאלים שאלות מסננות, מתאמים פגישה רק אם מתאימים. אתה מקבל יומן מסונן.</div>
+        <span class="agent-tag">חוסך זמן</span>
+      </label>
+
+      <label class="agent">
+        <input type="checkbox" name="agent" value="meeting-summary">
+        <span class="agent-emoji">📝</span>
+        <div class="agent-title">Meeting Summary <span class="agent-check">✓</span></div>
+        <div class="agent-desc">אחרי כל זום — סיכום אוטומטי, action items, וטיוטת מייל מעקב ללקוח. תוך 5 דקות מסיום השיחה.</div>
+        <span class="agent-tag">פגישות</span>
+      </label>
+
+      <label class="agent">
+        <input type="checkbox" name="agent" value="proposal-draft">
+        <span class="agent-emoji">📄</span>
+        <div class="agent-title">Proposal Draft <span class="agent-check">✓</span></div>
+        <div class="agent-desc">משיחת אפיון → טיוטת הצעת מחיר ראשונה. אתה רק עורך ומקליק שלח, במקום לכתוב מאפס.</div>
+        <span class="agent-tag">מכירות</span>
+      </label>
+
+      <label class="agent">
+        <input type="checkbox" name="agent" value="follow-up">
+        <span class="agent-emoji">⏰</span>
+        <div class="agent-title">Follow-up Sentinel <span class="agent-check">✓</span></div>
+        <div class="agent-desc">עוקב אחרי כל ליד/הצעה פתוחה. שולח תזכורת בזמן הנכון. אם משהו "מקפיא" — מתריע אצלך.</div>
+        <span class="agent-tag">לידים חמים</span>
+      </label>
+
+      <label class="agent">
+        <input type="checkbox" name="agent" value="email-triage">
+        <span class="agent-emoji">📧</span>
+        <div class="agent-title">Email Triage Agent <span class="agent-check">✓</span></div>
+        <div class="agent-desc">קורא תיבת דואר נכנסת, מסווג, מציע טיוטות מענה. מסיים 80% מהמיילים השגרתיים בלעדיך.</div>
+        <span class="agent-tag">יומיומי</span>
+      </label>
+
+      <label class="agent">
+        <input type="checkbox" name="agent" value="onboarding">
+        <span class="agent-emoji">🚀</span>
+        <div class="agent-title">Customer Onboarding <span class="agent-check">✓</span></div>
+        <div class="agent-desc">ללקוחות חדשים: בוט שמלווה אותם בהקמת CRM, עונה על שאלות, מציג סרטוני הדרכה. מקטין לחץ על הצוות.</div>
+        <span class="agent-tag">לקוחות</span>
+      </label>
+
+      <label class="agent">
+        <input type="checkbox" name="agent" value="support-bot">
+        <span class="agent-emoji">💬</span>
+        <div class="agent-title">Support Q&A Bot <span class="agent-check">✓</span></div>
+        <div class="agent-desc">בוט מבוסס על הידע של הפרויקטים שלך. לקוחות מקבלים תשובה ב-24/7, רק במקרים מורכבים מועברים אליך.</div>
+        <span class="agent-tag">תמיכה</span>
+      </label>
+
+      <label class="agent">
+        <input type="checkbox" name="agent" value="health-monitor">
+        <span class="agent-emoji">📊</span>
+        <div class="agent-title">Customer Health Monitor <span class="agent-check">✓</span></div>
+        <div class="agent-desc">מנטר את השימוש של כל לקוח במערכת. מזהה מי "בסיכון נטישה" ומתריע לפני שמאוחר.</div>
+        <span class="agent-tag">שימור</span>
+      </label>
+
+      <label class="agent">
+        <input type="checkbox" name="agent" value="status-reporter">
+        <span class="agent-emoji">📈</span>
+        <div class="agent-title">Project Status Reporter <span class="agent-check">✓</span></div>
+        <div class="agent-desc">פעם בשבוע, מייצר אוטומטית דוח סטטוס לכל פרויקט פעיל — שולח ללקוח ולצוות. בלי לכתוב מילה.</div>
+        <span class="agent-tag">פרויקטים</span>
+      </label>
+
+      <label class="agent">
+        <input type="checkbox" name="agent" value="knowledge-synth">
+        <span class="agent-emoji">🧠</span>
+        <div class="agent-title">Knowledge Synthesizer <span class="agent-check">✓</span></div>
+        <div class="agent-desc">קורא את כל מסמכי הפרויקטים שלך והופך אותם ל-KB חכם וחיפוש. "מצא לי איך פתרנו X בלקוח Y".</div>
+        <span class="agent-tag">ידע</span>
+      </label>
+
+      <label class="agent">
+        <input type="checkbox" name="agent" value="migration">
+        <span class="agent-emoji">🔄</span>
+        <div class="agent-title">CRM Migration Helper <span class="agent-check">✓</span></div>
+        <div class="agent-desc">סוכן שעוזר ללקוחות לעבור ממערכת CRM ישנה ל-Creatio. מנתח מבנה, מציע מיפוי, מבצע ייבוא.</div>
+        <span class="agent-tag">פרויקטים גדולים</span>
+      </label>
+
+      <label class="agent">
+        <input type="checkbox" name="agent" value="time-tracker">
+        <span class="agent-emoji">⏱</span>
+        <div class="agent-title">Smart Time Tracker <span class="agent-check">✓</span></div>
+        <div class="agent-desc">סוכן שמבין מתוך היומן והמיילים שלך מה עשית היום, ומפיק דוח שעות אוטומטי לכל לקוח.</div>
+        <span class="agent-tag">חיוב לקוחות</span>
+      </label>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="prevStep()">→ אחורה</button>
+      <button class="btn btn-primary" onclick="nextStep()">המשך ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 7: Implementation preference -->
+  <div class="step" data-step="7">
+    <div class="meta-label">7 / 7 · ההתאמה הסופית</div>
+    <h2>איך הכי נכון לך<br><span class="accent">להמשיך מכאן?</span></h2>
+    <p class="lead">בחר/י את האפשרות שמתאימה ביותר. אין תשובה נכונה — תלוי בכובע הנוכחי שלך:</p>
+
+    <div class="choices">
+      <label class="choice">
+        <input type="radio" name="implementation" value="full">
+        <div class="choice-title"><span class="check">✓</span>שתבנו לי את הסוכן end-to-end</div>
+        <div class="choice-desc">אני רוצה לקבל מערכת מוכנה ועובדת. אין לי צוות פיתוח להטמיע, אני מעדיף להיות הלקוח שמקבל מוצר.</div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="implementation" value="poc">
+        <div class="choice-title"><span class="check">✓</span>POC לחקר היתכנות</div>
+        <div class="choice-desc">תבנו לי הוכחת היתכנות מוגבלת, נראה שזה עובד, ואז הצוות הפנימי שלי ימשיך מכאן. מתאים גם לשותפויות.</div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="implementation" value="advisory">
+        <div class="choice-title"><span class="check">✓</span>ייעוץ ופיקוח</div>
+        <div class="choice-desc">יש לנו צוות פיתוח. אני רוצה ליווי, אדריכלות, סקירת קוד, ותכנון נכון. אנחנו מבצעים, אתם מנחים.</div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="implementation" value="explore">
+        <div class="choice-title"><span class="check">✓</span>קודם נדבר בלי התחייבות</div>
+        <div class="choice-desc">שיחת חצי שעה לחקור יחד. עוד לא בטוח/ה מה הצורך, רוצה להבין יותר לפני שמחליטים על משהו.</div>
+      </label>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="prevStep()">→ אחורה</button>
+      <button class="btn btn-primary" onclick="finishForm()" id="step7Next" disabled>קבלת סיכום ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 8: Results -->
+  <div class="step" data-step="8">
+    <div class="meta-label">סיכום אישי</div>
+    <h1><span id="resultName">תודה</span> — <span class="accent">הנה התמונה שלך.</span></h1>
+
+    <div class="result-card">
+      <h3>מה גילינו</h3>
+      <p id="resultSummary">…</p>
+    </div>
+
+    <h2 style="margin-top: 36px;">3 ההמלצות החזקות ביותר שלי</h2>
+    <p class="lead">על בסיס מה שסימנת, אלה הסוכנים שיעשו לך את ההבדל הכי גדול עכשיו:</p>
+
+    <div id="resultRecommended"></div>
+
+    <h2 style="margin-top: 36px;">איך נמשיך מכאן</h2>
+    <div class="result-card" id="resultPath">…</div>
+
+    <div style="margin-top: 36px; padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;">
+      <h3 style="font-size: 14px; color: var(--lavender-400); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px;">השלב הבא</h3>
+      <p style="margin-bottom: 16px;">
+        אינה גרוייס &amp; עמי מידר תקבלו את הסיכום הזה ותחזרו אליך תוך 24 שעות לתיאום שיחת 30 דקות.
+      </p>
+      <button class="btn btn-primary" onclick="sendSummary()" style="width: 100%; padding: 16px;">
+        📧 שליחת הסיכום ל-Forward
+      </button>
+      <p style="margin-top: 12px; font-size: 13px; color: var(--text-3); text-align: center;">
+        או צרו קשר ישירות:
+        <a href="mailto:inna@hai.tech" style="color: var(--lavender-300);">inna@hai.tech</a>
+        ·
+        <a href="tel:+972533009742" style="color: var(--lavender-300);" dir="ltr">+972-53-300-9742</a>
+      </p>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  const TOTAL_STEPS = 7;
+  let currentStep = 1;
+  const data = {};
+
+  const AGENT_INFO = {
+    'lead-qualifier': { emoji: '🎯', title: 'Lead Qualifier', desc: 'לידים מוסננים אוטומטית — רק המתאימים מגיעים לפגישה איתך.' },
+    'meeting-summary': { emoji: '📝', title: 'Meeting Summary', desc: 'סיכום זום + טיוטת מייל מעקב, תוך 5 דקות מסיום השיחה.' },
+    'proposal-draft': { emoji: '📄', title: 'Proposal Draft', desc: 'טיוטת הצעת מחיר ראשונה משיחת אפיון — חוסך שעות כתיבה.' },
+    'follow-up': { emoji: '⏰', title: 'Follow-up Sentinel', desc: 'מעקב אוטומטי על כל הצעה פתוחה, מתריע על לידים שמתקררים.' },
+    'email-triage': { emoji: '📧', title: 'Email Triage', desc: 'מסווג מיילים נכנסים ומציע טיוטות מענה — מסיים 80% בלעדיך.' },
+    'onboarding': { emoji: '🚀', title: 'Customer Onboarding', desc: 'בוט שמלווה לקוחות חדשים בהקמה — מקטין לחץ על הצוות.' },
+    'support-bot': { emoji: '💬', title: 'Support Q&A Bot', desc: 'תמיכה 24/7 מבוססת על ידע הפרויקטים שלך — רק מקרים מורכבים מגיעים אליך.' },
+    'health-monitor': { emoji: '📊', title: 'Customer Health Monitor', desc: 'מזהה לקוחות בסיכון נטישה לפני שעוזבים.' },
+    'status-reporter': { emoji: '📈', title: 'Project Status Reporter', desc: 'דוח סטטוס שבועי אוטומטי לכל פרויקט — בלי לכתוב מילה.' },
+    'knowledge-synth': { emoji: '🧠', title: 'Knowledge Synthesizer', desc: 'הופך מסמכי פרויקטים ל-KB חכם וחיפוש מהיר.' },
+    'migration': { emoji: '🔄', title: 'CRM Migration Helper', desc: 'מנתח מערכות CRM ישנות ועוזר במיגרציה ל-Creatio.' },
+    'time-tracker': { emoji: '⏱', title: 'Smart Time Tracker', desc: 'מבין אוטומטית מה עשית היום — דוח שעות בלי הקלדה.' },
+  };
+
+  // Wire up all radio/checkbox state changes for "enable next" buttons
+  document.addEventListener('change', () => {
+    // Step 3: hat radio
+    if (document.querySelector('input[name="hat"]:checked')) {
+      const btn = document.getElementById('step3Next');
+      if (btn) btn.disabled = false;
+    }
+    // Step 7: implementation
+    if (document.querySelector('input[name="implementation"]:checked')) {
+      const btn = document.getElementById('step7Next');
+      if (btn) btn.disabled = false;
+    }
+  });
+
+  // Step 2: enable next when name is filled
+  document.getElementById('name').addEventListener('input', (e) => {
+    document.getElementById('step2Next').disabled = !e.target.value.trim();
+  });
+  document.getElementById('step2Next').disabled = true;
+
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const el = document.querySelector(`.step[data-step="${n}"]`);
+    if (el) el.classList.add('active');
+    if (n <= TOTAL_STEPS) {
+      const pct = (n / TOTAL_STEPS) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('stepText').textContent = `שלב ${n} מתוך ${TOTAL_STEPS}`;
+    } else {
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('stepText').textContent = 'סיכום';
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function nextStep() {
+    saveCurrentStep();
+    currentStep++;
+    showStep(currentStep);
+  }
+
+  function prevStep() {
+    currentStep--;
+    showStep(currentStep);
+  }
+
+  function saveCurrentStep() {
+    if (currentStep === 2) {
+      data.name = document.getElementById('name').value.trim();
+      data.company = document.getElementById('company').value.trim();
+      data.role = document.getElementById('role').value.trim();
+      data.years = document.getElementById('years').value;
+    } else if (currentStep === 3) {
+      data.hat = document.querySelector('input[name="hat"]:checked')?.value;
+    } else if (currentStep === 4) {
+      data.drains = Array.from(document.querySelectorAll('input[name="drain"]:checked')).map(i => i.value);
+    } else if (currentStep === 5) {
+      data.wish = document.getElementById('wish').value.trim();
+      data.dayMaker = document.getElementById('dayMaker').value;
+    } else if (currentStep === 6) {
+      data.agents = Array.from(document.querySelectorAll('input[name="agent"]:checked')).map(i => i.value);
+    } else if (currentStep === 7) {
+      data.implementation = document.querySelector('input[name="implementation"]:checked')?.value;
+    }
+  }
+
+  function finishForm() {
+    saveCurrentStep();
+    renderResults();
+    currentStep = 8;
+    showStep(8);
+  }
+
+  function renderResults() {
+    document.getElementById('resultName').textContent = data.name || 'תודה';
+
+    // Summary
+    const drainsCount = (data.drains || []).length;
+    const agentsCount = (data.agents || []).length;
+    const summaryParts = [];
+
+    if (data.role) summaryParts.push(`<strong>${data.role}</strong>`);
+    if (data.company) summaryParts.push(`ב-${data.company}`);
+    summaryParts.push(`עם ${data.years || 'ניסיון'} בעולם ה-CRM`);
+
+    let summary = summaryParts.join(' ') + '. ';
+
+    if (drainsCount > 0) {
+      summary += `סימנת <strong>${drainsCount} תחומים</strong> שגוזלים זמן היום. `;
+    }
+    if (agentsCount > 0) {
+      summary += `מתוך 12 הסוכנים שהצגנו, סימנת <strong>${agentsCount}</strong> שמדליקים לך נורה. `;
+    }
+    if (data.dayMaker) {
+      const dayMakerLabels = {
+        time: 'חיסכון שעות עבודה', quality: 'הפחתת טעויות', speed: 'תגובה מהירה ללקוחות',
+        insight: 'תובנות וחיזוי', growth: 'סקייל ויותר לקוחות'
+      };
+      summary += `<br><br>הדבר שהכי "יציל" לך את היום: <strong>${dayMakerLabels[data.dayMaker]}</strong>.`;
+    }
+
+    document.getElementById('resultSummary').innerHTML = summary;
+
+    // Recommended agents — top 3 from his picks (or top defaults if none picked)
+    let topAgents = data.agents && data.agents.length > 0
+      ? data.agents.slice(0, 3)
+      : ['lead-qualifier', 'meeting-summary', 'follow-up'];
+
+    const recHTML = topAgents.map((key, i) => {
+      const agent = AGENT_INFO[key];
+      if (!agent) return '';
+      return `
+        <div class="recommended">
+          <div class="recommended-num">0${i + 1}</div>
+          <div>
+            <h4>${agent.emoji} ${agent.title}</h4>
+            <p>${agent.desc}</p>
+          </div>
+        </div>
+      `;
+    }).join('');
+    document.getElementById('resultRecommended').innerHTML = recHTML;
+
+    // Path
+    const pathByImpl = {
+      full: `<h3>מסלול end-to-end</h3><p>נבנה לך את הסוכנים הראשונים <strong>בלי שתצטרך/י לגעת בקוד</strong>. שיחת אפיון, אישור, פיתוח, hand-over. אתה מקבל מערכת עובדת תוך 3-6 שבועות (תלוי במורכבות).</p>`,
+      poc: `<h3>POC + העברה לצוות</h3><p>נבנה הוכחת היתכנות ב-2-3 שבועות שמראה שהסוכן עובד עם הדאטה האמיתית שלך. עם document, ארכיטקטורה, ולמידה — הצוות שלך/של פרוסיד יוכל לקחת מכאן.</p>`,
+      advisory: `<h3>ייעוץ ולווי</h3><p>הצוות שלך מבצע — אנחנו מנחים. אדריכלות, סקירת קוד, prompts, תכנון אינטגרציות. רטיינר חודשי או שעתי. מתאים לארגון עם capacity פיתוח קיים.</p>`,
+      explore: `<h3>שיחת היכרות</h3><p>30 דקות, בלי מצגות. נבחן יחד את התהליכים, נראה מה הכי משתלם להתחיל איתו, ונחליט אם יש fit.</p>`,
+    };
+    document.getElementById('resultPath').innerHTML = pathByImpl[data.implementation] || pathByImpl.explore;
+  }
+
+  function sendSummary() {
+    const subject = encodeURIComponent(`טופס סוכני AI · ${data.name || ''}`);
+    const lines = [
+      `שם: ${data.name || ''}`,
+      `חברה: ${data.company || ''}`,
+      `תפקיד: ${data.role || ''}`,
+      `שנים ב-CRM: ${data.years || ''}`,
+      `כובע: ${data.hat || ''}`,
+      `תחומי שחיקה: ${(data.drains || []).join(', ')}`,
+      `המשאלה: ${data.wish || ''}`,
+      `מציל את היום: ${data.dayMaker || ''}`,
+      `סוכנים נבחרים: ${(data.agents || []).join(', ')}`,
+      `מודל מועדף: ${data.implementation || ''}`,
+    ];
+    const body = encodeURIComponent(lines.join('\n'));
+    window.location.href = `mailto:inna@hai.tech?subject=${subject}&body=${body}`;
+  }
+</script>
+
+</body>
+</html>
