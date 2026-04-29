@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fff8f4">
+<title>שאלון התחלה · Women AI × Forward</title>
+<style>
+  :root {
+    --bg: #fff8f4;
+    --bg-2: #fff1ec;
+    --bg-card: rgba(255,255,255,0.85);
+    --bg-card-hover: rgba(255,255,255,1);
+    --border: rgba(242, 41, 91, 0.12);
+    --border-2: rgba(242, 41, 91, 0.22);
+    --border-active: rgba(242, 41, 91, 0.5);
+    --text: #2a1636;
+    --text-2: #412657;
+    --text-3: rgba(42, 22, 54, 0.55);
+    --pink-100: #ffd9e6;
+    --pink-200: #ffb7cf;
+    --pink-300: #f472b6;
+    --pink-500: #f2295b;
+    --pink-600: #d63384;
+    --success: #6ee7b7;
+    --gold: #f7b267;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Heebo", "Segoe UI", "Arial Hebrew", Arial, sans-serif;
+    font-weight: 400;
+    color: var(--text);
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(242,41,91,0.08) 0%, transparent 60%),
+      linear-gradient(180deg, #fff8f4 0%, #fff1ec 100%);
+    background-attachment: fixed;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  ::selection { background: rgba(242, 41, 91, 0.25); color: var(--text); }
+
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 248, 244, 0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    max-width: 900px; margin: 0 auto;
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 18px; font-weight: 900; letter-spacing: -0.02em; color: var(--text);
+    text-decoration: none;
+  }
+  .logo-square {
+    width: 30px; height: 30px; border-radius: 6px;
+    background: var(--pink-500); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .logo .dot { color: var(--pink-500); }
+  .progress-text { font-size: 12px; color: var(--text-3); letter-spacing: 0.1em; }
+  .progress-bar { height: 3px; background: rgba(242,41,91,0.08); position: relative; }
+  .progress-fill {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, var(--pink-300), var(--pink-500));
+    transition: width 0.4s ease;
+  }
+
+  main { max-width: 720px; margin: 0 auto; padding: 50px 24px 100px; }
+
+  .step { display: none; animation: fadeIn 0.4s ease; }
+  .step.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .meta-label {
+    color: var(--pink-500);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 900; line-height: 1.1;
+    letter-spacing: -0.025em; margin-bottom: 20px; color: var(--text);
+  }
+  h1 .accent {
+    background: linear-gradient(135deg, var(--pink-300), var(--pink-500));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  h2 {
+    font-size: clamp(24px, 3.5vw, 32px);
+    font-weight: 800; line-height: 1.25;
+    margin-bottom: 16px; color: var(--text);
+  }
+  .lead { font-size: 17px; color: var(--text-2); line-height: 1.75; margin-bottom: 32px; }
+  p { margin-bottom: 14px; color: var(--text-2); }
+  p strong { color: var(--text); }
+
+  .field { margin-bottom: 22px; }
+  label {
+    display: block; font-size: 14px; font-weight: 600;
+    color: var(--text); margin-bottom: 8px;
+  }
+  label .required { color: var(--pink-500); margin-right: 2px; }
+  label .hint { font-weight: 400; color: var(--text-3); margin-right: 6px; font-size: 13px; }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 15px;
+    transition: all 0.2s;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--border-active);
+    background: var(--bg-card-hover);
+    box-shadow: 0 0 0 4px rgba(242,41,91,0.08);
+  }
+  textarea { min-height: 100px; resize: vertical; line-height: 1.6; }
+  input::placeholder, textarea::placeholder { color: var(--text-3); }
+
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 500px) { .row-2 { grid-template-columns: 1fr; } }
+
+  /* Tool card */
+  .tool-card {
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    transition: all 0.2s;
+  }
+  .tool-card:hover { border-color: var(--border-2); }
+  .tool-card.has-data { border-color: var(--border-active); background: rgba(255,217,230,0.2); }
+  .tool-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .tool-name { font-size: 16px; font-weight: 700; color: var(--text); }
+  .tool-name .emoji { margin-left: 6px; }
+  .tool-status { display: flex; gap: 4px; }
+  .tool-status label {
+    cursor: pointer; padding: 4px 10px;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 11px; font-weight: 600; color: var(--text-3);
+    margin: 0;
+    transition: all 0.15s;
+  }
+  .tool-status input { position: absolute; opacity: 0; pointer-events: none; }
+  .tool-status label:has(input:checked) {
+    background: var(--pink-500); color: #fff; border-color: var(--pink-500);
+  }
+  .tool-fields { display: grid; gap: 10px; }
+  .tool-fields input, .tool-fields textarea {
+    padding: 8px 12px; font-size: 14px;
+  }
+  .tool-fields input::placeholder { font-size: 13px; }
+
+  /* Choice cards */
+  .choices { display: grid; gap: 10px; }
+  .choice {
+    display: block; cursor: pointer;
+    padding: 16px 18px;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .choice:hover { border-color: var(--border-2); background: var(--bg-card-hover); }
+  .choice input { position: absolute; opacity: 0; pointer-events: none; }
+  .choice:has(input:checked) {
+    border-color: var(--pink-500);
+    background: rgba(242,41,91,0.04);
+  }
+  .choice-title {
+    font-size: 14px; font-weight: 600; color: var(--text);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .choice-title .check {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border-2);
+    border-radius: 5px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; color: transparent;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .choice:has(input:checked) .check {
+    background: var(--pink-500); border-color: var(--pink-500); color: #fff;
+  }
+
+  /* Highlighted pain section */
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(242,41,91,0.05), rgba(244,114,182,0.04));
+    border: 2px solid var(--pink-300);
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 24px;
+  }
+  .highlight-box .highlight-label {
+    color: var(--pink-500);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .highlight-box p {
+    margin: 0; font-size: 14px; color: var(--text);
+  }
+
+  .step-nav {
+    margin-top: 32px;
+    display: flex; gap: 10px; align-items: center;
+  }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 24px;
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 15px; font-weight: 600;
+    cursor: pointer; border: 0;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--pink-500); color: #fff;
+    flex: 1;
+    box-shadow: 0 4px 12px rgba(242,41,91,0.25);
+  }
+  .btn-primary:hover { background: var(--pink-600); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+  .btn-ghost {
+    background: transparent; color: var(--text-2);
+    border: 1.5px solid var(--border-2);
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--pink-500); }
+
+  /* Welcome step */
+  .welcome-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin: 32px 0;
+  }
+  .welcome-stat {
+    text-align: center;
+    padding: 20px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .welcome-stat .value { font-size: 26px; font-weight: 900; color: var(--text); }
+  .welcome-stat .label { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+
+  /* Result */
+  .result-card {
+    background: linear-gradient(135deg, rgba(242,41,91,0.05), rgba(244,114,182,0.03));
+    border: 1px solid var(--border-active);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .result-card h3 {
+    font-size: 13px; color: var(--pink-500);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 12px; font-weight: 700;
+  }
+  .result-card p { color: var(--text); font-size: 16px; line-height: 1.85; }
+
+  @media (max-width: 500px) {
+    main { padding: 30px 20px 80px; }
+    .step-nav { flex-direction: column-reverse; }
+    .btn { width: 100%; }
+    .welcome-stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="https://forward.hai.tech" class="logo">
+      <span>Forward<span class="dot">.</span></span>
+      <span class="logo-square">←</span>
+    </a>
+    <span class="progress-text" id="stepText">שלב 1 מתוך 8</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 12.5%"></div></div>
+</header>
+
+<main>
+
+  <!-- STEP 1: Welcome -->
+  <div class="step active" data-step="1">
+    <div class="meta-label">Women AI × Forward · שאלון התחלה</div>
+    <h1>בואו נתחיל<br><span class="accent">לבנות את הגרעין.</span></h1>
+    <p class="lead">
+      טופס קצר עם המידע שצריך כדי <strong>להקים את ה-CRM שלכן</strong> — בלי שיחה ארוכה,
+      בלי "תזכרי לי לשלוח את ה-X". הכל במקום אחד, ובסוף נדע בדיוק מה לבנות ואיך.
+    </p>
+
+    <div class="welcome-stats">
+      <div class="welcome-stat">
+        <div class="value">10</div>
+        <div class="label">דקות מילוי</div>
+      </div>
+      <div class="welcome-stat">
+        <div class="value">7</div>
+        <div class="label">שלבים</div>
+      </div>
+      <div class="welcome-stat">
+        <div class="value">2-3</div>
+        <div class="label">שבועות לעלייה לאוויר</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-label">חשוב לדעת</div>
+      <p>אפשר לדלג על שאלות שלא יודעים תשובה — נשלים יחד בשיחה. גם תשובה חלקית עוזרת לנו להתקדם.</p>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-primary" onclick="nextStep()">התחלה ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Basics -->
+  <div class="step" data-step="2">
+    <div class="meta-label">2 / 7 · בסיס</div>
+    <h2>על המועדון.</h2>
+    <p class="lead">המידע הכללי כדי להבין את הסקייל.</p>
+
+    <div class="field">
+      <label>שם איש קשר ראשי <span class="required">*</span></label>
+      <input id="contactName" type="text" placeholder="למשל: אלכס" required>
+    </div>
+
+    <div class="row-2">
+      <div class="field">
+        <label>אימייל <span class="required">*</span></label>
+        <input id="contactEmail" type="email" placeholder="alex@womenai.co.il" dir="ltr" required>
+      </div>
+      <div class="field">
+        <label>טלפון</label>
+        <input id="contactPhone" type="tel" dir="ltr" placeholder="050-0000000">
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="field">
+        <label>חברות פעילות כרגע</label>
+        <input id="activeMembers" type="number" placeholder="לדוגמה: 120">
+      </div>
+      <div class="field">
+        <label>חברות שעברו אצלכן (היסטורית)</label>
+        <input id="pastMembers" type="number" placeholder="לדוגמה: 300">
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="field">
+        <label>לידים חדשים בחודש (בערך)</label>
+        <input id="leadsPerMonth" type="number" placeholder="לדוגמה: 40">
+      </div>
+      <div class="field">
+        <label>חברות שעוזבות בחודש (בערך)</label>
+        <input id="leavingPerMonth" type="number" placeholder="לדוגמה: 5">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>יש מסלולי חברות שונים?</label>
+      <textarea id="membershipTiers" placeholder="לדוגמה: מסלול בסיס ₪199/חודש, פרימיום ₪399/חודש עם זומים אישיים..."></textarea>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="prevStep()">→ אחורה</button>
+      <button class="btn btn-primary" onclick="nextStep()" id="step2Next">המשך ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Tools & Access -->
+  <div class="step" data-step="3">
+    <div class="meta-label">3 / 7 · הכלים</div>
+    <h2>הכלים שאתן <span class="accent">משתמשות בהם</span> היום.</h2>
+    <p class="lead">לכל כלי — האם משתמשות בו, ומי מנהל את החשבון. אם יש API key מוכן — מצוין; אם לא, נטפל בזה אחר כך.</p>
+
+    <div class="tool-card" data-tool="skool">
+      <div class="tool-head">
+        <span class="tool-name"><span class="emoji">🎓</span>Skool</span>
+        <div class="tool-status">
+          <label><input type="radio" name="skool_use" value="active">פעיל</label>
+          <label><input type="radio" name="skool_use" value="not">לא משתמשות</label>
+        </div>
+      </div>
+      <div class="tool-fields">
+        <input type="text" id="skool_url" placeholder="כתובת הקהילה (URL)">
+        <input type="text" id="skool_admin" placeholder="מי ה-admin הראשי?">
+      </div>
+    </div>
+
+    <div class="tool-card" data-tool="cardcom">
+      <div class="tool-head">
+        <span class="tool-name"><span class="emoji">💳</span>Cardcom</span>
+        <div class="tool-status">
+          <label><input type="radio" name="cardcom_use" value="active">פעיל</label>
+          <label><input type="radio" name="cardcom_use" value="not">לא משתמשות</label>
+        </div>
+      </div>
+      <div class="tool-fields">
+        <input type="text" id="cardcom_terminal" placeholder="Terminal ID (אם ידוע)">
+        <input type="text" id="cardcom_admin" placeholder="מי ה-admin?">
+      </div>
+    </div>
+
+    <div class="tool-card" data-tool="airtable">
+      <div class="tool-head">
+        <span class="tool-name"><span class="emoji">📊</span>Airtable</span>
+        <div class="tool-status">
+          <label><input type="radio" name="airtable_use" value="active">פעיל</label>
+          <label><input type="radio" name="airtable_use" value="not">לא משתמשות</label>
+        </div>
+      </div>
+      <div class="tool-fields">
+        <input type="text" id="airtable_base" placeholder="שם ה-Base הראשי">
+        <input type="text" id="airtable_admin" placeholder="מי ה-admin?">
+      </div>
+    </div>
+
+    <div class="tool-card" data-tool="ravmesser">
+      <div class="tool-head">
+        <span class="tool-name"><span class="emoji">📧</span>רב מסר</span>
+        <div class="tool-status">
+          <label><input type="radio" name="ravmesser_use" value="active">פעיל</label>
+          <label><input type="radio" name="ravmesser_use" value="not">לא משתמשות</label>
+        </div>
+      </div>
+      <div class="tool-fields">
+        <input type="text" id="ravmesser_lists" placeholder="כמה רשימות תפוצה פעילות?">
+      </div>
+    </div>
+
+    <div class="tool-card" data-tool="secnum">
+      <div class="tool-head">
+        <span class="tool-name"><span class="emoji">📱</span>SecNUM (SMS)</span>
+        <div class="tool-status">
+          <label><input type="radio" name="secnum_use" value="active">פעיל</label>
+          <label><input type="radio" name="secnum_use" value="not">לא משתמשות</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-card" data-tool="manychat">
+      <div class="tool-head">
+        <span class="tool-name"><span class="emoji">💬</span>ManyChat</span>
+        <div class="tool-status">
+          <label><input type="radio" name="manychat_use" value="active">פעיל</label>
+          <label><input type="radio" name="manychat_use" value="rare">לעיתים נדירות</label>
+          <label><input type="radio" name="manychat_use" value="not">לא משתמשות</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-card" data-tool="make">
+      <div class="tool-head">
+        <span class="tool-name"><span class="emoji">⚙️</span>Make.com / Zapier</span>
+        <div class="tool-status">
+          <label><input type="radio" name="make_use" value="active">פעיל</label>
+          <label><input type="radio" name="make_use" value="not">לא משתמשות</label>
+        </div>
+      </div>
+      <div class="tool-fields">
+        <input type="text" id="make_scenarios" placeholder="כמה scenarios/zaps פעילים?">
+      </div>
+    </div>
+
+    <div class="field" style="margin-top: 20px;">
+      <label>כלים נוספים שלא ציינו?</label>
+      <textarea id="otherTools" placeholder="לדוגמה: Notion לתיעוד, Slack לתקשורת פנימית, Calendly לפגישות..."></textarea>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="prevStep()">→ אחורה</button>
+      <button class="btn btn-primary" onclick="nextStep()">המשך ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Joining flow -->
+  <div class="step" data-step="4">
+    <div class="meta-label">4 / 7 · הצטרפות</div>
+    <h2>איך חברה <span class="accent">מצטרפת</span> היום?</h2>
+    <p class="lead">תארו את התהליך, גם אם הוא ידני וכאוטי. אנחנו רוצות לראות את האמת — לא להציג אידיאל.</p>
+
+    <div class="field">
+      <label>איך מתחיל התהליך? (תיאור חופשי)</label>
+      <textarea id="joinTrigger" rows="3" placeholder="לדוגמה: היא משלמת ב-Cardcom דרך הלינק שאני שולחת לה בוואטסאפ..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>כל הצעדים שצריך לעשות אחרי התשלום</label>
+      <textarea id="joinSteps" rows="6" placeholder="לדוגמה:&#10;1. אני מקבלת התראה ב-Cardcom&#10;2. נכנסת ל-Skool ומוסיפה אותה לקהילה X&#10;3. מוסיפה ל-Airtable&#10;4. מוסיפה לרשימת תפוצה Y ב-רב מסר&#10;5. שולחת מייל ברוכה הבאה ידנית&#10;..."></textarea>
+    </div>
+
+    <div class="row-2">
+      <div class="field">
+        <label>כמה זמן זה לוקח? (דקות)</label>
+        <input id="joinTimeMinutes" type="number" placeholder="15">
+      </div>
+      <div class="field">
+        <label>מי עושה את זה?</label>
+        <input id="joinResponsible" type="text" placeholder="אלכס / כל הצוות">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>אילו פרטים אתן רוצות לאסוף על כל חברה חדשה?</label>
+      <textarea id="joinFields" placeholder="לדוגמה: שם, טלפון, מאיפה הגיעה, יעדים, תחום עניין..."></textarea>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="prevStep()">→ אחורה</button>
+      <button class="btn btn-primary" onclick="nextStep()">המשך ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 5: Leaving flow ⭐ -->
+  <div class="step" data-step="5">
+    <div class="meta-label">5 / 7 · עזיבה — הכאב הגדול</div>
+    <h2>איך חברה <span class="accent">עוזבת</span> היום?</h2>
+    <p class="lead">זה הסעיף הכי חשוב. תיאור מפורט = פתרון מדויק.</p>
+
+    <div class="highlight-box">
+      <div class="highlight-label">⚠ זוכרות מקרה שפספסו ביטול?</div>
+      <p>ספרו עליו — זה בדיוק מה שאנחנו פותרות.</p>
+    </div>
+
+    <div class="field">
+      <label>איך מגיעה בקשת העזיבה?</label>
+      <textarea id="leaveTrigger" rows="2" placeholder="לדוגמה: הודעה בוואטסאפ / מייל / שיחה..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>כל הצעדים שעושות היום כדי לבטל</label>
+      <textarea id="leaveSteps" rows="6" placeholder="לדוגמה:&#10;1. נכנסת ל-Cardcom ומבטלת חיוב חוזר&#10;2. נכנסת ל-Skool ומסירה מהקהילה&#10;3. מסירה מ-3 רשימות תפוצה ב-רב מסר&#10;4. מעדכנת ב-Airtable שהיא 'past member'&#10;5. מבטלת הזמנות זום עתידיות&#10;..."></textarea>
+    </div>
+
+    <div class="row-2">
+      <div class="field">
+        <label>כמה זמן זה לוקח? (דקות)</label>
+        <input id="leaveTimeMinutes" type="number" placeholder="30">
+      </div>
+      <div class="field">
+        <label>מי עושה את זה?</label>
+        <input id="leaveResponsible" type="text" placeholder="אלכס בעיקר">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>היו מקרים שפספסתן?</label>
+      <textarea id="leaveMissed" rows="3" placeholder="ספרו על מקרה שחיוב המשיך, או שמישהי קיבלה מייל אחרי שעזבה..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>מה הכי גורם לכן עוגמת נפש בתהליך הזה?</label>
+      <textarea id="leavePain" rows="2" placeholder="לדוגמה: זה לוקח חצי שעה ואני שוכחת מקום אחד מתוך 6..."></textarea>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="prevStep()">→ אחורה</button>
+      <button class="btn btn-primary" onclick="nextStep()">המשך ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 6: Lead funnel -->
+  <div class="step" data-step="6">
+    <div class="meta-label">6 / 7 · משפך לידים</div>
+    <h2>איך לידים <span class="accent">מגיעים</span> אליכן?</h2>
+    <p class="lead">סמנו את כל מקורות הלידים — ותארו מה קורה איתם.</p>
+
+    <div class="field">
+      <label>מקורות לידים פעילים (סמנו את כל מה שרלוונטי)</label>
+      <div class="choices">
+        <label class="choice">
+          <input type="checkbox" name="leadSource" value="website">
+          <span class="choice-title"><span class="check">✓</span>טופס באתר שלכן</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="leadSource" value="facebookAds">
+          <span class="choice-title"><span class="check">✓</span>פרסומות פייסבוק / אינסטגרם</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="leadSource" value="googleAds">
+          <span class="choice-title"><span class="check">✓</span>פרסומות גוגל</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="leadSource" value="referrals">
+          <span class="choice-title"><span class="check">✓</span>המלצות מחברות קיימות</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="leadSource" value="emailList">
+          <span class="choice-title"><span class="check">✓</span>רשימת תפוצה / וובינרים חינמיים</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="leadSource" value="manual">
+          <span class="choice-title"><span class="check">✓</span>שיחות אישיות / נטוורקינג</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="leadSource" value="other">
+          <span class="choice-title"><span class="check">✓</span>מקורות אחרים</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>מה השלבים שליד עובר עד שמצטרפת?</label>
+      <textarea id="pipelineStages" rows="4" placeholder="לדוגמה:&#10;מתעניינת → שיחת היכרות → שבוע ניסיון → חברה משלמת"></textarea>
+    </div>
+
+    <div class="field">
+      <label>מי עוקב אחרי הלידים?</label>
+      <input id="pipelineOwner" type="text" placeholder="אלכס / כל הצוות / משתנה">
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="prevStep()">→ אחורה</button>
+      <button class="btn btn-primary" onclick="nextStep()">המשך ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 7: Team & finals -->
+  <div class="step" data-step="7">
+    <div class="meta-label">7 / 7 · צוות ולוגיסטיקה</div>
+    <h2>הצוות שלכן<br><span class="accent">ושאלות אחרונות.</span></h2>
+
+    <div class="field">
+      <label>שמות + תפקידים של הצוות שיעבוד עם המערכת</label>
+      <textarea id="team" rows="3" placeholder="לדוגמה:&#10;אלכס — מנהל המועדון&#10;נועה — תפעול וקהילה&#10;מאיה — שיווק"></textarea>
+    </div>
+
+    <div class="field">
+      <label>מי מקבלת החלטות סופיות בפרויקט?</label>
+      <input id="decisionMaker" type="text" placeholder="אלכס">
+    </div>
+
+    <div class="field">
+      <label>subdomain מועדף ל-CRM? <span class="hint">(אופציונלי)</span></label>
+      <input id="subdomain" type="text" dir="ltr" placeholder="crm.womenai.co.il">
+    </div>
+
+    <div class="field">
+      <label>מתי הכי טוב להתחיל?</label>
+      <select id="timeline">
+        <option value="">בחרו...</option>
+        <option value="asap">בהקדם האפשרי</option>
+        <option value="2weeks">בעוד שבועיים</option>
+        <option value="month">בעוד חודש</option>
+        <option value="quarter">בעוד 2-3 חודשים</option>
+        <option value="exploring">עדיין בחקירה</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>שאלות, חששות, או דברים חשובים שלא שאלנו</label>
+      <textarea id="openQuestions" rows="4" placeholder="כל מה שעולה לך לראש..."></textarea>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="prevStep()">→ אחורה</button>
+      <button class="btn btn-primary" onclick="finishForm()">קבלת סיכום ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 8: Result -->
+  <div class="step" data-step="8">
+    <div class="meta-label">תודה!</div>
+    <h1><span id="resultName">תודה</span> — <span class="accent">קיבלנו את כל המידע.</span></h1>
+
+    <div class="result-card">
+      <h3>מה קורה עכשיו</h3>
+      <p>
+        <strong>אינה ועמי</strong> מקבלים את הסיכום הזה לאימייל, וקוראים אותו בקפדנות.
+        תוך <strong>24 שעות</strong> נחזור עם:
+      </p>
+      <ul style="padding-right: 20px; margin-top: 12px; line-height: 1.85;">
+        <li>מסמך SOW סופי לחתימה</li>
+        <li>לוח זמנים מדויק לעלייה לאוויר</li>
+        <li>רשימת גישות שצריך לפתוח</li>
+        <li>תאריך לשיחת kickoff</li>
+      </ul>
+    </div>
+
+    <div style="margin-top: 24px; padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;">
+      <h3 style="font-size: 13px; color: var(--pink-500); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; font-weight: 700;">להורדה לארכיון</h3>
+      <p style="margin-bottom: 16px;">הורדת קובץ JSON עם כל התשובות — לשמירה אצלכן.</p>
+      <button class="btn btn-ghost" onclick="downloadJson()" style="width: 100%; padding: 12px;">
+        ⬇ הורדת JSON
+      </button>
+      <p style="margin-top: 16px; font-size: 13px; color: var(--text-3); text-align: center;">
+        או ישירות:
+        <a href="mailto:inna@hai.tech" style="color: var(--pink-500);">inna@hai.tech</a>
+        ·
+        <a href="tel:+972533009742" style="color: var(--pink-500);" dir="ltr">+972-53-300-9742</a>
+      </p>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  const TOTAL_STEPS = 7;
+  let currentStep = 1;
+  const data = {};
+
+  // Required field validation
+  document.getElementById('contactName').addEventListener('input', () => updateStep2Btn());
+  document.getElementById('contactEmail').addEventListener('input', () => updateStep2Btn());
+
+  function updateStep2Btn() {
+    const name = document.getElementById('contactName').value.trim();
+    const email = document.getElementById('contactEmail').value.trim();
+    document.getElementById('step2Next').disabled = !(name && email);
+  }
+  updateStep2Btn();
+
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const el = document.querySelector(`.step[data-step="${n}"]`);
+    if (el) el.classList.add('active');
+    if (n <= TOTAL_STEPS) {
+      const pct = (n / TOTAL_STEPS) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('stepText').textContent = `שלב ${n} מתוך ${TOTAL_STEPS}`;
+    } else {
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('stepText').textContent = 'נשלח!';
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function nextStep() { saveCurrentStep(); currentStep++; showStep(currentStep); }
+  function prevStep() { currentStep--; showStep(currentStep); }
+
+  function val(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+  function num(id) { const v = val(id); return v ? parseInt(v) : null; }
+  function radioVal(name) {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : null;
+  }
+  function checkboxVals(name) {
+    return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(i => i.value);
+  }
+
+  function saveCurrentStep() {
+    if (currentStep === 2) {
+      Object.assign(data, {
+        contactName: val('contactName'), contactEmail: val('contactEmail'), contactPhone: val('contactPhone'),
+        activeMembers: num('activeMembers'), pastMembers: num('pastMembers'),
+        leadsPerMonth: num('leadsPerMonth'), leavingPerMonth: num('leavingPerMonth'),
+        membershipTiers: val('membershipTiers'),
+      });
+    } else if (currentStep === 3) {
+      data.tools = {
+        skool: { use: radioVal('skool_use'), url: val('skool_url'), admin: val('skool_admin') },
+        cardcom: { use: radioVal('cardcom_use'), terminal: val('cardcom_terminal'), admin: val('cardcom_admin') },
+        airtable: { use: radioVal('airtable_use'), base: val('airtable_base'), admin: val('airtable_admin') },
+        ravmesser: { use: radioVal('ravmesser_use'), lists: val('ravmesser_lists') },
+        secnum: { use: radioVal('secnum_use') },
+        manychat: { use: radioVal('manychat_use') },
+        make: { use: radioVal('make_use'), scenarios: val('make_scenarios') },
+      };
+      data.otherTools = val('otherTools');
+    } else if (currentStep === 4) {
+      data.joining = {
+        trigger: val('joinTrigger'), steps: val('joinSteps'),
+        timeMinutes: num('joinTimeMinutes'), responsible: val('joinResponsible'),
+        fields: val('joinFields'),
+      };
+    } else if (currentStep === 5) {
+      data.leaving = {
+        trigger: val('leaveTrigger'), steps: val('leaveSteps'),
+        timeMinutes: num('leaveTimeMinutes'), responsible: val('leaveResponsible'),
+        missedCases: val('leaveMissed'), pain: val('leavePain'),
+      };
+    } else if (currentStep === 6) {
+      data.leadFunnel = {
+        sources: checkboxVals('leadSource'),
+        pipelineStages: val('pipelineStages'),
+        owner: val('pipelineOwner'),
+      };
+    } else if (currentStep === 7) {
+      data.team = val('team');
+      data.decisionMaker = val('decisionMaker');
+      data.subdomain = val('subdomain');
+      data.timeline = val('timeline');
+      data.openQuestions = val('openQuestions');
+    }
+  }
+
+  async function finishForm() {
+    saveCurrentStep();
+    data.submittedAt = new Date().toISOString();
+    data.formType = 'women-ai-kickoff';
+
+    document.getElementById('resultName').textContent = data.contactName || 'תודה';
+    currentStep = 8;
+    showStep(8);
+
+    // Send to backend
+    try {
+      await fetch('/api/discovery-submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.contactName,
+          company: 'Women AI Club',
+          role: 'Club Manager',
+          formType: 'women-ai-kickoff',
+          submittedAt: data.submittedAt,
+          fullData: data,
+        }),
+      });
+    } catch (err) {
+      console.error('Submit failed:', err);
+    }
+  }
+
+  function downloadJson() {
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const slug = (data.contactName || 'submission').replace(/\s+/g, '-').toLowerCase();
+    const date = new Date().toISOString().split('T')[0];
+    a.href = url;
+    a.download = `women-ai-kickoff-${slug}-${date}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+</script>
+
+</body>
+</html>
