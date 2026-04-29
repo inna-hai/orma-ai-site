@@ -363,11 +363,11 @@
 
     <div class="row-2">
       <div class="field">
-        <label>חברות פעילות כרגע</label>
+        <label>חברות במועדון פעילות כרגע</label>
         <input id="activeMembers" type="number" placeholder="לדוגמה: 120">
       </div>
       <div class="field">
-        <label>חברות שעברו אצלכן (היסטורית)</label>
+        <label>חברות במועדון שעברו אצלכן (היסטורית)</label>
         <input id="pastMembers" type="number" placeholder="לדוגמה: 300">
       </div>
     </div>
@@ -378,13 +378,13 @@
         <input id="leadsPerMonth" type="number" placeholder="לדוגמה: 40">
       </div>
       <div class="field">
-        <label>חברות שעוזבות בחודש (בערך)</label>
+        <label>חברות במועדון שעוזבות בחודש (בערך)</label>
         <input id="leavingPerMonth" type="number" placeholder="לדוגמה: 5">
       </div>
     </div>
 
     <div class="field">
-      <label>יש מסלולי חברות שונים?</label>
+      <label>יש מסלולי חברות במועדון שונים?</label>
       <textarea id="membershipTiers" placeholder="לדוגמה: מסלול בסיס ₪199/חודש, פרימיום ₪399/חודש עם זומים אישיים..."></textarea>
     </div>
 
@@ -394,102 +394,69 @@
     </div>
   </div>
 
-  <!-- STEP 3: Tools & Access -->
+  <!-- STEP 3: Tools -->
   <div class="step" data-step="3">
     <div class="meta-label">3 / 7 · הכלים</div>
     <h2>הכלים שאתן <span class="accent">משתמשות בהם</span> היום.</h2>
-    <p class="lead">לכל כלי — האם משתמשות בו, ומי מנהל את החשבון. אם יש API key מוכן — מצוין; אם לא, נטפל בזה אחר כך.</p>
+    <p class="lead">סמנו את כל הכלים שפעילים אצלכן — נדע למה להתחבר ומה להחליף.</p>
 
-    <div class="tool-card" data-tool="skool">
-      <div class="tool-head">
-        <span class="tool-name"><span class="emoji">🎓</span>Skool</span>
-        <div class="tool-status">
-          <label><input type="radio" name="skool_use" value="active">פעיל</label>
-          <label><input type="radio" name="skool_use" value="not">לא משתמשות</label>
-        </div>
-      </div>
-      <div class="tool-fields">
-        <input type="text" id="skool_url" placeholder="כתובת הקהילה (URL)">
-        <input type="text" id="skool_admin" placeholder="מי ה-admin הראשי?">
+    <div class="field">
+      <label>הכלים הפעילים אצלכן</label>
+      <div class="choices">
+        <label class="choice">
+          <input type="checkbox" name="tools" value="skool">
+          <span class="choice-title"><span class="check">✓</span>🎓 Skool — קהילה וקורסים</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="tools" value="zoom">
+          <span class="choice-title"><span class="check">✓</span>📹 Zoom — מפגשי וידאו</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="tools" value="vimeo">
+          <span class="choice-title"><span class="check">✓</span>🎬 Vimeo — אחסון סרטונים</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="tools" value="cardcom">
+          <span class="choice-title"><span class="check">✓</span>💳 Cardcom — חיוב ותשלומים</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="tools" value="airtable">
+          <span class="choice-title"><span class="check">✓</span>📊 Airtable — מאגר נתונים</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="tools" value="ravmesser">
+          <span class="choice-title"><span class="check">✓</span>📧 רב מסר — דיוור במיילים</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="tools" value="secnum">
+          <span class="choice-title"><span class="check">✓</span>📱 SecNUM — שליחת SMS</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="tools" value="manychat">
+          <span class="choice-title"><span class="check">✓</span>💬 ManyChat — בוט וואטסאפ/מסנג'ר</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="tools" value="make">
+          <span class="choice-title"><span class="check">✓</span>⚙️ Make.com — אוטומציות</span>
+        </label>
+        <label class="choice">
+          <input type="checkbox" name="tools" value="zapier">
+          <span class="choice-title"><span class="check">✓</span>🔗 Zapier — חיבורים אוטומטיים</span>
+        </label>
       </div>
     </div>
 
-    <div class="tool-card" data-tool="cardcom">
-      <div class="tool-head">
-        <span class="tool-name"><span class="emoji">💳</span>Cardcom</span>
-        <div class="tool-status">
-          <label><input type="radio" name="cardcom_use" value="active">פעיל</label>
-          <label><input type="radio" name="cardcom_use" value="not">לא משתמשות</label>
-        </div>
-      </div>
-      <div class="tool-fields">
-        <input type="text" id="cardcom_terminal" placeholder="Terminal ID (אם ידוע)">
-        <input type="text" id="cardcom_admin" placeholder="מי ה-admin?">
-      </div>
+    <div class="highlight-box">
+      <div class="highlight-label">⚙️ Make — חשוב לנו לדעת</div>
+      <p>אנחנו יודעות שיש לכן Make שעושה חלק מהאוטומציות היום. כדי שלא נשבור כלום ונדע מה להעביר — תוכלי לתאר בקצרה?</p>
     </div>
 
-    <div class="tool-card" data-tool="airtable">
-      <div class="tool-head">
-        <span class="tool-name"><span class="emoji">📊</span>Airtable</span>
-        <div class="tool-status">
-          <label><input type="radio" name="airtable_use" value="active">פעיל</label>
-          <label><input type="radio" name="airtable_use" value="not">לא משתמשות</label>
-        </div>
-      </div>
-      <div class="tool-fields">
-        <input type="text" id="airtable_base" placeholder="שם ה-Base הראשי">
-        <input type="text" id="airtable_admin" placeholder="מי ה-admin?">
-      </div>
+    <div class="field">
+      <label>מה Make עושה אצלכן היום? (בקצרה)</label>
+      <textarea id="makeAutomations" rows="4" placeholder="לדוגמה:&#10;• כשמישהי משלמת ב-Cardcom — מוסיפה לקהילת Skool&#10;• כשמתווספת חברה ל-Airtable — שולח מייל ב-רב מסר&#10;• מסנכרן בין Zoom ל-Vimeo&#10;..."></textarea>
     </div>
 
-    <div class="tool-card" data-tool="ravmesser">
-      <div class="tool-head">
-        <span class="tool-name"><span class="emoji">📧</span>רב מסר</span>
-        <div class="tool-status">
-          <label><input type="radio" name="ravmesser_use" value="active">פעיל</label>
-          <label><input type="radio" name="ravmesser_use" value="not">לא משתמשות</label>
-        </div>
-      </div>
-      <div class="tool-fields">
-        <input type="text" id="ravmesser_lists" placeholder="כמה רשימות תפוצה פעילות?">
-      </div>
-    </div>
-
-    <div class="tool-card" data-tool="secnum">
-      <div class="tool-head">
-        <span class="tool-name"><span class="emoji">📱</span>SecNUM (SMS)</span>
-        <div class="tool-status">
-          <label><input type="radio" name="secnum_use" value="active">פעיל</label>
-          <label><input type="radio" name="secnum_use" value="not">לא משתמשות</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="tool-card" data-tool="manychat">
-      <div class="tool-head">
-        <span class="tool-name"><span class="emoji">💬</span>ManyChat</span>
-        <div class="tool-status">
-          <label><input type="radio" name="manychat_use" value="active">פעיל</label>
-          <label><input type="radio" name="manychat_use" value="rare">לעיתים נדירות</label>
-          <label><input type="radio" name="manychat_use" value="not">לא משתמשות</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="tool-card" data-tool="make">
-      <div class="tool-head">
-        <span class="tool-name"><span class="emoji">⚙️</span>Make.com / Zapier</span>
-        <div class="tool-status">
-          <label><input type="radio" name="make_use" value="active">פעיל</label>
-          <label><input type="radio" name="make_use" value="not">לא משתמשות</label>
-        </div>
-      </div>
-      <div class="tool-fields">
-        <input type="text" id="make_scenarios" placeholder="כמה scenarios/zaps פעילים?">
-      </div>
-    </div>
-
-    <div class="field" style="margin-top: 20px;">
+    <div class="field">
       <label>כלים נוספים שלא ציינו?</label>
       <textarea id="otherTools" placeholder="לדוגמה: Notion לתיעוד, Slack לתקשורת פנימית, Calendly לפגישות..."></textarea>
     </div>
@@ -503,7 +470,7 @@
   <!-- STEP 4: Joining flow -->
   <div class="step" data-step="4">
     <div class="meta-label">4 / 7 · הצטרפות</div>
-    <h2>איך חברה <span class="accent">מצטרפת</span> היום?</h2>
+    <h2>איך חברה <span class="accent">מצטרפת למועדון</span> היום?</h2>
     <p class="lead">תארו את התהליך, גם אם הוא ידני וכאוטי. אנחנו רוצות לראות את האמת — לא להציג אידיאל.</p>
 
     <div class="field">
@@ -541,7 +508,7 @@
   <!-- STEP 5: Leaving flow ⭐ -->
   <div class="step" data-step="5">
     <div class="meta-label">5 / 7 · עזיבה — הכאב הגדול</div>
-    <h2>איך חברה <span class="accent">עוזבת</span> היום?</h2>
+    <h2>איך חברה <span class="accent">עוזבת את המועדון</span> היום?</h2>
     <p class="lead">זה הסעיף הכי חשוב. תיאור מפורט = פתרון מדויק.</p>
 
     <div class="highlight-box">
@@ -609,7 +576,7 @@
         </label>
         <label class="choice">
           <input type="checkbox" name="leadSource" value="referrals">
-          <span class="choice-title"><span class="check">✓</span>המלצות מחברות קיימות</span>
+          <span class="choice-title"><span class="check">✓</span>המלצות מחברות מועדון קיימות</span>
         </label>
         <label class="choice">
           <input type="checkbox" name="leadSource" value="emailList">
@@ -774,15 +741,8 @@
         membershipTiers: val('membershipTiers'),
       });
     } else if (currentStep === 3) {
-      data.tools = {
-        skool: { use: radioVal('skool_use'), url: val('skool_url'), admin: val('skool_admin') },
-        cardcom: { use: radioVal('cardcom_use'), terminal: val('cardcom_terminal'), admin: val('cardcom_admin') },
-        airtable: { use: radioVal('airtable_use'), base: val('airtable_base'), admin: val('airtable_admin') },
-        ravmesser: { use: radioVal('ravmesser_use'), lists: val('ravmesser_lists') },
-        secnum: { use: radioVal('secnum_use') },
-        manychat: { use: radioVal('manychat_use') },
-        make: { use: radioVal('make_use'), scenarios: val('make_scenarios') },
-      };
+      data.activeTools = checkboxVals('tools');
+      data.makeAutomations = val('makeAutomations');
       data.otherTools = val('otherTools');
     } else if (currentStep === 4) {
       data.joining = {
