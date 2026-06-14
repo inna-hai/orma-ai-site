@@ -45,6 +45,7 @@
       margin-bottom: 18px;
     }
     .logo { display: flex; align-items: center; gap: 12px; font-weight: 900; color: var(--purple-dark); }
+    .logo img { height: 42px; width: auto; max-width: 190px; object-fit: contain; display: block; border-radius: 10px; }
     .actions { display: flex; gap: 10px; flex-wrap: wrap; }
     .btn {
       border: 1px solid var(--border); background: rgba(255,255,255,.78); color: var(--purple-dark);
@@ -147,7 +148,7 @@
 <body>
   <main class="page">
     <div class="topbar">
-      <div class="logo"><span>Forward · Beomytech</span></div>
+      <div class="logo"><img src="/forward-logo-channel16.jpg" alt="Forward" /> <span>Forward · Beomytech</span></div>
       <div class="actions">
         <button class="btn" onclick="window.print()">הדפסה / PDF</button>
         <a class="btn primary" href="#price">עלות האיפיון</a>
@@ -373,7 +374,7 @@
       </div>
     </div>
 
-    <div class="footer">Forward · Beomytech · הצעת איפיון לערוץ 16 · 2026</div>
+    <div class="footer">Forward · Beomytech · הצעת איפיון לערוץ 16 · 2026<br><a href="https://forward.hai.tech" target="_blank" rel="noopener">https://forward.hai.tech</a></div>
   </main>
 </body>
 </html>
