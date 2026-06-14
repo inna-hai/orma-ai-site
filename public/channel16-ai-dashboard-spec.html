@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>ערוץ 16 — הצעת איפיון למערכת AI Digital Command Center | Forward</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Assistant:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #101828;
+      --ink-2: #253044;
+      --muted: #667085;
+      --soft: #f6f4fb;
+      --card: rgba(255,255,255,.92);
+      --border: rgba(60,52,102,.14);
+      --purple: #8b5cf6;
+      --purple-dark: #3c3466;
+      --violet: #7d3c98;
+      --green: #10a37f;
+      --blue: #0891b2;
+      --amber: #b45309;
+      --red: #b91c1c;
+      --shadow: 0 24px 80px rgba(31, 24, 62, .14);
+      --radius: 26px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Heebo", "Assistant", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(139,92,246,.22), transparent 34rem),
+        radial-gradient(circle at 10% 18%, rgba(16,163,127,.12), transparent 28rem),
+        linear-gradient(180deg, #fbfaff 0%, #f4f1fb 46%, #ffffff 100%);
+      line-height: 1.72;
+    }
+    a { color: inherit; }
+    .page { max-width: 1120px; margin: 0 auto; padding: 28px 18px 64px; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      margin-bottom: 18px;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; font-weight: 900; color: var(--purple-dark); }
+    .logo img { width: 42px; height: 42px; object-fit: contain; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      border: 1px solid var(--border); background: rgba(255,255,255,.78); color: var(--purple-dark);
+      border-radius: 999px; padding: 10px 16px; font-weight: 800; font-size: 14px;
+      text-decoration: none; cursor: pointer; backdrop-filter: blur(10px);
+    }
+    .btn.primary { background: var(--purple-dark); color: #fff; border-color: var(--purple-dark); }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 14% 18%, rgba(255,255,255,.22), transparent 18rem),
+        radial-gradient(circle at 80% 28%, rgba(16,163,127,.24), transparent 22rem),
+        linear-gradient(135deg, #231a3f 0%, #3c3466 44%, #7d3c98 100%);
+      color: #fff;
+      border-radius: 34px;
+      padding: clamp(30px, 5vw, 58px);
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    .hero:after {
+      content: ""; position: absolute; inset: auto -80px -110px auto; width: 360px; height: 360px;
+      background: conic-gradient(from 180deg, rgba(255,255,255,.18), rgba(16,163,127,.32), rgba(255,255,255,.08));
+      border-radius: 50%; filter: blur(.2px); opacity: .7;
+    }
+    .kicker {
+      position: relative; z-index: 1;
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.11);
+      padding: 8px 13px; border-radius: 999px;
+      color: #e9d5ff; font-weight: 900; font-size: 13px; letter-spacing: .02em;
+      margin-bottom: 20px;
+    }
+    h1 { position: relative; z-index: 1; font-size: clamp(34px, 5.6vw, 68px); line-height: 1.02; letter-spacing: -.045em; margin: 0 0 18px; max-width: 910px; }
+    .subtitle { position: relative; z-index: 1; color: rgba(255,255,255,.88); font-size: clamp(17px, 2.2vw, 22px); max-width: 860px; margin: 0; }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 34px; }
+    .hero-stat { border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.10); border-radius: 18px; padding: 15px 16px; min-height: 92px; }
+    .hero-stat span { display: block; color: rgba(255,255,255,.66); font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; }
+    .hero-stat strong { display: block; margin-top: 6px; font-size: 18px; color: #fff; }
+    .layout { display: grid; grid-template-columns: 270px 1fr; gap: 18px; align-items: start; }
+    .toc { position: sticky; top: 18px; background: rgba(255,255,255,.78); border: 1px solid var(--border); border-radius: 22px; padding: 16px; backdrop-filter: blur(12px); }
+    .toc h3 { margin: 0 0 10px; font-size: 15px; color: var(--purple-dark); }
+    .toc a { display: block; text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 700; padding: 8px 10px; border-radius: 12px; }
+    .toc a:hover { background: #fff; color: var(--purple-dark); }
+    section, .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: clamp(20px, 3vw, 32px); margin-bottom: 16px; box-shadow: 0 10px 35px rgba(31, 24, 62, .055);
+    }
+    h2 { margin: 0 0 12px; font-size: clamp(24px, 3vw, 34px); line-height: 1.18; letter-spacing: -.025em; color: var(--purple-dark); }
+    h3 { margin: 24px 0 10px; font-size: 20px; color: var(--ink); }
+    p { margin: 0 0 12px; }
+    .lead { font-size: 18px; color: var(--ink-2); }
+    .muted { color: var(--muted); }
+    ul { margin: 8px 0 0; padding-right: 22px; }
+    li { margin: 6px 0; }
+    .callout { border-radius: 18px; padding: 16px 18px; border: 1px solid rgba(16,163,127,.22); background: #ecfdf5; color: #064e3b; font-weight: 800; margin-top: 14px; }
+    .warning { border-radius: 18px; padding: 16px 18px; border: 1px solid #fde68a; background: #fffbeb; color: #78350f; margin-top: 14px; }
+    .mini-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
+    .mini { border: 1px solid var(--border); background: linear-gradient(180deg, #fff 0%, #fbfaff 100%); border-radius: 20px; padding: 18px; }
+    .mini .icon { width: 38px; height: 38px; border-radius: 13px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--purple), var(--purple-dark)); font-weight: 900; margin-bottom: 12px; }
+    .mini strong { display: block; color: var(--ink); font-size: 17px; margin-bottom: 6px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; margin: 16px 0 0; background: #fff; }
+    th, td { padding: 14px 16px; border-bottom: 1px solid var(--border); text-align: right; vertical-align: top; }
+    th { background: #f3f0fb; color: var(--purple-dark); font-size: 13px; font-weight: 900; }
+    tr:last-child td { border-bottom: 0; }
+    .num { direction: ltr; unicode-bidi: plaintext; white-space: nowrap; font-weight: 900; color: var(--purple-dark); }
+    .pill-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill { display: inline-flex; align-items: center; border: 1px solid rgba(125,60,152,.18); background: #f4efff; color: var(--purple-dark); padding: 7px 11px; border-radius: 999px; font-size: 12px; font-weight: 900; }
+    .timeline { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+    .step { border: 1px solid var(--border); border-radius: 18px; background: #fff; padding: 16px; }
+    .step span { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--purple-dark); color: #fff; font-weight: 900; margin-bottom: 8px; }
+    .price-card { background: linear-gradient(135deg, #101828 0%, #24183f 55%, #3c3466 100%); color: white; border-color: transparent; }
+    .price-row { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: center; }
+    .price-card h2 { color: white; }
+    .price { font-size: clamp(38px, 6vw, 68px); font-weight: 900; line-height: 1; letter-spacing: -.05em; direction: ltr; text-align: left; }
+    .price-sub { color: rgba(255,255,255,.74); }
+    .footer { text-align: center; color: var(--muted); font-size: 13px; padding: 20px 0 0; }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .toc { position: static; }
+      .hero-grid, .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 650px) {
+      .page { padding: 16px 12px 44px; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .hero { border-radius: 24px; }
+      .hero-grid, .mini-grid, .timeline, .price-row { grid-template-columns: 1fr; }
+      .price { text-align: right; }
+      table { display: block; overflow-x: auto; }
+    }
+    @media print {
+      body { background: #fff; }
+      .page { max-width: none; padding: 0; }
+      .topbar, .toc { display: none; }
+      .hero, section, .card { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <div class="logo"><img src="/logo.png" alt="Forward" /> <span>Forward · Beomytech</span></div>
+      <div class="actions">
+        <button class="btn" onclick="window.print()">הדפסה / PDF</button>
+        <a class="btn primary" href="#price">עלות האיפיון</a>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="kicker">הצעת איפיון בלבד · לא כולל פיתוח</div>
+      <h1>מערכת AI לניהול כל הדיגיטל של ערוץ 16</h1>
+      <p class="subtitle">איפיון מקצועי ל־AI Digital Command Center: מרכז שליטה חכם שמחבר דיגיטל, סושיאל, וידאו, תוכן, מתחרים, קמפיינים והנהלה — לתמונת מצב אחת ולהמלצות פעולה.</p>
+      <div class="hero-grid">
+        <div class="hero-stat"><span>היקף</span><strong>110 שעות איפיון</strong></div>
+        <div class="hero-stat"><span>משך</span><strong>3–4 שבועות</strong></div>
+        <div class="hero-stat"><span>תוצר</span><strong>PRD + מפת פיתוח</strong></div>
+        <div class="hero-stat"><span>עלות</span><strong>44,000 ₪ + מע״מ</strong></div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="toc">
+        <h3>תוכן ההצעה</h3>
+        <a href="#summary">תקציר</a>
+        <a href="#goal">מטרת האיפיון</a>
+        <a href="#scope">מה מאפיינים</a>
+        <a href="#interviews">ראיונות</a>
+        <a href="#data">מקורות דאטה</a>
+        <a href="#modules">רכיבי פתרון</a>
+        <a href="#hours">שעות</a>
+        <a href="#deliverables">תוצרים</a>
+        <a href="#out">מחוץ לסקופ</a>
+        <a href="#timeline">לו״ז</a>
+        <a href="#price">מחיר</a>
+      </aside>
+
+      <div>
+        <section id="summary">
+          <h2>תקציר</h2>
+          <p class="lead">ערוץ 16 נכנס לשוק טלוויזיה ודיגיטל תחרותי, עם צורך לבנות כבר מההתחלה יכולת ניהול דיגיטלית חכמה: לדעת מה עובד, מה עולה, מה מסוכן, מה כדאי לקדם, ואיפה נוצרות הזדמנויות.</p>
+          <p>השלב המוצע כאן הוא שלב איפיון בלבד. מטרתו להפוך את החזון למפרט מקצועי שממנו אפשר לקבל החלטת פיתוח: מה בונים קודם, אילו מקורות דאטה מחברים, מה דורש כלי צד שלישי, מהו MVP נכון, ומה סדר הגודל התקציבי לפיתוח.</p>
+          <div class="callout">התוצר המרכזי: מסמך אפיון מלא + מפת דרכים לפיתוח מערכת AI Digital Command Center לערוץ 16.</div>
+        </section>
+
+        <section id="goal">
+          <h2>מטרת האיפיון</h2>
+          <ul>
+            <li>להגדיר את צרכי ההנהלה, מערכת החדשות, הדיגיטל, הסושיאל, הווידאו והשיווק.</li>
+            <li>למפות את מקורות הדאטה והאינטגרציות: YouTube, TikTok, Meta, אתר, CMS, מערכות וידאו וכלי ניטור.</li>
+            <li>להגדיר את מסכי הדשבורד, הדוחות, ההתראות והמלצות ה־AI.</li>
+            <li>להפריד בין MVP, פאזות המשך, סיכונים ותלויות.</li>
+            <li>להכין בסיס להצעת פיתוח מדויקת ולא הערכת מחיר כללית.</li>
+          </ul>
+        </section>
+
+        <section id="scope">
+          <h2>מה בדיוק מאפיינים?</h2>
+          <p>האיפיון יתמקד במערכת אחת שמרכזת את פעילות הדיגיטל של הערוץ ומתרגמת נתונים להחלטות עבודה.</p>
+          <div class="mini-grid">
+            <div class="mini"><div class="icon">01</div><strong>Executive Overview</strong><p>תמונת מצב להנהלה: ביצועים, מגמות, תוכניות מובילות, טאלנטים, סיכונים והזדמנויות.</p></div>
+            <div class="mini"><div class="icon">02</div><strong>Digital War Room</strong><p>מסך עבודה חי לצוות דיגיטל: טרנדים, קליפים, פוסטים, התראות ומתחרים.</p></div>
+            <div class="mini"><div class="icon">03</div><strong>Content Intelligence</strong><p>ניתוח תוכן לפי תוכנית, טאלנט, נושא, פורמט, שעה ופלטפורמה.</p></div>
+            <div class="mini"><div class="icon">04</div><strong>AI Copilot</strong><p>סיכומים, המלצות פעולה, זיהוי רגעי שיא, ניסוח כותרות, סנטימנט ומשברים.</p></div>
+          </div>
+        </section>
+
+        <section id="interviews">
+          <h2>את מי צריך לראיין</h2>
+          <table>
+            <thead><tr><th>גורם</th><th>מה מוציאים מהראיון</th></tr></thead>
+            <tbody>
+              <tr><td>הנהלת הערוץ / מנכ״ל</td><td>יעדים עסקיים, KPI ניהוליים, סדרי עדיפויות והחלטות שהדשבורד צריך לתמוך בהן.</td></tr>
+              <tr><td>מנהל/ת דיגיטל</td><td>תהליכי עבודה יומיים, פלטפורמות, כאבים, הפצה, מדידה ואישורים.</td></tr>
+              <tr><td>מערכת חדשות / עורך ראשי</td><td>הקשר בין שידור לדיגיטל, תגובה לטרנדים, נושאים מתפתחים והתראות תוכן.</td></tr>
+              <tr><td>צוות סושיאל</td><td>Instagram, TikTok, YouTube, Facebook, X, Telegram/WhatsApp; פורמטים ומדדי הצלחה.</td></tr>
+              <tr><td>צוות וידאו / עורכים</td><td>חיתוך קליפים, Shorts/Reels/TikTok, תמלול, metadata, thumbnails וניהול נכסים.</td></tr>
+              <tr><td>שיווק / מסחרי</td><td>קמפיינים, חסויות, branded content, דוחות ללקוחות ומדדים מסחריים.</td></tr>
+              <tr><td>IT / ספקי מערכות</td><td>CMS, אתר, APIs, הרשאות, SSO, אבטחת מידע וסביבת פיתוח.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="data">
+          <h2>מקורות דאטה שייבדקו</h2>
+          <table>
+            <thead><tr><th>מקור</th><th>מה בודקים</th><th>הערה</th></tr></thead>
+            <tbody>
+              <tr><td>YouTube</td><td>צפיות, Watch time, retention, CTR, Shorts, מנויים.</td><td>תלוי הרשאות Google.</td></tr>
+              <tr><td>TikTok</td><td>ביצועי וידאו, engagement, צמיחה, מגבלות API.</td><td>ייתכן צורך בחשבון Business.</td></tr>
+              <tr><td>Instagram / Facebook</td><td>Reels, posts, stories, followers, engagement.</td><td>דרך Meta Graph API.</td></tr>
+              <tr><td>X / Twitter</td><td>אזכורים, שיח, משפיענים, משברים.</td><td>עלויות וגישה משתנות.</td></tr>
+              <tr><td>אתר / CMS</td><td>כתבות, צפיות, מקורות תנועה, SEO, Push/Newsletter.</td><td>GA4 / Search Console / CMS API.</td></tr>
+              <tr><td>וידאו / ארכיון</td><td>תוכניות, קבצי וידאו, תמלול, זיהוי קטעים.</td><td>ייבדק מול ספק הפקה/שידור.</td></tr>
+              <tr><td>מתחרים ומדיה חיצונית</td><td>Share of voice, סנטימנט, טרנדים וקליפים מתחרים.</td><td>ייתכן כלי צד שלישי.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="modules">
+          <h2>רכיבי הפתרון שיוגדרו באיפיון</h2>
+          <div class="pill-list">
+            <span class="pill">Executive Dashboard</span>
+            <span class="pill">Digital War Room</span>
+            <span class="pill">Content Performance</span>
+            <span class="pill">AI Clip Assistant</span>
+            <span class="pill">Social Listening</span>
+            <span class="pill">Reputation & Crisis Alerts</span>
+            <span class="pill">Competitor Intelligence</span>
+            <span class="pill">Editorial Tasks</span>
+            <span class="pill">Campaign Reports</span>
+            <span class="pill">AI Copilot בעברית</span>
+          </div>
+          <p style="margin-top:16px">כל רכיב יוגדר ברמת דרישות עסקיות, מקורות דאטה, משתמשים, מסכים, תדירות רענון, גבולות אוטומציה וסיכוני יישום.</p>
+        </section>
+
+        <section id="hours">
+          <h2>פירוט עבודה לפי שעות</h2>
+          <table>
+            <thead><tr><th>בלוק עבודה</th><th>פירוט</th><th>שעות</th></tr></thead>
+            <tbody>
+              <tr><td>התנעה ואיסוף חומרים</td><td>קריאת חומרים, הבנת חזון, גבולות איפיון, רשימת שאלות ותוצרים.</td><td class="num">6</td></tr>
+              <tr><td>ראיונות הנהלה ותוכן</td><td>ראיונות הנהלה, חדשות/תוכן, דיגיטל וסושיאל; חילוץ יעדים, כאבים ו־KPI.</td><td class="num">18</td></tr>
+              <tr><td>ראיונות וידאו, שיווק ו־IT</td><td>וידאו/קליפים, צרכים מסחריים, מערכות, הרשאות, CMS, APIs ואבטחה.</td><td class="num">14</td></tr>
+              <tr><td>מיפוי As-Is</td><td>תהליכי תוכן, הפצה, מדידה, אישורים, דוחות ומשימות צוות.</td><td class="num">10</td></tr>
+              <tr><td>מיפוי דאטה ואינטגרציות</td><td>YouTube, Meta, TikTok, אתר, CMS, וידאו, אנליטיקס, מתחרים וכלי ניטור.</td><td class="num">12</td></tr>
+              <tr><td>Use Cases ל־AI</td><td>Daily brief, trends, clip recommendations, כותרות, סנטימנט, משברים ו־Copilot.</td><td class="num">10</td></tr>
+              <tr><td>To-Be וארכיטקטורה</td><td>מבנה מערכת, מודולים, זרימת דאטה, הרשאות, תפקידי משתמשים ופתרון עתידי.</td><td class="num">12</td></tr>
+              <tr><td>מסכים, דוחות ו־MVP</td><td>Wireframe מילולי, KPI, דוחות, התראות, פיילוט ראשון ופאזות.</td><td class="num">10</td></tr>
+              <tr><td>כתיבת מסמך אפיון מלא</td><td>מסמך PRD, דרישות עסקיות/טכניות, סיכונים, שאלות פתוחות והמלצת פיתוח.</td><td class="num">12</td></tr>
+              <tr><td>הצגה, תיקונים וסגירה</td><td>הצגת מסקנות, סבב תיקונים אחד, תקציר מנהלים ובסיס להצעת פיתוח.</td><td class="num">6</td></tr>
+              <tr><td><strong>סה״כ</strong></td><td><strong>איפיון מלא למערכת AI Digital Command Center</strong></td><td class="num"><strong>110</strong></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="deliverables">
+          <h2>תוצרים</h2>
+          <ul>
+            <li>מסמך אפיון מלא למערכת AI לניהול הדיגיטל של ערוץ 16.</li>
+            <li>מיפוי As-Is וצרכי בעלי תפקידים.</li>
+            <li>הגדרת To-Be למערכת העתידית.</li>
+            <li>מיפוי מקורות דאטה, API, מערכות והרשאות.</li>
+            <li>רשימת Use Cases ל־AI כולל תיעדוף.</li>
+            <li>הגדרת MVP ופאזות המשך.</li>
+            <li>הגדרת מסכים ודוחות ברמת דרישות / wireframe מילולי.</li>
+            <li>סיכונים, הנחות יסוד ושאלות פתוחות.</li>
+            <li>אומדן ראשוני לפיתוח מערכת לאחר האיפיון.</li>
+            <li>תקציר מנהלים להצגה להנהלת הערוץ.</li>
+          </ul>
+        </section>
+
+        <section id="out">
+          <h2>מחוץ לסקופ</h2>
+          <ul>
+            <li>פיתוח מערכת בפועל.</li>
+            <li>חיבורי API / הרשאות / אינטגרציות פרודקשן.</li>
+            <li>רכישת כלי צד שלישי: social listening, media monitoring או broadcast monitoring.</li>
+            <li>עיצוב UI מלא או אבטיפוס אינטראקטיבי בפיגמה.</li>
+            <li>בניית מודל AI עובד, תמלול וידאו או עיבוד וידאו בפרודקשן.</li>
+            <li>פרסום אוטומטי לרשתות חברתיות.</li>
+            <li>יותר מסבב תיקונים אחד לאחר מסירת האיפיון.</li>
+          </ul>
+          <div class="warning">כל הרחבה מעבר לסקופ תתומחר בנפרד או לפי שעות, באישור מראש.</div>
+        </section>
+
+        <section id="timeline">
+          <h2>לוח זמנים</h2>
+          <div class="timeline">
+            <div class="step"><span>1</span><strong>שבוע 1</strong><p>התנעה, איסוף חומרים, ראיונות הנהלה/דיגיטל/תוכן.</p></div>
+            <div class="step"><span>2</span><strong>שבוע 2</strong><p>ראיונות IT/וידאו/שיווק, דאטה ואינטגרציות.</p></div>
+            <div class="step"><span>3</span><strong>שבוע 3</strong><p>To-Be, מודולי AI, מסכים, MVP ופאזות.</p></div>
+            <div class="step"><span>4</span><strong>שבוע 4</strong><p>כתיבת מסמך, הצגה, תיקונים וסגירה.</p></div>
+          </div>
+          <p class="muted" style="margin-top:14px">משך משוער: 3–4 שבועות, בכפוף לזמינות בעלי התפקידים והחומרים.</p>
+        </section>
+
+        <section id="price" class="price-card">
+          <div class="price-row">
+            <div>
+              <h2>עלות האיפיון</h2>
+              <p>110 שעות עבודה × 400 ₪ לשעה.</p>
+              <p class="price-sub">כולל איסוף חומרים, ראיונות, מיפוי, מסמך אפיון מלא, הצגת מסקנות וסבב תיקונים אחד.</p>
+            </div>
+            <div class="price">44,000 ₪</div>
+          </div>
+          <p class="price-sub" style="margin-top:18px">המחיר אינו כולל מע״מ. עבודה נוספת מעבר לסקופ תחויב לפי 400 ₪ לשעה, בכפוף לאישור מראש.</p>
+        </section>
+
+        <section>
+          <h2>סיכום</h2>
+          <p>שלב האיפיון יאפשר לערוץ 16 לקבל החלטה מושכלת לפני פיתוח: מה נכון לבנות קודם, אילו מערכות צריך לחבר, מהו ה־MVP, מה הסיכונים, ומה העלות הצפויה לפיתוח המשך.</p>
+          <p><strong>המלצה:</strong> להתחיל באיפיון ממוקד של 3–4 שבועות, שבסופו תוצג להנהלת הערוץ מפת דרכים ברורה למערכת AI Digital Command Center.</p>
+        </section>
+      </div>
+    </div>
+
+    <div class="footer">Forward · Beomytech · הצעת איפיון לערוץ 16 · 2026</div>
+  </main>
+</body>
+</html>
